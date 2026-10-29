@@ -1,0 +1,35 @@
+% Editable vector control diagram. Solid: signal/actuation; dashed blue: weight update.
+\begin{tikzpicture}[>=Latex,font=\sffamily\scriptsize,
+ block/.style={draw=ink,rounded corners=1pt,fill=white,align=center,minimum height=8mm,inner sep=3pt},
+ sum/.style={circle,draw=ink,fill=white,inner sep=0pt,minimum size=5mm},
+ signal/.style={->,draw=ink,line width=.65pt},
+ learn/.style={->,draw=accent,dashed,line width=.7pt}]
+\node[align=center] (ref) at (0,0) {$q_{\rm ref},\dot q_{\rm ref}$};
+\node[sum] (err) at (1.5,0) {$\Sigma$};
+\node[block,text width=26mm] (fb) at (3.5,0) {PI + PD feedback\\$68e+I+7\dot e$};
+\node[sum] (torque) at (5.7,0) {$\Sigma$};
+\node[block,text width=27mm] (cable) at (7.85,0) {Cable command\\$T=\mathrm{clip}(\tau_{\rm req}/r,0,T_{\max})$};
+\node[block,text width=26mm] (plant) at (11.05,0) {Arm26 + dumbbell\\nonlinear dynamics};
+\coordinate (out) at (13.1,0);
+\draw[signal] (ref) -- node[above,pos=.7] {$+$} (err);
+\draw[signal] (err) -- node[above] {$e,\dot e$} (fb);
+\draw[signal] (fb) -- node[above] {$+$} (torque);
+\draw[signal] (torque) -- node[above] {$\tau_{\rm req}$} (cable);
+\draw[signal] (cable) -- node[above] {$T$} (plant);
+\draw[signal] (plant) -- (out) node[right] {$q,\dot q$};
+\draw[signal] (out) -- (13.1,-1.0) -- (1.5,-1.0) -- node[left,pos=.85] {$-$} (err.south);
+\node[above] (load) at (11.05,.95) {$m(t):0.5\to2\to5\to0.5$ kg};
+\draw[signal] (load) -- (plant.north);
+\draw[signal] (cable.north) -- (7.85,1.25) -- node[above,fill=white,inner sep=1pt] {clipping flags for anti-windup} (3.5,1.25) -- (fb.north);
+\node[block,text width=25mm,draw=accent,fill=accent!4] (nn) at (5.7,-1.9) {Adaptive torque\\$h_w(\phi)$};
+\draw[signal] (nn.north) -- node[right,pos=.65] {$+$} (torque.south);
+\node[align=center,text width=39mm] (features) at (1.65,-1.9) {Features $\phi$:\\$q_{\rm ref},\dot q_{\rm ref},q,\dot q$, known $m$};
+\draw[signal] (features) -- (nn);
+\node[block,draw=accent,fill=accent!4,text width=30mm] (update) at (9,-3.15) {Online FEL + memory\\proximal weight update};
+\node[block,text width=26mm] (memory) at (12.45,-3.15) {At task boundaries:\\$\Omega\leftarrow\gamma\Omega+\Omega_{\rm seg}$\\$a\leftarrow w_{\rm end}$};
+\draw[signal] (memory) -- node[above] {$\Omega,a$} (update);
+\draw[learn] (update.north) -- (9,-2.55) -- (5.7,-2.55) -- node[left] {$w$} (nn.south);
+\node[align=center] (teacher) at (5.7,-3.2) {From tracking errors:\\$s=30e+8\dot e$};
+\draw[signal] (teacher) -- (update.west);
+\node[below,align=left,text width=115mm,font=\sffamily\tiny,text=muted] at (6.6,-3.65) {The learning path changes residual coefficients only. The cable applies nonnegative tension. Known mass is an observation supplied to both adaptive learners; fixed low muscle excitation remains part of the plant.};
+\end{tikzpicture}
