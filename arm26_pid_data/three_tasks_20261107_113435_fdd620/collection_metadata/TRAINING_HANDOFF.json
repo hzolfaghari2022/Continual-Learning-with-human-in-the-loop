@@ -1,0 +1,90 @@
+{
+  "format_version": 3,
+  "protocol": "three_tasks_pid_v1",
+  "ready_for_training": true,
+  "collection_only": true,
+  "task_order": [
+    "T1_90",
+    "T2_60",
+    "T3_30"
+  ],
+  "features": [
+    "angle_rad",
+    "velocity_rad_s",
+    "reference_rad",
+    "reference_velocity_rad_s",
+    "reference_acceleration_rad_s2",
+    "mass_kg",
+    "shoulder_angle_rad",
+    "previous_tension_N",
+    "error_integral_rad_s",
+    "TRIlong_activation",
+    "TRIlat_activation",
+    "TRImed_activation",
+    "BIClong_activation",
+    "BICshort_activation",
+    "BRA_activation",
+    "TRIlong_normalized_fiber_length",
+    "TRIlat_normalized_fiber_length",
+    "TRImed_normalized_fiber_length",
+    "BIClong_normalized_fiber_length",
+    "BICshort_normalized_fiber_length",
+    "BRA_normalized_fiber_length",
+    "strength_scale",
+    "shoulder_velocity_rad_s",
+    "shoulder_acceleration_rad_s2"
+  ],
+  "scales": [
+    1.0,
+    2.0,
+    1.0,
+    2.0,
+    10.0,
+    20.0,
+    1.0,
+    650.0,
+    0.10000000149011612,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    2.0,
+    10.0
+  ],
+  "encoding": "tracking_error_v1",
+  "target": "y_force_N",
+  "target_scale_N": 650.0,
+  "raw_extra_signals": [
+    "hand_x_m",
+    "hand_y_m",
+    "hand_z_m",
+    "human_muscle_torque_Nm"
+  ],
+  "suggested_network": "MLP; identical inputs/topology/training budgets in both branches",
+  "evaluation_matrix": {
+    "after_task1": [
+      "T1_90"
+    ],
+    "after_task2": [
+      "T1_90",
+      "T2_60"
+    ],
+    "after_task3": [
+      "T1_90",
+      "T2_60",
+      "T3_30"
+    ]
+  },
+  "test_access": "Use validation during protocol/epoch/lambda selection. Freeze all selected checkpoints before final test access. Test stored checkpoints on exactly the same held-out references, without updates.",
+  "EWC_note": "Three-task EWC must consolidate importance after Tasks 1 and 2; a penalty protecting only Task 1 does not protect Task 2.",
+  "compatibility": "Earlier two-task 90/60 or 90/30 trainers require an explicit update. Task IDs are metadata, not automatically additional NN inputs."
+}
