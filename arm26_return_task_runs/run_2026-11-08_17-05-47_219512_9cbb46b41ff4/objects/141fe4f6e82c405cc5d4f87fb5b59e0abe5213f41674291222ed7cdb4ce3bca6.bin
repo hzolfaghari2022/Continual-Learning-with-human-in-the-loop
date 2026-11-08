@@ -1,0 +1,682 @@
+<html><meta charset="utf-8"><style>body{font:17px Georgia;max-width:1100px;margin:30px auto;line-height:1.5}td,th{padding:8px;border-bottom:1px solid #ccc}img{max-width:100%}</style><h1>Task A: CUDA recovery report</h1><p><b>All six validation references passed. This validates initial Task A recovery only; continual-learning benefit has not been evaluated.</b></p><p>Original controller: 3/6 trials failed physically. No continual-learning comparison has run in this recovery stage.</p><table><tr><th>Reference</th><th>Completed</th><th>Motion RMSE (deg)</th><th>Partial RMSE (deg)</th><th>Peak motion error (deg)</th><th>Passed</th></tr><tr><td>A_90_A_e50_validation_00</td><td>True</td><td>0.024160346902077596</td><td>None</td><td>0.06907000506957667</td><td>True</td></tr><tr><td>A_90_A_e60_validation_00</td><td>True</td><td>0.024397236730426024</td><td>None</td><td>0.06419110342251957</td><td>True</td></tr><tr><td>A_90_A_e70_validation_00</td><td>True</td><td>0.02070101742379272</td><td>None</td><td>0.0591723527759503</td><td>True</td></tr><tr><td>A_90_B_e50_validation_00</td><td>True</td><td>0.0155076991357402</td><td>None</td><td>0.04248727646877108</td><td>True</td></tr><tr><td>A_90_B_e60_validation_00</td><td>True</td><td>0.018215642776041128</td><td>None</td><td>0.03933156426680999</td><td>True</td></tr><tr><td>A_90_B_e80_validation_00</td><td>True</td><td>0.022251325161983204</td><td>None</td><td>0.048971086243411184</td><td>True</td></tr></table><h2>Method and limitations</h2><p>Same 28-64-64-1 tanh direct-force NN (6081 parameters), initialized from your existing 600-epoch CUDA checkpoint. No PID is added at deployment. All A_90 training trajectory/query rows are reused; held-out tests are not decoded. Training weights: first 0.25 s 25; remaining first 1 s 8; other trajectory rows 1; teacher probes 6. Loss: weighted normalized-force MSE plus 0.1 times a finite-difference corrective-response penalty on up to 128 training examples per batch. The penalty encourages (but does not guarantee) increasing flexor force when actual angle or velocity decreases at fixed reference; minimum encoded directional slope 0.02, step 0.05. Adam lr=0.0001, batch 2048, maximum 200 epochs. Validation rollouts at epochs 50,100,200 (clipped to the requested budget); stop at the first all-reference pass. Otherwise report the candidate with fewest failed/inaccurate references, then lowest worst complete/partial RMSE. Validation-guided repair is development; no held-out test claims. OpenSim physics uses CPU workers; NN optimization uses CUDA only.</p><h2>Data and training</h2><pre>{
+  &quot;train_parent_episodes&quot;: 44,
+  &quot;validation_parent_episodes&quot;: 6,
+  &quot;train_rows&quot;: 206394,
+  &quot;validation_rows&quot;: 27939,
+  &quot;train_weight_sum&quot;: 399654.0,
+  &quot;validation_weight_sum&quot;: 54179.0,
+  &quot;train_groups&quot;: [
+    {
+      &quot;episode&quot;: &quot;A_90_A_e50_train_00&quot;,
+      &quot;role&quot;: &quot;trajectory&quot;,
+      &quot;rows&quot;: 4250,
+      &quot;effective_weight&quot;: 6500.0
+    },
+    {
+      &quot;episode&quot;: &quot;A_90_A_e50_train_00&quot;,
+      &quot;role&quot;: &quot;probe&quot;,
+      &quot;rows&quot;: 428,
+      &quot;effective_weight&quot;: 2568.0
+    },
+    {
+      &quot;episode&quot;: &quot;A_90_A_e50_train_01&quot;,
+      &quot;role&quot;: &quot;trajectory&quot;,
+      &quot;rows&quot;: 4098,
+      &quot;effective_weight&quot;: 6348.0
+    },
+    {
+      &quot;episode&quot;: &quot;A_90_A_e50_train_01&quot;,
+      &quot;role&quot;: &quot;probe&quot;,
+      &quot;rows&quot;: 412,
+      &quot;effective_weight&quot;: 2472.0
+    },
+    {
+      &quot;episode&quot;: &quot;A_90_A_e50_train_02&quot;,
+      &quot;role&quot;: &quot;trajectory&quot;,
+      &quot;rows&quot;: 4456,
+      &quot;effective_weight&quot;: 6706.0
+    },
+    {
+      &quot;episode&quot;: &quot;A_90_A_e50_train_02&quot;,
+      &quot;role&quot;: &quot;probe&quot;,
+      &quot;rows&quot;: 448,
+      &quot;effective_weight&quot;: 2688.0
+    },
+    {
+      &quot;episode&quot;: &quot;A_90_A_e50_train_03&quot;,
+      &quot;role&quot;: &quot;trajectory&quot;,
+      &quot;rows&quot;: 4446,
+      &quot;effective_weight&quot;: 6696.0
+    },
+    {
+      &quot;episode&quot;: &quot;A_90_A_e50_train_03&quot;,
+      &quot;role&quot;: &quot;probe&quot;,
+      &quot;rows&quot;: 448,
+      &quot;effective_weight&quot;: 2688.0
+    },
+    {
+      &quot;episode&quot;: &quot;A_90_A_e50_train_04&quot;,
+      &quot;role&quot;: &quot;trajectory&quot;,
+      &quot;rows&quot;: 3866,
+      &quot;effective_weight&quot;: 6116.0
+    },
+    {
+      &quot;episode&quot;: &quot;A_90_A_e50_train_04&quot;,
+      &quot;role&quot;: &quot;probe&quot;,
+      &quot;rows&quot;: 388,
+      &quot;effective_weight&quot;: 2328.0
+    },
+    {
+      &quot;episode&quot;: &quot;A_90_A_e50_train_05&quot;,
+      &quot;role&quot;: &quot;trajectory&quot;,
+      &quot;rows&quot;: 3935,
+      &quot;effective_weight&quot;: 6185.0
+    },
+    {
+      &quot;episode&quot;: &quot;A_90_A_e50_train_05&quot;,
+      &quot;role&quot;: &quot;probe&quot;,
+      &quot;rows&quot;: 396,
+      &quot;effective_weight&quot;: 2376.0
+    },
+    {
+      &quot;episode&quot;: &quot;A_90_A_e60_train_00&quot;,
+      &quot;role&quot;: &quot;trajectory&quot;,
+      &quot;rows&quot;: 4047,
+      &quot;effective_weight&quot;: 6297.0
+    },
+    {
+      &quot;episode&quot;: &quot;A_90_A_e60_train_00&quot;,
+      &quot;role&quot;: &quot;probe&quot;,
+      &quot;rows&quot;: 408,
+      &quot;effective_weight&quot;: 2448.0
+    },
+    {
+      &quot;episode&quot;: &quot;A_90_A_e60_train_01&quot;,
+      &quot;role&quot;: &quot;trajectory&quot;,
+      &quot;rows&quot;: 4058,
+      &quot;effective_weight&quot;: 6308.0
+    },
+    {
+      &quot;episode&quot;: &quot;A_90_A_e60_train_01&quot;,
+      &quot;role&quot;: &quot;probe&quot;,
+      &quot;rows&quot;: 408,
+      &quot;effective_weight&quot;: 2448.0
+    },
+    {
+      &quot;episode&quot;: &quot;A_90_A_e60_train_02&quot;,
+      &quot;role&quot;: &quot;trajectory&quot;,
+      &quot;rows&quot;: 4322,
+      &quot;effective_weight&quot;: 6572.0
+    },
+    {
+      &quot;episode&quot;: &quot;A_90_A_e60_train_02&quot;,
+      &quot;role&quot;: &quot;probe&quot;,
+      &quot;rows&quot;: 436,
+      &quot;effective_weight&quot;: 2616.0
+    },
+    {
+      &quot;episode&quot;: &quot;A_90_A_e60_train_03&quot;,
+      &quot;role&quot;: &quot;trajectory&quot;,
+      &quot;rows&quot;: 4481,
+      &quot;effective_weight&quot;: 6731.0
+    },
+    {
+      &quot;episode&quot;: &quot;A_90_A_e60_train_03&quot;,
+      &quot;role&quot;: &quot;probe&quot;,
+      &quot;rows&quot;: 452,
+      &quot;effective_weight&quot;: 2712.0
+    },
+    {
+      &quot;episode&quot;: &quot;A_90_A_e60_train_04&quot;,
+      &quot;role&quot;: &quot;trajectory&quot;,
+      &quot;rows&quot;: 4025,
+      &quot;effective_weight&quot;: 6275.0
+    },
+    {
+      &quot;episode&quot;: &quot;A_90_A_e60_train_04&quot;,
+      &quot;role&quot;: &quot;probe&quot;,
+      &quot;rows&quot;: 404,
+      &quot;effective_weight&quot;: 2424.0
+    },
+    {
+      &quot;episode&quot;: &quot;A_90_A_e70_train_00&quot;,
+      &quot;role&quot;: &quot;trajectory&quot;,
+      &quot;rows&quot;: 3958,
+      &quot;effective_weight&quot;: 6208.0
+    },
+    {
+      &quot;episode&quot;: &quot;A_90_A_e70_train_00&quot;,
+      &quot;role&quot;: &quot;probe&quot;,
+      &quot;rows&quot;: 396,
+      &quot;effective_weight&quot;: 2376.0
+    },
+    {
+      &quot;episode&quot;: &quot;A_90_A_e70_train_01&quot;,
+      &quot;role&quot;: &quot;trajectory&quot;,
+      &quot;rows&quot;: 4417,
+      &quot;effective_weight&quot;: 6667.0
+    },
+    {
+      &quot;episode&quot;: &quot;A_90_A_e70_train_01&quot;,
+      &quot;role&quot;: &quot;probe&quot;,
+      &quot;rows&quot;: 444,
+      &quot;effective_weight&quot;: 2664.0
+    },
+    {
+      &quot;episode&quot;: &quot;A_90_A_e70_train_02&quot;,
+      &quot;role&quot;: &quot;trajectory&quot;,
+      &quot;rows&quot;: 4300,
+      &quot;effective_weight&quot;: 6550.0
+    },
+    {
+      &quot;episode&quot;: &quot;A_90_A_e70_train_02&quot;,
+      &quot;role&quot;: &quot;probe&quot;,
+      &quot;rows&quot;: 432,
+      &quot;effective_weight&quot;: 2592.0
+    },
+    {
+      &quot;episode&quot;: &quot;A_90_A_e70_train_03&quot;,
+      &quot;role&quot;: &quot;trajectory&quot;,
+      &quot;rows&quot;: 4072,
+      &quot;effective_weight&quot;: 6322.0
+    },
+    {
+      &quot;episode&quot;: &quot;A_90_A_e70_train_03&quot;,
+      &quot;role&quot;: &quot;probe&quot;,
+      &quot;rows&quot;: 408,
+      &quot;effective_weight&quot;: 2448.0
+    },
+    {
+      &quot;episode&quot;: &quot;A_90_A_e70_train_04&quot;,
+      &quot;role&quot;: &quot;trajectory&quot;,
+      &quot;rows&quot;: 4058,
+      &quot;effective_weight&quot;: 6308.0
+    },
+    {
+      &quot;episode&quot;: &quot;A_90_A_e70_train_04&quot;,
+      &quot;role&quot;: &quot;probe&quot;,
+      &quot;rows&quot;: 408,
+      &quot;effective_weight&quot;: 2448.0
+    },
+    {
+      &quot;episode&quot;: &quot;A_90_A_e70_train_05&quot;,
+      &quot;role&quot;: &quot;trajectory&quot;,
+      &quot;rows&quot;: 4293,
+      &quot;effective_weight&quot;: 6543.0
+    },
+    {
+      &quot;episode&quot;: &quot;A_90_A_e70_train_05&quot;,
+      &quot;role&quot;: &quot;probe&quot;,
+      &quot;rows&quot;: 432,
+      &quot;effective_weight&quot;: 2592.0
+    },
+    {
+      &quot;episode&quot;: &quot;A_90_A_e80_train_00&quot;,
+      &quot;role&quot;: &quot;trajectory&quot;,
+      &quot;rows&quot;: 4088,
+      &quot;effective_weight&quot;: 6338.0
+    },
+    {
+      &quot;episode&quot;: &quot;A_90_A_e80_train_00&quot;,
+      &quot;role&quot;: &quot;probe&quot;,
+      &quot;rows&quot;: 412,
+      &quot;effective_weight&quot;: 2472.0
+    },
+    {
+      &quot;episode&quot;: &quot;A_90_A_e80_train_01&quot;,
+      &quot;role&quot;: &quot;trajectory&quot;,
+      &quot;rows&quot;: 4336,
+      &quot;effective_weight&quot;: 6586.0
+    },
+    {
+      &quot;episode&quot;: &quot;A_90_A_e80_train_01&quot;,
+      &quot;role&quot;: &quot;probe&quot;,
+      &quot;rows&quot;: 436,
+      &quot;effective_weight&quot;: 2616.0
+    },
+    {
+      &quot;episode&quot;: &quot;A_90_A_e80_train_02&quot;,
+      &quot;role&quot;: &quot;trajectory&quot;,
+      &quot;rows&quot;: 4053,
+      &quot;effective_weight&quot;: 6303.0
+    },
+    {
+      &quot;episode&quot;: &quot;A_90_A_e80_train_02&quot;,
+      &quot;role&quot;: &quot;probe&quot;,
+      &quot;rows&quot;: 408,
+      &quot;effective_weight&quot;: 2448.0
+    },
+    {
+      &quot;episode&quot;: &quot;A_90_A_e80_train_03&quot;,
+      &quot;role&quot;: &quot;trajectory&quot;,
+      &quot;rows&quot;: 4191,
+      &quot;effective_weight&quot;: 6441.0
+    },
+    {
+      &quot;episode&quot;: &quot;A_90_A_e80_train_03&quot;,
+      &quot;role&quot;: &quot;probe&quot;,
+      &quot;rows&quot;: 420,
+      &quot;effective_weight&quot;: 2520.0
+    },
+    {
+      &quot;episode&quot;: &quot;A_90_A_e80_train_04&quot;,
+      &quot;role&quot;: &quot;trajectory&quot;,
+      &quot;rows&quot;: 4103,
+      &quot;effective_weight&quot;: 6353.0
+    },
+    {
+      &quot;episode&quot;: &quot;A_90_A_e80_train_04&quot;,
+      &quot;role&quot;: &quot;probe&quot;,
+      &quot;rows&quot;: 412,
+      &quot;effective_weight&quot;: 2472.0
+    },
+    {
+      &quot;episode&quot;: &quot;A_90_B_e50_train_00&quot;,
+      &quot;role&quot;: &quot;trajectory&quot;,
+      &quot;rows&quot;: 4644,
+      &quot;effective_weight&quot;: 6894.0
+    },
+    {
+      &quot;episode&quot;: &quot;A_90_B_e50_train_00&quot;,
+      &quot;role&quot;: &quot;probe&quot;,
+      &quot;rows&quot;: 468,
+      &quot;effective_weight&quot;: 2808.0
+    },
+    {
+      &quot;episode&quot;: &quot;A_90_B_e50_train_01&quot;,
+      &quot;role&quot;: &quot;trajectory&quot;,
+      &quot;rows&quot;: 4530,
+      &quot;effective_weight&quot;: 6780.0
+    },
+    {
+      &quot;episode&quot;: &quot;A_90_B_e50_train_01&quot;,
+      &quot;role&quot;: &quot;probe&quot;,
+      &quot;rows&quot;: 456,
+      &quot;effective_weight&quot;: 2736.0
+    },
+    {
+      &quot;episode&quot;: &quot;A_90_B_e50_train_02&quot;,
+      &quot;role&quot;: &quot;trajectory&quot;,
+      &quot;rows&quot;: 3999,
+      &quot;effective_weight&quot;: 6249.0
+    },
+    {
+      &quot;episode&quot;: &quot;A_90_B_e50_train_02&quot;,
+      &quot;role&quot;: &quot;probe&quot;,
+      &quot;rows&quot;: 400,
+      &quot;effective_weight&quot;: 2400.0
+    },
+    {
+      &quot;episode&quot;: &quot;A_90_B_e50_train_03&quot;,
+      &quot;role&quot;: &quot;trajectory&quot;,
+      &quot;rows&quot;: 4264,
+      &quot;effective_weight&quot;: 6514.0
+    },
+    {
+      &quot;episode&quot;: &quot;A_90_B_e50_train_03&quot;,
+      &quot;role&quot;: &quot;probe&quot;,
+      &quot;rows&quot;: 428,
+      &quot;effective_weight&quot;: 2568.0
+    },
+    {
+      &quot;episode&quot;: &quot;A_90_B_e50_train_04&quot;,
+      &quot;role&quot;: &quot;trajectory&quot;,
+      &quot;rows&quot;: 4243,
+      &quot;effective_weight&quot;: 6493.0
+    },
+    {
+      &quot;episode&quot;: &quot;A_90_B_e50_train_04&quot;,
+      &quot;role&quot;: &quot;probe&quot;,
+      &quot;rows&quot;: 428,
+      &quot;effective_weight&quot;: 2568.0
+    },
+    {
+      &quot;episode&quot;: &quot;A_90_B_e60_train_00&quot;,
+      &quot;role&quot;: &quot;trajectory&quot;,
+      &quot;rows&quot;: 4688,
+      &quot;effective_weight&quot;: 6938.0
+    },
+    {
+      &quot;episode&quot;: &quot;A_90_B_e60_train_00&quot;,
+      &quot;role&quot;: &quot;probe&quot;,
+      &quot;rows&quot;: 472,
+      &quot;effective_weight&quot;: 2832.0
+    },
+    {
+      &quot;episode&quot;: &quot;A_90_B_e60_train_01&quot;,
+      &quot;role&quot;: &quot;trajectory&quot;,
+      &quot;rows&quot;: 4215,
+      &quot;effective_weight&quot;: 6465.0
+    },
+    {
+      &quot;episode&quot;: &quot;A_90_B_e60_train_01&quot;,
+      &quot;role&quot;: &quot;probe&quot;,
+      &quot;rows&quot;: 424,
+      &quot;effective_weight&quot;: 2544.0
+    },
+    {
+      &quot;episode&quot;: &quot;A_90_B_e60_train_02&quot;,
+      &quot;role&quot;: &quot;trajectory&quot;,
+      &quot;rows&quot;: 4415,
+      &quot;effective_weight&quot;: 6665.0
+    },
+    {
+      &quot;episode&quot;: &quot;A_90_B_e60_train_02&quot;,
+      &quot;role&quot;: &quot;probe&quot;,
+      &quot;rows&quot;: 444,
+      &quot;effective_weight&quot;: 2664.0
+    },
+    {
+      &quot;episode&quot;: &quot;A_90_B_e60_train_03&quot;,
+      &quot;role&quot;: &quot;trajectory&quot;,
+      &quot;rows&quot;: 4326,
+      &quot;effective_weight&quot;: 6576.0
+    },
+    {
+      &quot;episode&quot;: &quot;A_90_B_e60_train_03&quot;,
+      &quot;role&quot;: &quot;probe&quot;,
+      &quot;rows&quot;: 436,
+      &quot;effective_weight&quot;: 2616.0
+    },
+    {
+      &quot;episode&quot;: &quot;A_90_B_e60_train_04&quot;,
+      &quot;role&quot;: &quot;trajectory&quot;,
+      &quot;rows&quot;: 4061,
+      &quot;effective_weight&quot;: 6311.0
+    },
+    {
+      &quot;episode&quot;: &quot;A_90_B_e60_train_04&quot;,
+      &quot;role&quot;: &quot;probe&quot;,
+      &quot;rows&quot;: 408,
+      &quot;effective_weight&quot;: 2448.0
+    },
+    {
+      &quot;episode&quot;: &quot;A_90_B_e60_train_05&quot;,
+      &quot;role&quot;: &quot;trajectory&quot;,
+      &quot;rows&quot;: 4547,
+      &quot;effective_weight&quot;: 6797.0
+    },
+    {
+      &quot;episode&quot;: &quot;A_90_B_e60_train_05&quot;,
+      &quot;role&quot;: &quot;probe&quot;,
+      &quot;rows&quot;: 456,
+      &quot;effective_weight&quot;: 2736.0
+    },
+    {
+      &quot;episode&quot;: &quot;A_90_B_e70_train_00&quot;,
+      &quot;role&quot;: &quot;trajectory&quot;,
+      &quot;rows&quot;: 4254,
+      &quot;effective_weight&quot;: 6504.0
+    },
+    {
+      &quot;episode&quot;: &quot;A_90_B_e70_train_00&quot;,
+      &quot;role&quot;: &quot;probe&quot;,
+      &quot;rows&quot;: 428,
+      &quot;effective_weight&quot;: 2568.0
+    },
+    {
+      &quot;episode&quot;: &quot;A_90_B_e70_train_01&quot;,
+      &quot;role&quot;: &quot;trajectory&quot;,
+      &quot;rows&quot;: 4509,
+      &quot;effective_weight&quot;: 6759.0
+    },
+    {
+      &quot;episode&quot;: &quot;A_90_B_e70_train_01&quot;,
+      &quot;role&quot;: &quot;probe&quot;,
+      &quot;rows&quot;: 452,
+      &quot;effective_weight&quot;: 2712.0
+    },
+    {
+      &quot;episode&quot;: &quot;A_90_B_e70_train_02&quot;,
+      &quot;role&quot;: &quot;trajectory&quot;,
+      &quot;rows&quot;: 4408,
+      &quot;effective_weight&quot;: 6658.0
+    },
+    {
+      &quot;episode&quot;: &quot;A_90_B_e70_train_02&quot;,
+      &quot;role&quot;: &quot;probe&quot;,
+      &quot;rows&quot;: 444,
+      &quot;effective_weight&quot;: 2664.0
+    },
+    {
+      &quot;episode&quot;: &quot;A_90_B_e70_train_03&quot;,
+      &quot;role&quot;: &quot;trajectory&quot;,
+      &quot;rows&quot;: 4270,
+      &quot;effective_weight&quot;: 6520.0
+    },
+    {
+      &quot;episode&quot;: &quot;A_90_B_e70_train_03&quot;,
+      &quot;role&quot;: &quot;probe&quot;,
+      &quot;rows&quot;: 428,
+      &quot;effective_weight&quot;: 2568.0
+    },
+    {
+      &quot;episode&quot;: &quot;A_90_B_e70_train_04&quot;,
+      &quot;role&quot;: &quot;trajectory&quot;,
+      &quot;rows&quot;: 4022,
+      &quot;effective_weight&quot;: 6272.0
+    },
+    {
+      &quot;episode&quot;: &quot;A_90_B_e70_train_04&quot;,
+      &quot;role&quot;: &quot;probe&quot;,
+      &quot;rows&quot;: 404,
+      &quot;effective_weight&quot;: 2424.0
+    },
+    {
+      &quot;episode&quot;: &quot;A_90_B_e80_train_00&quot;,
+      &quot;role&quot;: &quot;trajectory&quot;,
+      &quot;rows&quot;: 4502,
+      &quot;effective_weight&quot;: 6752.0
+    },
+    {
+      &quot;episode&quot;: &quot;A_90_B_e80_train_00&quot;,
+      &quot;role&quot;: &quot;probe&quot;,
+      &quot;rows&quot;: 452,
+      &quot;effective_weight&quot;: 2712.0
+    },
+    {
+      &quot;episode&quot;: &quot;A_90_B_e80_train_01&quot;,
+      &quot;role&quot;: &quot;trajectory&quot;,
+      &quot;rows&quot;: 3825,
+      &quot;effective_weight&quot;: 6075.0
+    },
+    {
+      &quot;episode&quot;: &quot;A_90_B_e80_train_01&quot;,
+      &quot;role&quot;: &quot;probe&quot;,
+      &quot;rows&quot;: 384,
+      &quot;effective_weight&quot;: 2304.0
+    },
+    {
+      &quot;episode&quot;: &quot;A_90_B_e80_train_02&quot;,
+      &quot;role&quot;: &quot;trajectory&quot;,
+      &quot;rows&quot;: 4530,
+      &quot;effective_weight&quot;: 6780.0
+    },
+    {
+      &quot;episode&quot;: &quot;A_90_B_e80_train_02&quot;,
+      &quot;role&quot;: &quot;probe&quot;,
+      &quot;rows&quot;: 456,
+      &quot;effective_weight&quot;: 2736.0
+    },
+    {
+      &quot;episode&quot;: &quot;A_90_B_e80_train_03&quot;,
+      &quot;role&quot;: &quot;trajectory&quot;,
+      &quot;rows&quot;: 4706,
+      &quot;effective_weight&quot;: 6956.0
+    },
+    {
+      &quot;episode&quot;: &quot;A_90_B_e80_train_03&quot;,
+      &quot;role&quot;: &quot;probe&quot;,
+      &quot;rows&quot;: 472,
+      &quot;effective_weight&quot;: 2832.0
+    },
+    {
+      &quot;episode&quot;: &quot;A_90_B_e80_train_04&quot;,
+      &quot;role&quot;: &quot;trajectory&quot;,
+      &quot;rows&quot;: 4261,
+      &quot;effective_weight&quot;: 6511.0
+    },
+    {
+      &quot;episode&quot;: &quot;A_90_B_e80_train_04&quot;,
+      &quot;role&quot;: &quot;probe&quot;,
+      &quot;rows&quot;: 428,
+      &quot;effective_weight&quot;: 2568.0
+    },
+    {
+      &quot;episode&quot;: &quot;A_90_B_e80_train_05&quot;,
+      &quot;role&quot;: &quot;trajectory&quot;,
+      &quot;rows&quot;: 4470,
+      &quot;effective_weight&quot;: 6720.0
+    },
+    {
+      &quot;episode&quot;: &quot;A_90_B_e80_train_05&quot;,
+      &quot;role&quot;: &quot;probe&quot;,
+      &quot;rows&quot;: 448,
+      &quot;effective_weight&quot;: 2688.0
+    }
+  ],
+  &quot;validation_groups&quot;: [
+    {
+      &quot;episode&quot;: &quot;A_90_A_e50_validation_00&quot;,
+      &quot;role&quot;: &quot;trajectory&quot;,
+      &quot;rows&quot;: 3909,
+      &quot;effective_weight&quot;: 6159.0
+    },
+    {
+      &quot;episode&quot;: &quot;A_90_A_e50_validation_00&quot;,
+      &quot;role&quot;: &quot;probe&quot;,
+      &quot;rows&quot;: 392,
+      &quot;effective_weight&quot;: 2352.0
+    },
+    {
+      &quot;episode&quot;: &quot;A_90_A_e60_validation_00&quot;,
+      &quot;role&quot;: &quot;trajectory&quot;,
+      &quot;rows&quot;: 3954,
+      &quot;effective_weight&quot;: 6204.0
+    },
+    {
+      &quot;episode&quot;: &quot;A_90_A_e60_validation_00&quot;,
+      &quot;role&quot;: &quot;probe&quot;,
+      &quot;rows&quot;: 396,
+      &quot;effective_weight&quot;: 2376.0
+    },
+    {
+      &quot;episode&quot;: &quot;A_90_A_e70_validation_00&quot;,
+      &quot;role&quot;: &quot;trajectory&quot;,
+      &quot;rows&quot;: 4344,
+      &quot;effective_weight&quot;: 6594.0
+    },
+    {
+      &quot;episode&quot;: &quot;A_90_A_e70_validation_00&quot;,
+      &quot;role&quot;: &quot;probe&quot;,
+      &quot;rows&quot;: 436,
+      &quot;effective_weight&quot;: 2616.0
+    },
+    {
+      &quot;episode&quot;: &quot;A_90_B_e50_validation_00&quot;,
+      &quot;role&quot;: &quot;trajectory&quot;,
+      &quot;rows&quot;: 4259,
+      &quot;effective_weight&quot;: 6509.0
+    },
+    {
+      &quot;episode&quot;: &quot;A_90_B_e50_validation_00&quot;,
+      &quot;role&quot;: &quot;probe&quot;,
+      &quot;rows&quot;: 428,
+      &quot;effective_weight&quot;: 2568.0
+    },
+    {
+      &quot;episode&quot;: &quot;A_90_B_e60_validation_00&quot;,
+      &quot;role&quot;: &quot;trajectory&quot;,
+      &quot;rows&quot;: 4420,
+      &quot;effective_weight&quot;: 6670.0
+    },
+    {
+      &quot;episode&quot;: &quot;A_90_B_e60_validation_00&quot;,
+      &quot;role&quot;: &quot;probe&quot;,
+      &quot;rows&quot;: 444,
+      &quot;effective_weight&quot;: 2664.0
+    },
+    {
+      &quot;episode&quot;: &quot;A_90_B_e80_validation_00&quot;,
+      &quot;role&quot;: &quot;trajectory&quot;,
+      &quot;rows&quot;: 4505,
+      &quot;effective_weight&quot;: 6755.0
+    },
+    {
+      &quot;episode&quot;: &quot;A_90_B_e80_validation_00&quot;,
+      &quot;role&quot;: &quot;probe&quot;,
+      &quot;rows&quot;: 452,
+      &quot;effective_weight&quot;: 2712.0
+    }
+  ],
+  &quot;device&quot;: &quot;cuda:0&quot;,
+  &quot;gpu&quot;: &quot;NVIDIA RTX 2000 Ada Generation&quot;,
+  &quot;held_out_test_rows_loaded&quot;: 0
+}</pre><h2>All evaluated candidates</h2><pre>{
+  &quot;epoch_50&quot;: {
+    &quot;epoch&quot;: 50,
+    &quot;rows&quot;: [
+      {
+        &quot;episode_id&quot;: &quot;A_90_A_e50_validation_00&quot;,
+        &quot;completed&quot;: true,
+        &quot;rmse_deg&quot;: 0.024160346902077596,
+        &quot;partial_rmse_deg&quot;: null,
+        &quot;motion_max_error_deg&quot;: 0.06907000506957667,
+        &quot;high_accuracy&quot;: true,
+        &quot;error&quot;: null,
+        &quot;folder&quot;: &quot;validation/epoch_50/A_90_A_e50_validation_00&quot;
+      },
+      {
+        &quot;episode_id&quot;: &quot;A_90_A_e60_validation_00&quot;,
+        &quot;completed&quot;: true,
+        &quot;rmse_deg&quot;: 0.024397236730426024,
+        &quot;partial_rmse_deg&quot;: null,
+        &quot;motion_max_error_deg&quot;: 0.06419110342251957,
+        &quot;high_accuracy&quot;: true,
+        &quot;error&quot;: null,
+        &quot;folder&quot;: &quot;validation/epoch_50/A_90_A_e60_validation_00&quot;
+      },
+      {
+        &quot;episode_id&quot;: &quot;A_90_A_e70_validation_00&quot;,
+        &quot;completed&quot;: true,
+        &quot;rmse_deg&quot;: 0.02070101742379272,
+        &quot;partial_rmse_deg&quot;: null,
+        &quot;motion_max_error_deg&quot;: 0.0591723527759503,
+        &quot;high_accuracy&quot;: true,
+        &quot;error&quot;: null,
+        &quot;folder&quot;: &quot;validation/epoch_50/A_90_A_e70_validation_00&quot;
+      },
+      {
+        &quot;episode_id&quot;: &quot;A_90_B_e50_validation_00&quot;,
+        &quot;completed&quot;: true,
+        &quot;rmse_deg&quot;: 0.0155076991357402,
+        &quot;partial_rmse_deg&quot;: null,
+        &quot;motion_max_error_deg&quot;: 0.04248727646877108,
+        &quot;high_accuracy&quot;: true,
+        &quot;error&quot;: null,
+        &quot;folder&quot;: &quot;validation/epoch_50/A_90_B_e50_validation_00&quot;
+      },
+      {
+        &quot;episode_id&quot;: &quot;A_90_B_e60_validation_00&quot;,
+        &quot;completed&quot;: true,
+        &quot;rmse_deg&quot;: 0.018215642776041128,
+        &quot;partial_rmse_deg&quot;: null,
+        &quot;motion_max_error_deg&quot;: 0.03933156426680999,
+        &quot;high_accuracy&quot;: true,
+        &quot;error&quot;: null,
+        &quot;folder&quot;: &quot;validation/epoch_50/A_90_B_e60_validation_00&quot;
+      },
+      {
+        &quot;episode_id&quot;: &quot;A_90_B_e80_validation_00&quot;,
+        &quot;completed&quot;: true,
+        &quot;rmse_deg&quot;: 0.022251325161983204,
+        &quot;partial_rmse_deg&quot;: null,
+        &quot;motion_max_error_deg&quot;: 0.048971086243411184,
+        &quot;high_accuracy&quot;: true,
+        &quot;error&quot;: null,
+        &quot;folder&quot;: &quot;validation/epoch_50/A_90_B_e80_validation_00&quot;
+      }
+    ],
+    &quot;all_passed&quot;: true
+  }
+}</pre><img src="learning.png"><img src="tracking.png"></html>
