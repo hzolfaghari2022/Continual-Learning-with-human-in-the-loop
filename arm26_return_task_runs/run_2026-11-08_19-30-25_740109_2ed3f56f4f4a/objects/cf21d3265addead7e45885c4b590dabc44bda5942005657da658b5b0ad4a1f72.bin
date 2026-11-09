@@ -1,0 +1,386 @@
+<html><meta charset="utf-8"><style>body{font:17px Georgia;max-width:1150px;margin:30px auto;line-height:1.55}td,th{padding:7px;border-bottom:1px solid #ddd;text-align:left}img{max-width:100%}pre{white-space:pre-wrap}h2{margin-top:1.8em}table{font-size:14px;border-collapse:collapse}code{overflow-wrap:anywhere}</style><h1>Return-task retention: experiment and results</h1><p><b>VALIDATION ONLY</b> | seed 42 | state no_eligible_CL_candidate</p><h2>Measured outcome</h2><p>No replay candidate satisfied every later-task adaptation constraint. Preserving an old task without adequate new-task adaptation is not counted as successful continual learning. Tests were not opened.</p><table><tr><th>Task</th><th>Checkpoint</th><th>RMSE deg</th><th>Motion max deg</th><th>Full max deg</th><th>Speed RMSE deg/s</th><th>Failed/attempted</th><th>High accuracy</th></tr><tr><td>A_90</td><td>initial_target</td><td>0.021</td><td>0.069</td><td>2.267</td><td>0.018</td><td>0/6</td><td>6/6</td></tr><tr><td>A_90</td><td>noCL_final</td><td>4.907</td><td>9.642</td><td>9.642</td><td>2.742</td><td>0/6</td><td>0/6</td></tr></table><h2>Question and experimental sequence</h2><p>Does sequential fine-tuning forget the preselected task A_90, and does target-only replay preserve it? Train A_90 -&gt; B_60 -&gt; C_30 -&gt; D_45; freeze the final weights; revisit A_90 without learning. Ordinary NN runs first. Each CL candidate restarts from the exact same shared target-at-learning checkpoint. The last new task is tested separately, so preserved old-task behavior is not confused with successful new-task learning.</p><h2>Data generation and split</h2><p>The affine-dynamics plus PID teacher supplies desired cable tension. Muscle strength is changed through maximum isometric force, not by changing excitation. Entire reference episodes are assigned to train/validation/test before NN fitting; all rows and instantaneous recovery queries stay with their parent split. Four copied-state teacher queries every 0.2 s cover +/-2 deg position, +/-12 deg/s speed and +/-0.02 rad s integral offsets. Queries are not additional integrated trials. No pilots or test values are fitted. Startup state combinations may recur across splits; whole reference episodes remain separate. Row counts are correlated samples, not independent episodes. More rows alone do not prove adequate state coverage.</p><h2>NN controller and input/output meaning</h2><p>The feedforward MLP has 6081 parameters and one cable-force output. It is a learned feedback controller because measured state/error, bounded integral and previous tension are inputs; there is no recurrent hidden state and no separate PID, nominal or gain head. Shoulder elevation/yaw are prescribed. Simulation muscle states and known task parameters are available inputs; physical sensor deployment is not established by this study.</p><h2>Training and CUDA execution</h2><p>Initial fit: 600 ordinary-MSE epochs, Adam lr0.001 with cosine decay to 5%, batch2048. Then up to 200 recovery epochs, Adam lr0.0001, weighted force loss and corrective-response regularization. Milestones 50/100/200 are capped to the requested budget. The first checkpoint meeting every initial validation reference is shared by both branches. Later stages: 120 epochs/task, Adam0.001, optimizer reset, final fixed-budget checkpoint. Both branches see identical current-task rows/permutations and update counts. Training uses CUDA, with no CPU fallback in this release; data remain GPU-resident when memory permits. OpenSim physics and report/data preparation remain CPU operations. Collection runs independent headless CPU episodes in parallel.</p><h2>Continual-learning memory and objective</h2><p>During sequential learning, both branches minimize weighted MSE between raw force/650 and teacher force/650 plus 0.1 times a local corrective-response penalty. Trajectory weights:25 for first0.25 s,8 for remaining first1 s,1 otherwise; teacher-query weight6. The response penalty discourages force decreasing when actual angle or velocity decreases at fixed reference, using encoded finite differences of0.05 and minimum slope0.02 on up to128 training examples. This encourages corrective response but does not guarantee closed-loop stability. CL adds beta times the same objective on at most1024 target-training examples. Memory prioritizes startup samples then stratifies the remainder by episode/query type. Up to512 old examples are replayed per update. Float32 features/target/weights occupy at most120 KiB, plus indices/IDs. No previous full parameter vector is used by the CL mechanism; full deployment checkpoints are still saved. This is replay, not EWC. Replay adds data access/computation, so budgets are matched in current-task rows/updates, not total examples or wall time.</p><h2>Validation-only selection and sealed tests</h2><p>Candidate replay weights are1,4,16. At every later stage, CL current-task validation force RMSE must be at most1.5 times the ordinary-NN reference, with a1 N floor. Among eligible candidates, prefer those meeting target angle criteria, then lower target validation tracking RMSE, then smaller beta. All candidates are reported. No hidden fallback is selected if all adaptation constraints fail. Models, memory and selection are sealed before held-out values are decoded; no test tuning, updates or return-task relearning occurs.</p><h2>Metric definitions and acceptance criteria</h2><p>Primary target accuracy: motion angle RMSE at most 0.5 deg AND motion maximum absolute error at most 2 deg, on every selected reference. Initial recovery hold is excluded from motion criteria, but full-episode maximum is also shown. Velocity RMSE is in deg/s. Saturation is the percentage of motion samples whose requested force is clipped. Angle group means give equal weight to each completed reference. Teacher-forced force RMSE is pooled over saved teacher states/queries and is not a closed-loop angle metric. Failed runs retain failure counts/partial traces and receive no invented finite final RMSE.</p><h2>How to interpret the outcome</h2><p>No replay candidate satisfied every later-task adaptation constraint. Preserving an old task without adequate new-task adaptation is not counted as successful continual learning. Tests were not opened.</p><h2>Limits and reproducibility</h2><p>Results from one seed do not establish statistical significance. Validation guided method selection; only the sealed held-out tests support the final reported comparison. The first reference overlay was chosen by episode ID, not by error. Initial poor tracking, forgetting, new-task adaptation and numerical/storage failures are different issues. All data hashes, source, checkpoints, candidate scores, histories and logs are retained. Perfect tracking, a large baseline failure and CL superiority are not guaranteed.</p><h2>Tasks and physical conditions</h2><table><tr><th>Task</th><th>Reference</th><th>Strength ratio</th><th>Initial reference angles (deg)</th></tr><tr><td>A_90</td><td>Vertical reaches</td><td>[0.9]</td><td>[50.0, 60.0, 70.0, 80.0]</td></tr><tr><td>B_60</td><td>Variable speeds and reversals</td><td>[0.6]</td><td>[50.0, 60.0, 70.0, 80.0]</td></tr><tr><td>C_30</td><td>Cross-body sweep via prescribed yaw</td><td>[0.3]</td><td>[50.0, 60.0, 70.0, 80.0]</td></tr><tr><td>D_45</td><td>Reach/hold with load pulses</td><td>[0.45]</td><td>[50.0, 60.0, 70.0, 80.0]</td></tr></table><table><tr><th>Setting</th><th>Value</th></tr><tr><td>Mass (kg)</td><td>[5.0]</td></tr><tr><td>Control sample interval (s)</td><td>[0.005]</td></tr><tr><td>Muscle excitation</td><td>[0.1]</td></tr><tr><td>Initial angle offsets (deg)</td><td>[-2.0, 0.0, 2.0]</td></tr><tr><td>Initial speeds (deg/s)</td><td>[-15.0, 0.0, 15.0]</td></tr><tr><td>Integrator accuracy</td><td>[1e-05]</td></tr><tr><td>NN training device</td><td>cuda:0</td></tr><tr><td>GPU</td><td>NVIDIA RTX 2000 Ada Generation</td></tr><tr><td>Physics device</td><td>CPU OpenSim; no CUDA forward dynamics</td></tr><tr><td>Viewer</td><td>Headless by default; optional final test viewer</td></tr></table><h2>Actual dataset size and split</h2><table><tr><th>Task</th><th>Split</th><th>Episodes</th><th>Trajectory rows</th><th>Query rows</th></tr><tr><td>A_90</td><td>train</td><td>44</td><td>187542</td><td>18852</td></tr><tr><td>A_90</td><td>validation</td><td>6</td><td>25391</td><td>2548</td></tr><tr><td>A_90</td><td>test</td><td>13</td><td>53860</td><td>5412</td></tr><tr><td>B_60</td><td>train</td><td>44</td><td>179151</td><td>18004</td></tr><tr><td>B_60</td><td>validation</td><td>6</td><td>24193</td><td>2428</td></tr><tr><td>B_60</td><td>test</td><td>13</td><td>54189</td><td>5444</td></tr><tr><td>C_30</td><td>train</td><td>44</td><td>284957</td><td>28584</td></tr><tr><td>C_30</td><td>validation</td><td>6</td><td>37269</td><td>3740</td></tr><tr><td>C_30</td><td>test</td><td>12</td><td>77863</td><td>7808</td></tr><tr><td>D_45</td><td>train</td><td>43</td><td>246977</td><td>24784</td></tr><tr><td>D_45</td><td>validation</td><td>7</td><td>38843</td><td>3896</td></tr><tr><td>D_45</td><td>test</td><td>12</td><td>70822</td><td>7104</td></tr></table><h2>NN topology</h2><table><tr><th>Layer</th><th>Size/output</th><th>Parameters</th></tr><tr><td>Input</td><td>28 encoded simulator features</td><td>0</td></tr><tr><td>Hidden 1</td><td>64 tanh</td><td>1856</td></tr><tr><td>Hidden 2</td><td>64 tanh</td><td>4160</td></tr><tr><td>Output</td><td>1 linear normalized force</td><td>65</td></tr><tr><td>Total</td><td>One cable tension, clipped to 0-650 N</td><td>6081</td></tr></table><h2>All 28 inputs and normalization</h2><table><tr><th>Index</th><th>Raw feature</th><th>Raw unit</th><th>Encoded value</th></tr><tr><td>1</td><td>angle_rad</td><td>rad</td><td>raw / 1</td></tr><tr><td>2</td><td>velocity_rad_s</td><td>rad/s</td><td>raw / 2</td></tr><tr><td>3</td><td>reference_rad</td><td>rad</td><td>(reference angle - actual angle) / 0.02 rad</td></tr><tr><td>4</td><td>reference_velocity_rad_s</td><td>rad/s</td><td>(reference speed - actual speed) / 0.2 rad/s</td></tr><tr><td>5</td><td>reference_acceleration_rad_s2</td><td>rad/s2</td><td>raw / 10</td></tr><tr><td>6</td><td>mass_kg</td><td>kg</td><td>raw / 20</td></tr><tr><td>7</td><td>shoulder_angle_rad</td><td>rad</td><td>raw / 1</td></tr><tr><td>8</td><td>previous_tension_N</td><td>N</td><td>raw / 650</td></tr><tr><td>9</td><td>error_integral_rad_s</td><td>rad s</td><td>raw / 0.1</td></tr><tr><td>10</td><td>TRIlong_activation</td><td>dimensionless</td><td>raw / 1</td></tr><tr><td>11</td><td>TRIlat_activation</td><td>dimensionless</td><td>raw / 1</td></tr><tr><td>12</td><td>TRImed_activation</td><td>dimensionless</td><td>raw / 1</td></tr><tr><td>13</td><td>BIClong_activation</td><td>dimensionless</td><td>raw / 1</td></tr><tr><td>14</td><td>BICshort_activation</td><td>dimensionless</td><td>raw / 1</td></tr><tr><td>15</td><td>BRA_activation</td><td>dimensionless</td><td>raw / 1</td></tr><tr><td>16</td><td>TRIlong_normalized_fiber_length</td><td>dimensionless</td><td>raw / 1</td></tr><tr><td>17</td><td>TRIlat_normalized_fiber_length</td><td>dimensionless</td><td>raw / 1</td></tr><tr><td>18</td><td>TRImed_normalized_fiber_length</td><td>dimensionless</td><td>raw / 1</td></tr><tr><td>19</td><td>BIClong_normalized_fiber_length</td><td>dimensionless</td><td>raw / 1</td></tr><tr><td>20</td><td>BICshort_normalized_fiber_length</td><td>dimensionless</td><td>raw / 1</td></tr><tr><td>21</td><td>BRA_normalized_fiber_length</td><td>dimensionless</td><td>raw / 1</td></tr><tr><td>22</td><td>strength_scale</td><td>dimensionless</td><td>raw / 1</td></tr><tr><td>23</td><td>shoulder_velocity_rad_s</td><td>rad/s</td><td>raw / 2</td></tr><tr><td>24</td><td>shoulder_acceleration_rad_s2</td><td>rad/s2</td><td>raw / 10</td></tr><tr><td>25</td><td>yaw_rad</td><td>rad</td><td>raw / 1.5</td></tr><tr><td>26</td><td>yaw_velocity_rad_s</td><td>rad/s</td><td>raw / 2</td></tr><tr><td>27</td><td>yaw_acceleration_rad_s2</td><td>rad/s2</td><td>raw / 10</td></tr><tr><td>28</td><td>external_load_y_N</td><td>N</td><td>raw / 25</td></tr></table><h2>Training history at saved checkpoints</h2><p>Training RMSE is the online, last-epoch minibatch aggregate before/after intervening updates. Validation is evaluated at the saved final checkpoint. Force units are N; they do not represent angle error.</p><table><tr><th>Branch</th><th>After task</th><th>Epochs</th><th>Train RMSE N</th><th>Current val RMSE N</th><th>Updates</th><th>Device</th></tr><tr><td>initial_base</td><td>A_90</td><td>600</td><td>1.299</td><td>3.332</td><td>60600</td><td>cuda:0</td></tr><tr><td>noCL</td><td>B_60</td><td>120</td><td>1.396</td><td>1.592</td><td>11640</td><td>cuda:0</td></tr><tr><td>noCL</td><td>C_30</td><td>120</td><td>0.551</td><td>1.430</td><td>18480</td><td>cuda:0</td></tr><tr><td>noCL</td><td>D_45</td><td>120</td><td>0.545</td><td>1.774</td><td>15960</td><td>cuda:0</td></tr><tr><td>replay_1</td><td>B_60</td><td>120</td><td>2.509</td><td>3.429</td><td>11640</td><td>cuda:0</td></tr><tr><td>replay_1</td><td>C_30</td><td>120</td><td>1.152</td><td>3.734</td><td>18480</td><td>cuda:0</td></tr><tr><td>replay_1</td><td>D_45</td><td>120</td><td>0.972</td><td>3.898</td><td>15960</td><td>cuda:0</td></tr><tr><td>replay_16</td><td>B_60</td><td>120</td><td>4.002</td><td>3.731</td><td>11640</td><td>cuda:0</td></tr><tr><td>replay_16</td><td>C_30</td><td>120</td><td>2.555</td><td>4.159</td><td>18480</td><td>cuda:0</td></tr><tr><td>replay_16</td><td>D_45</td><td>120</td><td>1.768</td><td>3.639</td><td>15960</td><td>cuda:0</td></tr><tr><td>replay_4</td><td>B_60</td><td>120</td><td>2.785</td><td>2.683</td><td>11640</td><td>cuda:0</td></tr><tr><td>replay_4</td><td>C_30</td><td>120</td><td>1.662</td><td>3.950</td><td>18480</td><td>cuda:0</td></tr><tr><td>replay_4</td><td>D_45</td><td>120</td><td>1.242</td><td>3.720</td><td>15960</td><td>cuda:0</td></tr><tr><td>shared</td><td>A_90</td><td>50</td><td>1.470</td><td>3.064</td><td>5050</td><td>cuda:0</td></tr></table><h2>Figures and all-reference gallery</h2><p>Solid learning curves show return-task validation force RMSE; dotted curves show current-task training force RMSE. The current task changes between stages, so the dotted/solid gap is not a same-task generalization gap.</p><img src="retention.png"><img src="tracking.png"><img src="all_return_references_1.png"><img src="all_return_references_2.png"><h2>All replay candidates (validation)</h2><table><tr><th>Weight</th><th>Eligible adaptation</th><th>Target RMSE deg</th><th>Target accuracy passed</th></tr><tr><td>1.0</td><td>False</td><td>0.047</td><td>True</td></tr><tr><td>4.0</td><td>False</td><td>0.081</td><td>True</td></tr><tr><td>16.0</td><td>False</td><td>2.764</td><td>False</td></tr></table><details><summary>Adaptation constraints and selection</summary><pre>{
+  &quot;selected&quot;: null,
+  &quot;candidates&quot;: [
+    {
+      &quot;weight&quot;: 1.0,
+      &quot;label&quot;: &quot;replay_1&quot;,
+      &quot;checkpoint&quot;: &quot;models/replay_1/after_D_45/policy.pt&quot;,
+      &quot;adaptation&quot;: {
+        &quot;B_60&quot;: {
+          &quot;force_rmse_N&quot;: 3.428691962969122,
+          &quot;noCL_force_rmse_N&quot;: 1.591506842774804,
+          &quot;limit_N&quot;: 2.3872602641622063,
+          &quot;passed&quot;: false
+        },
+        &quot;C_30&quot;: {
+          &quot;force_rmse_N&quot;: 3.7336474783579496,
+          &quot;noCL_force_rmse_N&quot;: 1.430186611706745,
+          &quot;limit_N&quot;: 2.1452799175601176,
+          &quot;passed&quot;: false
+        },
+        &quot;D_45&quot;: {
+          &quot;force_rmse_N&quot;: 3.8977223566652306,
+          &quot;noCL_force_rmse_N&quot;: 1.7742695156713022,
+          &quot;limit_N&quot;: 2.661404273506953,
+          &quot;passed&quot;: false
+        }
+      },
+      &quot;eligible&quot;: false,
+      &quot;target_high_accuracy&quot;: true,
+      &quot;mean_target_rmse_deg&quot;: 0.04663315693653419,
+      &quot;rows&quot;: [
+        {
+          &quot;task&quot;: &quot;A_90&quot;,
+          &quot;split&quot;: &quot;validation&quot;,
+          &quot;label&quot;: &quot;replay_1&quot;,
+          &quot;episode_id&quot;: &quot;A_90_A_e50_validation_00&quot;,
+          &quot;completed&quot;: true,
+          &quot;rmse_deg&quot;: 0.03300319647054603,
+          &quot;partial_rmse_deg&quot;: null,
+          &quot;motion_max_error_deg&quot;: 0.07431743200455011,
+          &quot;all_max_error_deg&quot;: 2.2331348354689258,
+          &quot;speed_rmse_deg_s&quot;: 0.015526411355929309,
+          &quot;saturation_percent&quot;: 0.0,
+          &quot;high_accuracy&quot;: true,
+          &quot;error&quot;: null,
+          &quot;folder&quot;: &quot;validation/replay_1/A_90_A_e50_validation_00&quot;
+        },
+        {
+          &quot;task&quot;: &quot;A_90&quot;,
+          &quot;split&quot;: &quot;validation&quot;,
+          &quot;label&quot;: &quot;replay_1&quot;,
+          &quot;episode_id&quot;: &quot;A_90_A_e60_validation_00&quot;,
+          &quot;completed&quot;: true,
+          &quot;rmse_deg&quot;: 0.03361685184404972,
+          &quot;partial_rmse_deg&quot;: null,
+          &quot;motion_max_error_deg&quot;: 0.06445630067761213,
+          &quot;all_max_error_deg&quot;: 2.2427924289977548,
+          &quot;speed_rmse_deg_s&quot;: 0.020154875901597008,
+          &quot;saturation_percent&quot;: 0.0,
+          &quot;high_accuracy&quot;: true,
+          &quot;error&quot;: null,
+          &quot;folder&quot;: &quot;validation/replay_1/A_90_A_e60_validation_00&quot;
+        },
+        {
+          &quot;task&quot;: &quot;A_90&quot;,
+          &quot;split&quot;: &quot;validation&quot;,
+          &quot;label&quot;: &quot;replay_1&quot;,
+          &quot;episode_id&quot;: &quot;A_90_A_e70_validation_00&quot;,
+          &quot;completed&quot;: true,
+          &quot;rmse_deg&quot;: 0.016402660980825705,
+          &quot;partial_rmse_deg&quot;: null,
+          &quot;motion_max_error_deg&quot;: 0.041589630595334874,
+          &quot;all_max_error_deg&quot;: 0.39725876378490027,
+          &quot;speed_rmse_deg_s&quot;: 0.01797168786267411,
+          &quot;saturation_percent&quot;: 0.0,
+          &quot;high_accuracy&quot;: true,
+          &quot;error&quot;: null,
+          &quot;folder&quot;: &quot;validation/replay_1/A_90_A_e70_validation_00&quot;
+        },
+        {
+          &quot;task&quot;: &quot;A_90&quot;,
+          &quot;split&quot;: &quot;validation&quot;,
+          &quot;label&quot;: &quot;replay_1&quot;,
+          &quot;episode_id&quot;: &quot;A_90_B_e50_validation_00&quot;,
+          &quot;completed&quot;: true,
+          &quot;rmse_deg&quot;: 0.04840946714647976,
+          &quot;partial_rmse_deg&quot;: null,
+          &quot;motion_max_error_deg&quot;: 0.35060229648370445,
+          &quot;all_max_error_deg&quot;: 2.0000000000000027,
+          &quot;speed_rmse_deg_s&quot;: 0.21093735135644665,
+          &quot;saturation_percent&quot;: 0.0,
+          &quot;high_accuracy&quot;: true,
+          &quot;error&quot;: null,
+          &quot;folder&quot;: &quot;validation/replay_1/A_90_B_e50_validation_00&quot;
+        },
+        {
+          &quot;task&quot;: &quot;A_90&quot;,
+          &quot;split&quot;: &quot;validation&quot;,
+          &quot;label&quot;: &quot;replay_1&quot;,
+          &quot;episode_id&quot;: &quot;A_90_B_e60_validation_00&quot;,
+          &quot;completed&quot;: true,
+          &quot;rmse_deg&quot;: 0.09094933863294388,
+          &quot;partial_rmse_deg&quot;: null,
+          &quot;motion_max_error_deg&quot;: 0.7967549749713572,
+          &quot;all_max_error_deg&quot;: 1.99999999999999,
+          &quot;speed_rmse_deg_s&quot;: 0.45350219675413106,
+          &quot;saturation_percent&quot;: 0.0,
+          &quot;high_accuracy&quot;: true,
+          &quot;error&quot;: null,
+          &quot;folder&quot;: &quot;validation/replay_1/A_90_B_e60_validation_00&quot;
+        },
+        {
+          &quot;task&quot;: &quot;A_90&quot;,
+          &quot;split&quot;: &quot;validation&quot;,
+          &quot;label&quot;: &quot;replay_1&quot;,
+          &quot;episode_id&quot;: &quot;A_90_B_e80_validation_00&quot;,
+          &quot;completed&quot;: true,
+          &quot;rmse_deg&quot;: 0.05741742654436004,
+          &quot;partial_rmse_deg&quot;: null,
+          &quot;motion_max_error_deg&quot;: 0.35653199207586306,
+          &quot;all_max_error_deg&quot;: 2.2689650850433787,
+          &quot;speed_rmse_deg_s&quot;: 0.20241373484224975,
+          &quot;saturation_percent&quot;: 0.0,
+          &quot;high_accuracy&quot;: true,
+          &quot;error&quot;: null,
+          &quot;folder&quot;: &quot;validation/replay_1/A_90_B_e80_validation_00&quot;
+        }
+      ]
+    },
+    {
+      &quot;weight&quot;: 4.0,
+      &quot;label&quot;: &quot;replay_4&quot;,
+      &quot;checkpoint&quot;: &quot;models/replay_4/after_D_45/policy.pt&quot;,
+      &quot;adaptation&quot;: {
+        &quot;B_60&quot;: {
+          &quot;force_rmse_N&quot;: 2.6826287577245065,
+          &quot;noCL_force_rmse_N&quot;: 1.591506842774804,
+          &quot;limit_N&quot;: 2.3872602641622063,
+          &quot;passed&quot;: false
+        },
+        &quot;C_30&quot;: {
+          &quot;force_rmse_N&quot;: 3.9503973487974555,
+          &quot;noCL_force_rmse_N&quot;: 1.430186611706745,
+          &quot;limit_N&quot;: 2.1452799175601176,
+          &quot;passed&quot;: false
+        },
+        &quot;D_45&quot;: {
+          &quot;force_rmse_N&quot;: 3.7196418584851747,
+          &quot;noCL_force_rmse_N&quot;: 1.7742695156713022,
+          &quot;limit_N&quot;: 2.661404273506953,
+          &quot;passed&quot;: false
+        }
+      },
+      &quot;eligible&quot;: false,
+      &quot;target_high_accuracy&quot;: true,
+      &quot;mean_target_rmse_deg&quot;: 0.08103588565013811,
+      &quot;rows&quot;: [
+        {
+          &quot;task&quot;: &quot;A_90&quot;,
+          &quot;split&quot;: &quot;validation&quot;,
+          &quot;label&quot;: &quot;replay_4&quot;,
+          &quot;episode_id&quot;: &quot;A_90_A_e50_validation_00&quot;,
+          &quot;completed&quot;: true,
+          &quot;rmse_deg&quot;: 0.06803923882500817,
+          &quot;partial_rmse_deg&quot;: null,
+          &quot;motion_max_error_deg&quot;: 0.39401420287987504,
+          &quot;all_max_error_deg&quot;: 2.2565227008336466,
+          &quot;speed_rmse_deg_s&quot;: 0.2232347241490838,
+          &quot;saturation_percent&quot;: 0.0,
+          &quot;high_accuracy&quot;: true,
+          &quot;error&quot;: null,
+          &quot;folder&quot;: &quot;validation/replay_4/A_90_A_e50_validation_00&quot;
+        },
+        {
+          &quot;task&quot;: &quot;A_90&quot;,
+          &quot;split&quot;: &quot;validation&quot;,
+          &quot;label&quot;: &quot;replay_4&quot;,
+          &quot;episode_id&quot;: &quot;A_90_A_e60_validation_00&quot;,
+          &quot;completed&quot;: true,
+          &quot;rmse_deg&quot;: 0.09954788459209804,
+          &quot;partial_rmse_deg&quot;: null,
+          &quot;motion_max_error_deg&quot;: 0.518570134281594,
+          &quot;all_max_error_deg&quot;: 2.265791073118061,
+          &quot;speed_rmse_deg_s&quot;: 0.37260694275262407,
+          &quot;saturation_percent&quot;: 0.0,
+          &quot;high_accuracy&quot;: true,
+          &quot;error&quot;: null,
+          &quot;folder&quot;: &quot;validation/replay_4/A_90_A_e60_validation_00&quot;
+        },
+        {
+          &quot;task&quot;: &quot;A_90&quot;,
+          &quot;split&quot;: &quot;validation&quot;,
+          &quot;label&quot;: &quot;replay_4&quot;,
+          &quot;episode_id&quot;: &quot;A_90_A_e70_validation_00&quot;,
+          &quot;completed&quot;: true,
+          &quot;rmse_deg&quot;: 0.02267571007309977,
+          &quot;partial_rmse_deg&quot;: null,
+          &quot;motion_max_error_deg&quot;: 0.0988370986582434,
+          &quot;all_max_error_deg&quot;: 0.37777005597752156,
+          &quot;speed_rmse_deg_s&quot;: 0.044006448599917335,
+          &quot;saturation_percent&quot;: 0.0,
+          &quot;high_accuracy&quot;: true,
+          &quot;error&quot;: null,
+          &quot;folder&quot;: &quot;validation/replay_4/A_90_A_e70_validation_00&quot;
+        },
+        {
+          &quot;task&quot;: &quot;A_90&quot;,
+          &quot;split&quot;: &quot;validation&quot;,
+          &quot;label&quot;: &quot;replay_4&quot;,
+          &quot;episode_id&quot;: &quot;A_90_B_e50_validation_00&quot;,
+          &quot;completed&quot;: true,
+          &quot;rmse_deg&quot;: 0.06735426033264695,
+          &quot;partial_rmse_deg&quot;: null,
+          &quot;motion_max_error_deg&quot;: 0.48940220901347453,
+          &quot;all_max_error_deg&quot;: 2.0000000000000027,
+          &quot;speed_rmse_deg_s&quot;: 0.2882064839052268,
+          &quot;saturation_percent&quot;: 0.0,
+          &quot;high_accuracy&quot;: true,
+          &quot;error&quot;: null,
+          &quot;folder&quot;: &quot;validation/replay_4/A_90_B_e50_validation_00&quot;
+        },
+        {
+          &quot;task&quot;: &quot;A_90&quot;,
+          &quot;split&quot;: &quot;validation&quot;,
+          &quot;label&quot;: &quot;replay_4&quot;,
+          &quot;episode_id&quot;: &quot;A_90_B_e60_validation_00&quot;,
+          &quot;completed&quot;: true,
+          &quot;rmse_deg&quot;: 0.14345404737094922,
+          &quot;partial_rmse_deg&quot;: null,
+          &quot;motion_max_error_deg&quot;: 1.1628274560588445,
+          &quot;all_max_error_deg&quot;: 1.99999999999999,
+          &quot;speed_rmse_deg_s&quot;: 0.7170321564916242,
+          &quot;saturation_percent&quot;: 0.0,
+          &quot;high_accuracy&quot;: true,
+          &quot;error&quot;: null,
+          &quot;folder&quot;: &quot;validation/replay_4/A_90_B_e60_validation_00&quot;
+        },
+        {
+          &quot;task&quot;: &quot;A_90&quot;,
+          &quot;split&quot;: &quot;validation&quot;,
+          &quot;label&quot;: &quot;replay_4&quot;,
+          &quot;episode_id&quot;: &quot;A_90_B_e80_validation_00&quot;,
+          &quot;completed&quot;: true,
+          &quot;rmse_deg&quot;: 0.08514417270702651,
+          &quot;partial_rmse_deg&quot;: null,
+          &quot;motion_max_error_deg&quot;: 0.6393937036578992,
+          &quot;all_max_error_deg&quot;: 2.0000000000000027,
+          &quot;speed_rmse_deg_s&quot;: 0.35030219283493874,
+          &quot;saturation_percent&quot;: 0.0,
+          &quot;high_accuracy&quot;: true,
+          &quot;error&quot;: null,
+          &quot;folder&quot;: &quot;validation/replay_4/A_90_B_e80_validation_00&quot;
+        }
+      ]
+    },
+    {
+      &quot;weight&quot;: 16.0,
+      &quot;label&quot;: &quot;replay_16&quot;,
+      &quot;checkpoint&quot;: &quot;models/replay_16/after_D_45/policy.pt&quot;,
+      &quot;adaptation&quot;: {
+        &quot;B_60&quot;: {
+          &quot;force_rmse_N&quot;: 3.730814592977789,
+          &quot;noCL_force_rmse_N&quot;: 1.591506842774804,
+          &quot;limit_N&quot;: 2.3872602641622063,
+          &quot;passed&quot;: false
+        },
+        &quot;C_30&quot;: {
+          &quot;force_rmse_N&quot;: 4.159034421724225,
+          &quot;noCL_force_rmse_N&quot;: 1.430186611706745,
+          &quot;limit_N&quot;: 2.1452799175601176,
+          &quot;passed&quot;: false
+        },
+        &quot;D_45&quot;: {
+          &quot;force_rmse_N&quot;: 3.639149881250656,
+          &quot;noCL_force_rmse_N&quot;: 1.7742695156713022,
+          &quot;limit_N&quot;: 2.661404273506953,
+          &quot;passed&quot;: false
+        }
+      },
+      &quot;eligible&quot;: false,
+      &quot;target_high_accuracy&quot;: false,
+      &quot;mean_target_rmse_deg&quot;: 2.763925469091438,
+      &quot;rows&quot;: [
+        {
+          &quot;task&quot;: &quot;A_90&quot;,
+          &quot;split&quot;: &quot;validation&quot;,
+          &quot;label&quot;: &quot;replay_16&quot;,
+          &quot;episode_id&quot;: &quot;A_90_A_e50_validation_00&quot;,
+          &quot;completed&quot;: true,
+          &quot;rmse_deg&quot;: 16.490263643718546,
+          &quot;partial_rmse_deg&quot;: null,
+          &quot;motion_max_error_deg&quot;: 18.99877029495879,
+          &quot;all_max_error_deg&quot;: 18.99877029495879,
+          &quot;speed_rmse_deg_s&quot;: 1.4793153392821865,
+          &quot;saturation_percent&quot;: 0.0,
+          &quot;high_accuracy&quot;: false,
+          &quot;error&quot;: null,
+          &quot;folder&quot;: &quot;validation/replay_16/A_90_A_e50_validation_00&quot;
+        },
+        {
+          &quot;task&quot;: &quot;A_90&quot;,
+          &quot;split&quot;: &quot;validation&quot;,
+          &quot;label&quot;: &quot;replay_16&quot;,
+          &quot;episode_id&quot;: &quot;A_90_A_e60_validation_00&quot;,
+          &quot;completed&quot;: true,
+          &quot;rmse_deg&quot;: 0.02363899682417677,
+          &quot;partial_rmse_deg&quot;: null,
+          &quot;motion_max_error_deg&quot;: 0.0504428596898358,
+          &quot;all_max_error_deg&quot;: 2.256274838315323,
+          &quot;speed_rmse_deg_s&quot;: 0.009248421078887235,
+          &quot;saturation_percent&quot;: 0.0,
+          &quot;high_accuracy&quot;: true,
+          &quot;error&quot;: null,
+          &quot;folder&quot;: &quot;validation/replay_16/A_90_A_e60_validation_00&quot;
+        },
+        {
+          &quot;task&quot;: &quot;A_90&quot;,
+          &quot;split&quot;: &quot;validation&quot;,
+          &quot;label&quot;: &quot;replay_16&quot;,
+          &quot;episode_id&quot;: &quot;A_90_A_e70_validation_00&quot;,
+          &quot;completed&quot;: true,
+          &quot;rmse_deg&quot;: 0.01053469070479019,
+          &quot;partial_rmse_deg&quot;: null,
+          &quot;motion_max_error_deg&quot;: 0.02241412932948172,
+          &quot;all_max_error_deg&quot;: 0.30810257474589436,
+          &quot;speed_rmse_deg_s&quot;: 0.012040839320097979,
+          &quot;saturation_percent&quot;: 0.0,
+          &quot;high_accuracy&quot;: true,
+          &quot;error&quot;: null,
+          &quot;folder&quot;: &quot;validation/replay_16/A_90_A_e70_validation_00&quot;
+        },
+        {
+          &quot;task&quot;: &quot;A_90&quot;,
+          &quot;split&quot;: &quot;validation&quot;,
+          &quot;label&quot;: &quot;replay_16&quot;,
+          &quot;episode_id&quot;: &quot;A_90_B_e50_validation_00&quot;,
+          &quot;completed&quot;: true,
+          &quot;rmse_deg&quot;: 0.02589517223709171,
+          &quot;partial_rmse_deg&quot;: null,
+          &quot;motion_max_error_deg&quot;: 0.062345955803391674,
+          &quot;all_max_error_deg&quot;: 2.0000000000000027,
+          &quot;speed_rmse_deg_s&quot;: 0.01636533655851528,
+          &quot;saturation_percent&quot;: 0.0,
+          &quot;high_accuracy&quot;: true,
+          &quot;error&quot;: null,
+          &quot;folder&quot;: &quot;validation/replay_16/A_90_B_e50_validation_00&quot;
+        },
+        {
+          &quot;task&quot;: &quot;A_90&quot;,
+          &quot;split&quot;: &quot;validation&quot;,
+          &quot;label&quot;: &quot;replay_16&quot;,
+          &quot;episode_id&quot;: &quot;A_90_B_e60_validation_00&quot;,
+          &quot;completed&quot;: true,
+          &quot;rmse_deg&quot;: 0.014737643527039383,
+          &quot;partial_rmse_deg&quot;: null,
+          &quot;motion_max_error_deg&quot;: 0.03426433831837598,
+          &quot;all_max_error_deg&quot;: 1.99999999999999,
+          &quot;speed_rmse_deg_s&quot;: 0.007106406538911776,
+          &quot;saturation_percent&quot;: 0.0,
+          &quot;high_accuracy&quot;: true,
+          &quot;error&quot;: null,
+          &quot;folder&quot;: &quot;validation/replay_16/A_90_B_e60_validation_00&quot;
+        },
+        {
+          &quot;task&quot;: &quot;A_90&quot;,
+          &quot;split&quot;: &quot;validation&quot;,
+          &quot;label&quot;: &quot;replay_16&quot;,
+          &quot;episode_id&quot;: &quot;A_90_B_e80_validation_00&quot;,
+          &quot;completed&quot;: true,
+          &quot;rmse_deg&quot;: 0.018482667536986925,
+          &quot;partial_rmse_deg&quot;: null,
+          &quot;motion_max_error_deg&quot;: 0.03290458475911769,
+          &quot;all_max_error_deg&quot;: 2.0000000000000027,
+          &quot;speed_rmse_deg_s&quot;: 0.01546923048071689,
+          &quot;saturation_percent&quot;: 0.0,
+          &quot;high_accuracy&quot;: true,
+          &quot;error&quot;: null,
+          &quot;folder&quot;: &quot;validation/replay_16/A_90_B_e80_validation_00&quot;
+        }
+      ]
+    }
+  ],
+  &quot;baseline_checkpoint&quot;: &quot;models/noCL/after_D_45/policy.pt&quot;,
+  &quot;initial_checkpoint&quot;: &quot;models/shared/after_A_90/policy.pt&quot;,
+  &quot;rule&quot;: &quot;First require new-task validation force adaptation within 1.5x noCL (floor 1 N); among eligible prefer meeting return-angle criteria, then lowest mean return validation angle RMSE, then lower replay weight. No test selection or guaranteed benefit. No fallback if all adaptation constraints fail.&quot;
+}</pre></details><h2>Every attempted episode</h2><table><tr><th>Task</th><th>Model</th><th>Reference</th><th>Completed</th><th>Motion RMSE deg</th><th>Partial RMSE deg</th><th>Motion peak deg</th><th>Passed</th></tr><tr><td>A_90</td><td>initial_target</td><td>A_90_A_e50_validation_00</td><td>True</td><td>0.024160346902077596</td><td>None</td><td>0.06907000506957667</td><td>True</td></tr><tr><td>A_90</td><td>initial_target</td><td>A_90_A_e60_validation_00</td><td>True</td><td>0.024397236730426024</td><td>None</td><td>0.06419110342251957</td><td>True</td></tr><tr><td>A_90</td><td>initial_target</td><td>A_90_A_e70_validation_00</td><td>True</td><td>0.02070101742379272</td><td>None</td><td>0.0591723527759503</td><td>True</td></tr><tr><td>A_90</td><td>initial_target</td><td>A_90_B_e50_validation_00</td><td>True</td><td>0.0155076991357402</td><td>None</td><td>0.04248727646877108</td><td>True</td></tr><tr><td>A_90</td><td>initial_target</td><td>A_90_B_e60_validation_00</td><td>True</td><td>0.018215642776041128</td><td>None</td><td>0.03933156426680999</td><td>True</td></tr><tr><td>A_90</td><td>initial_target</td><td>A_90_B_e80_validation_00</td><td>True</td><td>0.022251325161983204</td><td>None</td><td>0.048971086243411184</td><td>True</td></tr><tr><td>A_90</td><td>noCL_final</td><td>A_90_A_e50_validation_00</td><td>True</td><td>3.6353531774394763</td><td>None</td><td>7.631349067191621</td><td>False</td></tr><tr><td>A_90</td><td>noCL_final</td><td>A_90_A_e60_validation_00</td><td>True</td><td>4.117206505008134</td><td>None</td><td>8.07592362768354</td><td>False</td></tr><tr><td>A_90</td><td>noCL_final</td><td>A_90_A_e70_validation_00</td><td>True</td><td>1.2490601792956326</td><td>None</td><td>6.232151134765783</td><td>False</td></tr><tr><td>A_90</td><td>noCL_final</td><td>A_90_B_e50_validation_00</td><td>True</td><td>4.940250238099839</td><td>None</td><td>9.384112889695405</td><td>False</td></tr><tr><td>A_90</td><td>noCL_final</td><td>A_90_B_e60_validation_00</td><td>True</td><td>7.66762866967676</td><td>None</td><td>9.185704031369758</td><td>False</td></tr><tr><td>A_90</td><td>noCL_final</td><td>A_90_B_e80_validation_00</td><td>True</td><td>7.83546201862962</td><td>None</td><td>9.642106642675511</td><td>False</td></tr></table></html>
