@@ -1,2 +1,37 @@
 RUN: C:\Users\hzlfghri\miniconda3\envs\lstm-py312\python.exe -X utf8 C:\Users\hzlfghri\A6_dd0c3b\Arm26_600_Data_Collection_v2\core\environment_check.py --physics-only --report C:\Users\hzlfghri\A6_dd0c3b\Arm26_600_Data_Collection_v2\runs\run_2026-11-08_22-13-55_771126\ENVIRONMENT.json
 OpenSim model initialization passed. Physics engine: CPU; no viewer and no CUDA dynamics.
+Traceback (most recent call last):
+  File "C:\Users\hzlfghri\A6_dd0c3b\Arm26_600_Data_Collection_v2\flow.py", line 409, in verified_checkpoint
+    return backup_experiment(a.out,ROOT,reason=reason,final=final)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\hzlfghri\A6_dd0c3b\Arm26_600_Data_Collection_v2\backup.py", line 261, in backup_experiment
+    main_commit=register_on_main(clone,head,relative,out)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\hzlfghri\A6_dd0c3b\Arm26_600_Data_Collection_v2\backup.py", line 166, in register_on_main
+    new_root=make_tree(clone,entries)
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\hzlfghri\A6_dd0c3b\Arm26_600_Data_Collection_v2\backup.py", line 151, in make_tree
+    return git_input(['mktree','--missing'],lines,clone)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\hzlfghri\A6_dd0c3b\Arm26_600_Data_Collection_v2\backup.py", line 138, in git_input
+    if result.returncode:raise RuntimeError('git '+str(args[0])+': '+result.stderr[-2000:])
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: git mktree: fatal: input format error: ?
+
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\hzlfghri\A6_dd0c3b\Arm26_600_Data_Collection_v2\flow.py", line 421, in main
+    collect(a,index,console)
+  File "C:\Users\hzlfghri\A6_dd0c3b\Arm26_600_Data_Collection_v2\flow.py", line 125, in collect
+    lock_output(a,index,protocol);a.progress.stage('Data episodes',len(plan));records={}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\hzlfghri\A6_dd0c3b\Arm26_600_Data_Collection_v2\flow.py", line 61, in lock_output
+    checkpoint_backup(a,'run initialized')
+  File "C:\Users\hzlfghri\A6_dd0c3b\Arm26_600_Data_Collection_v2\flow.py", line 65, in checkpoint_backup
+    if callback is not None:callback(reason)
+                            ^^^^^^^^^^^^^^^^
+  File "C:\Users\hzlfghri\A6_dd0c3b\Arm26_600_Data_Collection_v2\flow.py", line 412, in verified_checkpoint
+    raise RuntimeError('GitHub backup was NOT verified. Work is saved locally. Inspect GITHUB_STATUS.json and retry --backup-only --resume-latest after fixing access/network.')
+RuntimeError: GitHub backup was NOT verified. Work is saved locally. Inspect GITHUB_STATUS.json and retry --backup-only --resume-latest after fixing access/network.
