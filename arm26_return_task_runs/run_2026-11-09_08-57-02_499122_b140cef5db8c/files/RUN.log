@@ -539,3 +539,30 @@ RUN: C:\Users\hzlfghri\miniconda3\envs\lstm-py312\python.exe -X utf8 C:\Users\hz
 RUN: C:\Users\hzlfghri\miniconda3\envs\lstm-py312\python.exe -X utf8 C:\Users\hzlfghri\R250_7801b6\Arm26_250_Return_ABC\core\complex_engine.py --worker C:\Users\hzlfghri\R250_7801b6\Arm26_250_Return_ABC\runs\run_2026-11-09_08-57-02_499122\validation\B_60\CL_beta_4\B_60_A_e60_validation_00
 RUN: C:\Users\hzlfghri\miniconda3\envs\lstm-py312\python.exe -X utf8 C:\Users\hzlfghri\R250_7801b6\Arm26_250_Return_ABC\core\complex_engine.py --worker C:\Users\hzlfghri\R250_7801b6\Arm26_250_Return_ABC\runs\run_2026-11-09_08-57-02_499122\validation\B_60\CL_beta_4\B_60_B_e60_validation_00
 RUN: C:\Users\hzlfghri\miniconda3\envs\lstm-py312\python.exe -X utf8 C:\Users\hzlfghri\R250_7801b6\Arm26_250_Return_ABC\core\complex_engine.py --worker C:\Users\hzlfghri\R250_7801b6\Arm26_250_Return_ABC\runs\run_2026-11-09_08-57-02_499122\validation\B_60\CL_beta_4\B_60_B_e80_validation_00
+Traceback (most recent call last):
+  File "C:\Users\hzlfghri\R250_7801b6\Arm26_250_Return_ABC\run_return_abc.py", line 167, in main
+    try:run(a)
+        ^^^^^^
+  File "C:\Users\hzlfghri\R250_7801b6\Arm26_250_Return_ABC\run_return_abc.py", line 120, in run
+    policy=parent;rr=evaluate(a,data,policy,target,label);eligible=all(x['passed'] for x in adaptation.values()) and all(r['completed'] for r in rr)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\hzlfghri\R250_7801b6\Arm26_250_Return_ABC\run_return_abc.py", line 77, in evaluate
+    rows=f.evaluate_return(a,data,path,task,'validation',task+'/'+label)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\hzlfghri\R250_7801b6\Arm26_250_Return_ABC\flow.py", line 237, in evaluate_return
+    checkpoint_backup(a,label+' '+split+' group complete')
+  File "C:\Users\hzlfghri\R250_7801b6\Arm26_250_Return_ABC\flow.py", line 65, in checkpoint_backup
+    if callback is not None:callback(reason)
+                            ^^^^^^^^^^^^^^^^
+  File "C:\Users\hzlfghri\R250_7801b6\Arm26_250_Return_ABC\run_return_abc.py", line 160, in backup
+    with a.progress.waiting('GitHub upload and verification'):return backup_experiment(a.out,ROOT,reason=reason,final=final)
+                                                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\hzlfghri\R250_7801b6\Arm26_250_Return_ABC\backup.py", line 272, in backup_experiment
+    git(['push','origin','HEAD:refs/heads/'+branch],clone)
+  File "C:\Users\hzlfghri\R250_7801b6\Arm26_250_Return_ABC\backup.py", line 27, in git
+    if p.returncode:raise RuntimeError('git '+str(args[0])+': '+p.stderr.decode('utf-8','replace')[-3000:])
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: git push: fatal: unable to access 'https://github.com/hzolfaghari2022/Continual-Learning-with-human-in-the-loop.git/': Failed to connect to github.com port 443 after 21114 ms: Could not connect to server
+
+RUN: C:\Users\hzlfghri\miniconda3\envs\lstm-py312\python.exe -X utf8 C:\Users\hzlfghri\R250_7801b6\Arm26_250_Return_ABC\core\environment_check.py --device cuda --report C:\Users\hzlfghri\R250_7801b6\Arm26_250_Return_ABC\runs\run_2026-11-09_08-57-02_499122\ENVIRONMENT.json
+Environment, model, optimizer and Torch/NumPy parity checks passed. Device: cuda:0

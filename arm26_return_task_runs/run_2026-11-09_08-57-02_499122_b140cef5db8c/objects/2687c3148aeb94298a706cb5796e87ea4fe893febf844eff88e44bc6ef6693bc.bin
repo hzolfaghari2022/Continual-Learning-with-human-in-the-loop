@@ -1,0 +1,1 @@
+Compile main.tex for the compact advisor report. Compile all_figures_appendix.tex separately for every exported figure. All outcomes are validation-only. PDF figures retain vector text; use the separate FIGURES folder PNG/SVG exports for slides.
