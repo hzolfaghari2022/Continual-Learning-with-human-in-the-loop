@@ -1,0 +1,2090 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<OpenSimDocument Version="40600">
+	<Model name="arm26_four_task_prescribed_yaw_carrier">
+		<!--The model's ground reference frame.-->
+		<Ground name="ground">
+			<!--The geometry used to display the axes of this Frame.-->
+			<FrameGeometry name="frame_geometry">
+				<!--Path to a Component that satisfies the Socket 'frame' of type Frame.-->
+				<socket_frame>..</socket_frame>
+				<!--Scale factors in X, Y, Z directions respectively.-->
+				<scale_factors>0.20000000000000001 0.20000000000000001 0.20000000000000001</scale_factors>
+			</FrameGeometry>
+			<!--List of geometry attached to this Frame. Note, the geometry are treated as fixed to the frame and they share the transform of the frame when visualized-->
+			<attached_geometry>
+				<Mesh name="ground_geom_1">
+					<!--Path to a Component that satisfies the Socket 'frame' of type Frame.-->
+					<socket_frame>..</socket_frame>
+					<!--Scale factors in X, Y, Z directions respectively.-->
+					<scale_factors>1 1 1</scale_factors>
+					<!--Default appearance attributes for this Geometry-->
+					<Appearance>
+						<!--The opacity used to display the geometry between 0:transparent, 1:opaque.-->
+						<opacity>1</opacity>
+						<!--The color, (red, green, blue), [0, 1], used to display the geometry. -->
+						<color>1 1 1</color>
+					</Appearance>
+					<!--Name of geometry file.-->
+					<mesh_file>ground_ribs.vtp</mesh_file>
+				</Mesh>
+				<Mesh name="ground_geom_2">
+					<!--Path to a Component that satisfies the Socket 'frame' of type Frame.-->
+					<socket_frame>..</socket_frame>
+					<!--Scale factors in X, Y, Z directions respectively.-->
+					<scale_factors>1 1 1</scale_factors>
+					<!--Default appearance attributes for this Geometry-->
+					<Appearance>
+						<!--The opacity used to display the geometry between 0:transparent, 1:opaque.-->
+						<opacity>1</opacity>
+						<!--The color, (red, green, blue), [0, 1], used to display the geometry. -->
+						<color>1 1 1</color>
+					</Appearance>
+					<!--Name of geometry file.-->
+					<mesh_file>ground_spine.vtp</mesh_file>
+				</Mesh>
+				<Mesh name="ground_geom_3">
+					<!--Path to a Component that satisfies the Socket 'frame' of type Frame.-->
+					<socket_frame>..</socket_frame>
+					<!--Scale factors in X, Y, Z directions respectively.-->
+					<scale_factors>1 1 1</scale_factors>
+					<!--Default appearance attributes for this Geometry-->
+					<Appearance>
+						<!--The opacity used to display the geometry between 0:transparent, 1:opaque.-->
+						<opacity>1</opacity>
+						<!--The color, (red, green, blue), [0, 1], used to display the geometry. -->
+						<color>1 1 1</color>
+					</Appearance>
+					<!--Name of geometry file.-->
+					<mesh_file>ground_skull.vtp</mesh_file>
+				</Mesh>
+				<Mesh name="ground_geom_4">
+					<!--Path to a Component that satisfies the Socket 'frame' of type Frame.-->
+					<socket_frame>..</socket_frame>
+					<!--Scale factors in X, Y, Z directions respectively.-->
+					<scale_factors>1 1 1</scale_factors>
+					<!--Default appearance attributes for this Geometry-->
+					<Appearance>
+						<!--The opacity used to display the geometry between 0:transparent, 1:opaque.-->
+						<opacity>1</opacity>
+						<!--The color, (red, green, blue), [0, 1], used to display the geometry. -->
+						<color>1 1 1</color>
+					</Appearance>
+					<!--Name of geometry file.-->
+					<mesh_file>ground_jaw.vtp</mesh_file>
+				</Mesh>
+				<Mesh name="ground_geom_5">
+					<!--Path to a Component that satisfies the Socket 'frame' of type Frame.-->
+					<socket_frame>..</socket_frame>
+					<!--Scale factors in X, Y, Z directions respectively.-->
+					<scale_factors>1 1 1</scale_factors>
+					<!--Default appearance attributes for this Geometry-->
+					<Appearance>
+						<!--The opacity used to display the geometry between 0:transparent, 1:opaque.-->
+						<opacity>1</opacity>
+						<!--The color, (red, green, blue), [0, 1], used to display the geometry. -->
+						<color>1 1 1</color>
+					</Appearance>
+					<!--Name of geometry file.-->
+					<mesh_file>ground_r_clavicle.vtp</mesh_file>
+				</Mesh>
+				<Mesh name="ground_geom_6">
+					<!--Path to a Component that satisfies the Socket 'frame' of type Frame.-->
+					<socket_frame>..</socket_frame>
+					<!--Scale factors in X, Y, Z directions respectively.-->
+					<scale_factors>1 1 1</scale_factors>
+					<!--Default appearance attributes for this Geometry-->
+					<Appearance>
+						<!--The opacity used to display the geometry between 0:transparent, 1:opaque.-->
+						<opacity>1</opacity>
+						<!--The color, (red, green, blue), [0, 1], used to display the geometry. -->
+						<color>1 1 1</color>
+					</Appearance>
+					<!--Name of geometry file.-->
+					<mesh_file>ground_r_scapula.vtp</mesh_file>
+				</Mesh>
+			</attached_geometry>
+			<!--Set of wrap objects fixed to this body that GeometryPaths can wrap over.This property used to be a member of Body but was moved up with the introduction of Frames.-->
+			<WrapObjectSet name="wrapobjectset">
+				<objects>
+					<WrapCylinder name="TRIlongglen">
+						<!--Whether or not the WrapObject is considered active in computing paths-->
+						<active>true</active>
+						<!--Body-fixed Euler angle sequence for the orientation of the WrapObject-->
+						<xyz_body_rotation>1.3753200000000001 -0.29461199999999999 2.4359600000000001</xyz_body_rotation>
+						<!--Translation of the WrapObject.-->
+						<translation>-0.043905 -0.0038999999999999998 0.14779999999999999</translation>
+						<!--The name of quadrant over which the wrap object is active. For example, '+x' or '-y' to set the sidedness of the wrapping.-->
+						<quadrant>x</quadrant>
+						<!--The radius of the cylinder.-->
+						<radius>0.0030000000000000001</radius>
+						<!--The length of the cylinder.-->
+						<length>0.029999999999999999</length>
+					</WrapCylinder>
+				</objects>
+				<groups />
+			</WrapObjectSet>
+		</Ground>
+		<!--Acceleration due to gravity, expressed in ground.-->
+		<gravity>0 -9.8066499999999994 0</gravity>
+		<!--Credits (e.g., model author names) associated with the model.-->
+		<credits>The OpenSim Development Team (Reinbolt, J; Seth, A; Habib, A; Hamner, S) adapted from a model originally created by Kate Holzbaur (11/22/04) License: Creative Commons (CCBY 3.0). You are free to distribute, remix, tweak, and build upon this work, even commercially, as long as you credit us for the original creation. http://creativecommons.org/licenses/by/3.0/</credits>
+		<!--Publications and references associated with the model.-->
+		<publications>Holzbaur, K.R.S., Murray, W.M., Delp, S.L. A Model of the Upper Extremity for Simulating Musculoskeletal Surgery and Analyzing Neuromuscular Control. Annals of Biomedical Engineering, vol 33, pp 829–840, 2005</publications>
+		<!--Units for all lengths.-->
+		<length_units>meters</length_units>
+		<!--Units for all forces.-->
+		<force_units>N</force_units>
+		<!--List of bodies that make up this model.-->
+		<BodySet name="bodyset">
+			<objects>
+				<Body name="r_humerus">
+					<!--List of components that this component owns and serializes.-->
+					<components>
+						<PhysicalOffsetFrame name="exo_upper_anchor_display">
+							<!--The geometry used to display the axes of this Frame.-->
+							<FrameGeometry name="frame_geometry">
+								<!--Path to a Component that satisfies the Socket 'frame' of type Frame.-->
+								<socket_frame>..</socket_frame>
+								<!--Scale factors in X, Y, Z directions respectively.-->
+								<scale_factors>0.20000000000000001 0.20000000000000001 0.20000000000000001</scale_factors>
+							</FrameGeometry>
+							<!--List of geometry attached to this Frame. Note, the geometry are treated as fixed to the frame and they share the transform of the frame when visualized-->
+							<attached_geometry>
+								<Sphere name="exo_upper_anchor_display_geom_1">
+									<!--Path to a Component that satisfies the Socket 'frame' of type Frame.-->
+									<socket_frame>..</socket_frame>
+									<!--Default appearance attributes for this Geometry-->
+									<Appearance>
+										<!--The color, (red, green, blue), [0, 1], used to display the geometry. -->
+										<color>1 0.55000000000000004 0</color>
+									</Appearance>
+									<!--Radius of sphere, defaults to 1.0-->
+									<radius>0.0060000000000000001</radius>
+								</Sphere>
+							</attached_geometry>
+							<!--Path to a Component that satisfies the Socket 'parent' of type C (description: The parent frame to this frame.).-->
+							<socket_parent>..</socket_parent>
+							<!--Translational offset (in meters) of this frame's origin from the parent frame's origin, expressed in the parent frame.-->
+							<translation>0.046100000000000002 -0.15039999999999998 -0.0123</translation>
+							<!--Orientation offset (in radians) of this frame in its parent frame, expressed as a frame-fixed x-y-z rotation sequence.-->
+							<orientation>-0 0 -0</orientation>
+						</PhysicalOffsetFrame>
+						<PhysicalOffsetFrame name="arm_strap_frame">
+							<!--The geometry used to display the axes of this Frame.-->
+							<FrameGeometry name="frame_geometry">
+								<!--Path to a Component that satisfies the Socket 'frame' of type Frame.-->
+								<socket_frame>..</socket_frame>
+								<!--Scale factors in X, Y, Z directions respectively.-->
+								<scale_factors>0.20000000000000001 0.20000000000000001 0.20000000000000001</scale_factors>
+							</FrameGeometry>
+							<!--List of geometry attached to this Frame. Note, the geometry are treated as fixed to the frame and they share the transform of the frame when visualized-->
+							<attached_geometry>
+								<Cylinder name="arm_strap_visual">
+									<!--Path to a Component that satisfies the Socket 'frame' of type Frame.-->
+									<socket_frame>..</socket_frame>
+									<!--Default appearance attributes for this Geometry-->
+									<Appearance>
+										<!--The opacity used to display the geometry between 0:transparent, 1:opaque.-->
+										<opacity>1</opacity>
+										<!--The color, (red, green, blue), [0, 1], used to display the geometry. -->
+										<color>0.10000000000000001 0.11 0.13</color>
+									</Appearance>
+									<!--Radius of cylinder.-->
+									<radius>0.044999999999999998</radius>
+									<!--Half-Height of cylinder.-->
+									<half_height>0.035000000000000003</half_height>
+								</Cylinder>
+							</attached_geometry>
+							<!--Path to a Component that satisfies the Socket 'parent' of type C (description: The parent frame to this frame.).-->
+							<socket_parent>..</socket_parent>
+							<!--Translational offset (in meters) of this frame's origin from the parent frame's origin, expressed in the parent frame.-->
+							<translation>0.0061000000000000004 -0.15040000000000001 -0.0123</translation>
+							<!--Orientation offset (in radians) of this frame in its parent frame, expressed as a frame-fixed x-y-z rotation sequence.-->
+							<orientation>-0 0 -0</orientation>
+						</PhysicalOffsetFrame>
+					</components>
+					<!--The geometry used to display the axes of this Frame.-->
+					<FrameGeometry name="frame_geometry">
+						<!--Path to a Component that satisfies the Socket 'frame' of type Frame.-->
+						<socket_frame>..</socket_frame>
+						<!--Scale factors in X, Y, Z directions respectively.-->
+						<scale_factors>0.20000000000000001 0.20000000000000001 0.20000000000000001</scale_factors>
+					</FrameGeometry>
+					<!--List of geometry attached to this Frame. Note, the geometry are treated as fixed to the frame and they share the transform of the frame when visualized-->
+					<attached_geometry>
+						<Mesh name="r_humerus_geom_1">
+							<!--Path to a Component that satisfies the Socket 'frame' of type Frame.-->
+							<socket_frame>..</socket_frame>
+							<!--Scale factors in X, Y, Z directions respectively.-->
+							<scale_factors>1 1 1</scale_factors>
+							<!--Default appearance attributes for this Geometry-->
+							<Appearance>
+								<!--The opacity used to display the geometry between 0:transparent, 1:opaque.-->
+								<opacity>1</opacity>
+								<!--The color, (red, green, blue), [0, 1], used to display the geometry. -->
+								<color>1 1 1</color>
+							</Appearance>
+							<!--Name of geometry file.-->
+							<mesh_file>arm_r_humerus.vtp</mesh_file>
+						</Mesh>
+					</attached_geometry>
+					<!--Set of wrap objects fixed to this body that GeometryPaths can wrap over.This property used to be a member of Body but was moved up with the introduction of Frames.-->
+					<WrapObjectSet name="wrapobjectset">
+						<objects>
+							<WrapEllipsoid name="TRIlonghh">
+								<!--Whether or not the WrapObject is considered active in computing paths-->
+								<active>true</active>
+								<!--Body-fixed Euler angle sequence for the orientation of the WrapObject-->
+								<xyz_body_rotation>3.00162 -0.85346599999999995 2.5741900000000002</xyz_body_rotation>
+								<!--Translation of the WrapObject.-->
+								<translation>-0.0077999999999999996 -0.0041000000000000003 -0.0014</translation>
+								<!--The name of quadrant over which the wrap object is active. For example, '+x' or '-y' to set the sidedness of the wrapping.-->
+								<quadrant>z</quadrant>
+								<!--The length of the radii of the ellipsoid.-->
+								<dimensions>0.035000000000000003 0.02 0.02</dimensions>
+							</WrapEllipsoid>
+							<WrapEllipsoid name="BIClonghh">
+								<!--Whether or not the WrapObject is considered active in computing paths-->
+								<active>true</active>
+								<!--Body-fixed Euler angle sequence for the orientation of the WrapObject-->
+								<xyz_body_rotation>-2.00434 -1.0016400000000001 0.97546500000000003</xyz_body_rotation>
+								<!--Translation of the WrapObject.-->
+								<translation>0.0033 0.0073000000000000001 0.00029999999999999997</translation>
+								<!--The name of quadrant over which the wrap object is active. For example, '+x' or '-y' to set the sidedness of the wrapping.-->
+								<quadrant>-y</quadrant>
+								<!--The length of the radii of the ellipsoid.-->
+								<dimensions>0.025000000000000001 0.02 0.02</dimensions>
+							</WrapEllipsoid>
+							<WrapCylinder name="TRI">
+								<!--Whether or not the WrapObject is considered active in computing paths-->
+								<active>true</active>
+								<!--Body-fixed Euler angle sequence for the orientation of the WrapObject-->
+								<xyz_body_rotation>-0.14015 -0.0062831900000000001 0.15498500000000001</xyz_body_rotation>
+								<!--Translation of the WrapObject.-->
+								<translation>0.0028 -0.29189999999999999 -0.0068999999999999999</translation>
+								<!--The name of quadrant over which the wrap object is active. For example, '+x' or '-y' to set the sidedness of the wrapping.-->
+								<quadrant>all</quadrant>
+								<!--The radius of the cylinder.-->
+								<radius>0.016</radius>
+								<!--The length of the cylinder.-->
+								<length>0.050000000000000003</length>
+							</WrapCylinder>
+						</objects>
+						<groups />
+					</WrapObjectSet>
+					<!--The mass of the body (kg)-->
+					<mass>1.8645719999999999</mass>
+					<!--The location (Vec3) of the mass center in the body frame.-->
+					<mass_center>0 -0.18049599999999999 0</mass_center>
+					<!--The elements of the inertia tensor (Vec6) as [Ixx Iyy Izz Ixy Ixz Iyz] measured about the mass_center and not the body origin.-->
+					<inertia>0.01481 0.0045510000000000004 0.013193 0 0 0</inertia>
+				</Body>
+				<Body name="r_ulna_radius_hand">
+					<!--List of components that this component owns and serializes.-->
+					<components>
+						<PhysicalOffsetFrame name="exo_forearm_anchor_display">
+							<!--The geometry used to display the axes of this Frame.-->
+							<FrameGeometry name="frame_geometry">
+								<!--Path to a Component that satisfies the Socket 'frame' of type Frame.-->
+								<socket_frame>..</socket_frame>
+								<!--Scale factors in X, Y, Z directions respectively.-->
+								<scale_factors>0.20000000000000001 0.20000000000000001 0.20000000000000001</scale_factors>
+							</FrameGeometry>
+							<!--List of geometry attached to this Frame. Note, the geometry are treated as fixed to the frame and they share the transform of the frame when visualized-->
+							<attached_geometry>
+								<Sphere name="exo_forearm_anchor_display_geom_1">
+									<!--Path to a Component that satisfies the Socket 'frame' of type Frame.-->
+									<socket_frame>..</socket_frame>
+									<!--Default appearance attributes for this Geometry-->
+									<Appearance>
+										<!--The color, (red, green, blue), [0, 1], used to display the geometry. -->
+										<color>1 0.55000000000000004 0</color>
+									</Appearance>
+									<!--Radius of sphere, defaults to 1.0-->
+									<radius>0.0060000000000000001</radius>
+								</Sphere>
+							</attached_geometry>
+							<!--Path to a Component that satisfies the Socket 'parent' of type C (description: The parent frame to this frame.).-->
+							<socket_parent>..</socket_parent>
+							<!--Translational offset (in meters) of this frame's origin from the parent frame's origin, expressed in the parent frame.-->
+							<translation>0.02 -0.14999999999999999 0</translation>
+							<!--Orientation offset (in radians) of this frame in its parent frame, expressed as a frame-fixed x-y-z rotation sequence.-->
+							<orientation>-0 0 -0</orientation>
+						</PhysicalOffsetFrame>
+						<PhysicalOffsetFrame name="forearm_strap_frame">
+							<!--The geometry used to display the axes of this Frame.-->
+							<FrameGeometry name="frame_geometry">
+								<!--Path to a Component that satisfies the Socket 'frame' of type Frame.-->
+								<socket_frame>..</socket_frame>
+								<!--Scale factors in X, Y, Z directions respectively.-->
+								<scale_factors>0.20000000000000001 0.20000000000000001 0.20000000000000001</scale_factors>
+							</FrameGeometry>
+							<!--List of geometry attached to this Frame. Note, the geometry are treated as fixed to the frame and they share the transform of the frame when visualized-->
+							<attached_geometry>
+								<Cylinder name="forearm_strap_visual">
+									<!--Path to a Component that satisfies the Socket 'frame' of type Frame.-->
+									<socket_frame>..</socket_frame>
+									<!--Default appearance attributes for this Geometry-->
+									<Appearance>
+										<!--The opacity used to display the geometry between 0:transparent, 1:opaque.-->
+										<opacity>1</opacity>
+										<!--The color, (red, green, blue), [0, 1], used to display the geometry. -->
+										<color>0.10000000000000001 0.11 0.13</color>
+									</Appearance>
+									<!--Radius of cylinder.-->
+									<radius>0.035000000000000003</radius>
+									<!--Half-Height of cylinder.-->
+									<half_height>0.029999999999999999</half_height>
+								</Cylinder>
+							</attached_geometry>
+							<!--Path to a Component that satisfies the Socket 'parent' of type C (description: The parent frame to this frame.).-->
+							<socket_parent>..</socket_parent>
+							<!--Translational offset (in meters) of this frame's origin from the parent frame's origin, expressed in the parent frame.-->
+							<translation>0 -0.14999999999999999 0.025000000000000001</translation>
+							<!--Orientation offset (in radians) of this frame in its parent frame, expressed as a frame-fixed x-y-z rotation sequence.-->
+							<orientation>-0 0 -0</orientation>
+						</PhysicalOffsetFrame>
+					</components>
+					<!--The geometry used to display the axes of this Frame.-->
+					<FrameGeometry name="frame_geometry">
+						<!--Path to a Component that satisfies the Socket 'frame' of type Frame.-->
+						<socket_frame>..</socket_frame>
+						<!--Scale factors in X, Y, Z directions respectively.-->
+						<scale_factors>0.20000000000000001 0.20000000000000001 0.20000000000000001</scale_factors>
+					</FrameGeometry>
+					<!--List of geometry attached to this Frame. Note, the geometry are treated as fixed to the frame and they share the transform of the frame when visualized-->
+					<attached_geometry>
+						<Mesh name="r_ulna_radius_hand_geom_1">
+							<!--Path to a Component that satisfies the Socket 'frame' of type Frame.-->
+							<socket_frame>..</socket_frame>
+							<!--Scale factors in X, Y, Z directions respectively.-->
+							<scale_factors>1 1 1</scale_factors>
+							<!--Default appearance attributes for this Geometry-->
+							<Appearance>
+								<!--The opacity used to display the geometry between 0:transparent, 1:opaque.-->
+								<opacity>1</opacity>
+								<!--The color, (red, green, blue), [0, 1], used to display the geometry. -->
+								<color>1 1 1</color>
+							</Appearance>
+							<!--Name of geometry file.-->
+							<mesh_file>arm_r_ulna.vtp</mesh_file>
+						</Mesh>
+						<Mesh name="r_ulna_radius_hand_geom_2">
+							<!--Path to a Component that satisfies the Socket 'frame' of type Frame.-->
+							<socket_frame>..</socket_frame>
+							<!--Scale factors in X, Y, Z directions respectively.-->
+							<scale_factors>1 1 1</scale_factors>
+							<!--Default appearance attributes for this Geometry-->
+							<Appearance>
+								<!--The opacity used to display the geometry between 0:transparent, 1:opaque.-->
+								<opacity>1</opacity>
+								<!--The color, (red, green, blue), [0, 1], used to display the geometry. -->
+								<color>1 1 1</color>
+							</Appearance>
+							<!--Name of geometry file.-->
+							<mesh_file>arm_r_radius.vtp</mesh_file>
+						</Mesh>
+						<Mesh name="r_ulna_radius_hand_geom_3">
+							<!--Path to a Component that satisfies the Socket 'frame' of type Frame.-->
+							<socket_frame>..</socket_frame>
+							<!--Scale factors in X, Y, Z directions respectively.-->
+							<scale_factors>1 1 1</scale_factors>
+							<!--Default appearance attributes for this Geometry-->
+							<Appearance>
+								<!--The opacity used to display the geometry between 0:transparent, 1:opaque.-->
+								<opacity>1</opacity>
+								<!--The color, (red, green, blue), [0, 1], used to display the geometry. -->
+								<color>1 1 1</color>
+							</Appearance>
+							<!--Name of geometry file.-->
+							<mesh_file>arm_r_lunate.vtp</mesh_file>
+						</Mesh>
+						<Mesh name="r_ulna_radius_hand_geom_4">
+							<!--Path to a Component that satisfies the Socket 'frame' of type Frame.-->
+							<socket_frame>..</socket_frame>
+							<!--Scale factors in X, Y, Z directions respectively.-->
+							<scale_factors>1 1 1</scale_factors>
+							<!--Default appearance attributes for this Geometry-->
+							<Appearance>
+								<!--The opacity used to display the geometry between 0:transparent, 1:opaque.-->
+								<opacity>1</opacity>
+								<!--The color, (red, green, blue), [0, 1], used to display the geometry. -->
+								<color>1 1 1</color>
+							</Appearance>
+							<!--Name of geometry file.-->
+							<mesh_file>arm_r_scaphoid.vtp</mesh_file>
+						</Mesh>
+						<Mesh name="r_ulna_radius_hand_geom_5">
+							<!--Path to a Component that satisfies the Socket 'frame' of type Frame.-->
+							<socket_frame>..</socket_frame>
+							<!--Scale factors in X, Y, Z directions respectively.-->
+							<scale_factors>1 1 1</scale_factors>
+							<!--Default appearance attributes for this Geometry-->
+							<Appearance>
+								<!--The opacity used to display the geometry between 0:transparent, 1:opaque.-->
+								<opacity>1</opacity>
+								<!--The color, (red, green, blue), [0, 1], used to display the geometry. -->
+								<color>1 1 1</color>
+							</Appearance>
+							<!--Name of geometry file.-->
+							<mesh_file>arm_r_pisiform.vtp</mesh_file>
+						</Mesh>
+						<Mesh name="r_ulna_radius_hand_geom_6">
+							<!--Path to a Component that satisfies the Socket 'frame' of type Frame.-->
+							<socket_frame>..</socket_frame>
+							<!--Scale factors in X, Y, Z directions respectively.-->
+							<scale_factors>1 1 1</scale_factors>
+							<!--Default appearance attributes for this Geometry-->
+							<Appearance>
+								<!--The opacity used to display the geometry between 0:transparent, 1:opaque.-->
+								<opacity>1</opacity>
+								<!--The color, (red, green, blue), [0, 1], used to display the geometry. -->
+								<color>1 1 1</color>
+							</Appearance>
+							<!--Name of geometry file.-->
+							<mesh_file>arm_r_triquetrum.vtp</mesh_file>
+						</Mesh>
+						<Mesh name="r_ulna_radius_hand_geom_7">
+							<!--Path to a Component that satisfies the Socket 'frame' of type Frame.-->
+							<socket_frame>..</socket_frame>
+							<!--Scale factors in X, Y, Z directions respectively.-->
+							<scale_factors>1 1 1</scale_factors>
+							<!--Default appearance attributes for this Geometry-->
+							<Appearance>
+								<!--The opacity used to display the geometry between 0:transparent, 1:opaque.-->
+								<opacity>1</opacity>
+								<!--The color, (red, green, blue), [0, 1], used to display the geometry. -->
+								<color>1 1 1</color>
+							</Appearance>
+							<!--Name of geometry file.-->
+							<mesh_file>arm_r_capitate.vtp</mesh_file>
+						</Mesh>
+						<Mesh name="r_ulna_radius_hand_geom_8">
+							<!--Path to a Component that satisfies the Socket 'frame' of type Frame.-->
+							<socket_frame>..</socket_frame>
+							<!--Scale factors in X, Y, Z directions respectively.-->
+							<scale_factors>1 1 1</scale_factors>
+							<!--Default appearance attributes for this Geometry-->
+							<Appearance>
+								<!--The opacity used to display the geometry between 0:transparent, 1:opaque.-->
+								<opacity>1</opacity>
+								<!--The color, (red, green, blue), [0, 1], used to display the geometry. -->
+								<color>1 1 1</color>
+							</Appearance>
+							<!--Name of geometry file.-->
+							<mesh_file>arm_r_trapezium.vtp</mesh_file>
+						</Mesh>
+						<Mesh name="r_ulna_radius_hand_geom_9">
+							<!--Path to a Component that satisfies the Socket 'frame' of type Frame.-->
+							<socket_frame>..</socket_frame>
+							<!--Scale factors in X, Y, Z directions respectively.-->
+							<scale_factors>1 1 1</scale_factors>
+							<!--Default appearance attributes for this Geometry-->
+							<Appearance>
+								<!--The opacity used to display the geometry between 0:transparent, 1:opaque.-->
+								<opacity>1</opacity>
+								<!--The color, (red, green, blue), [0, 1], used to display the geometry. -->
+								<color>1 1 1</color>
+							</Appearance>
+							<!--Name of geometry file.-->
+							<mesh_file>arm_r_trapezoid.vtp</mesh_file>
+						</Mesh>
+						<Mesh name="r_ulna_radius_hand_geom_10">
+							<!--Path to a Component that satisfies the Socket 'frame' of type Frame.-->
+							<socket_frame>..</socket_frame>
+							<!--Scale factors in X, Y, Z directions respectively.-->
+							<scale_factors>1 1 1</scale_factors>
+							<!--Default appearance attributes for this Geometry-->
+							<Appearance>
+								<!--The opacity used to display the geometry between 0:transparent, 1:opaque.-->
+								<opacity>1</opacity>
+								<!--The color, (red, green, blue), [0, 1], used to display the geometry. -->
+								<color>1 1 1</color>
+							</Appearance>
+							<!--Name of geometry file.-->
+							<mesh_file>arm_r_hamate.vtp</mesh_file>
+						</Mesh>
+						<Mesh name="r_ulna_radius_hand_geom_11">
+							<!--Path to a Component that satisfies the Socket 'frame' of type Frame.-->
+							<socket_frame>..</socket_frame>
+							<!--Scale factors in X, Y, Z directions respectively.-->
+							<scale_factors>1 1 1</scale_factors>
+							<!--Default appearance attributes for this Geometry-->
+							<Appearance>
+								<!--The opacity used to display the geometry between 0:transparent, 1:opaque.-->
+								<opacity>1</opacity>
+								<!--The color, (red, green, blue), [0, 1], used to display the geometry. -->
+								<color>1 1 1</color>
+							</Appearance>
+							<!--Name of geometry file.-->
+							<mesh_file>arm_r_1mc.vtp</mesh_file>
+						</Mesh>
+						<Mesh name="r_ulna_radius_hand_geom_12">
+							<!--Path to a Component that satisfies the Socket 'frame' of type Frame.-->
+							<socket_frame>..</socket_frame>
+							<!--Scale factors in X, Y, Z directions respectively.-->
+							<scale_factors>1 1 1</scale_factors>
+							<!--Default appearance attributes for this Geometry-->
+							<Appearance>
+								<!--The opacity used to display the geometry between 0:transparent, 1:opaque.-->
+								<opacity>1</opacity>
+								<!--The color, (red, green, blue), [0, 1], used to display the geometry. -->
+								<color>1 1 1</color>
+							</Appearance>
+							<!--Name of geometry file.-->
+							<mesh_file>arm_r_2mc.vtp</mesh_file>
+						</Mesh>
+						<Mesh name="r_ulna_radius_hand_geom_13">
+							<!--Path to a Component that satisfies the Socket 'frame' of type Frame.-->
+							<socket_frame>..</socket_frame>
+							<!--Scale factors in X, Y, Z directions respectively.-->
+							<scale_factors>1 1 1</scale_factors>
+							<!--Default appearance attributes for this Geometry-->
+							<Appearance>
+								<!--The opacity used to display the geometry between 0:transparent, 1:opaque.-->
+								<opacity>1</opacity>
+								<!--The color, (red, green, blue), [0, 1], used to display the geometry. -->
+								<color>1 1 1</color>
+							</Appearance>
+							<!--Name of geometry file.-->
+							<mesh_file>arm_r_3mc.vtp</mesh_file>
+						</Mesh>
+						<Mesh name="r_ulna_radius_hand_geom_14">
+							<!--Path to a Component that satisfies the Socket 'frame' of type Frame.-->
+							<socket_frame>..</socket_frame>
+							<!--Scale factors in X, Y, Z directions respectively.-->
+							<scale_factors>1 1 1</scale_factors>
+							<!--Default appearance attributes for this Geometry-->
+							<Appearance>
+								<!--The opacity used to display the geometry between 0:transparent, 1:opaque.-->
+								<opacity>1</opacity>
+								<!--The color, (red, green, blue), [0, 1], used to display the geometry. -->
+								<color>1 1 1</color>
+							</Appearance>
+							<!--Name of geometry file.-->
+							<mesh_file>arm_r_4mc.vtp</mesh_file>
+						</Mesh>
+						<Mesh name="r_ulna_radius_hand_geom_15">
+							<!--Path to a Component that satisfies the Socket 'frame' of type Frame.-->
+							<socket_frame>..</socket_frame>
+							<!--Scale factors in X, Y, Z directions respectively.-->
+							<scale_factors>1 1 1</scale_factors>
+							<!--Default appearance attributes for this Geometry-->
+							<Appearance>
+								<!--The opacity used to display the geometry between 0:transparent, 1:opaque.-->
+								<opacity>1</opacity>
+								<!--The color, (red, green, blue), [0, 1], used to display the geometry. -->
+								<color>1 1 1</color>
+							</Appearance>
+							<!--Name of geometry file.-->
+							<mesh_file>arm_r_5mc.vtp</mesh_file>
+						</Mesh>
+						<Mesh name="r_ulna_radius_hand_geom_16">
+							<!--Path to a Component that satisfies the Socket 'frame' of type Frame.-->
+							<socket_frame>..</socket_frame>
+							<!--Scale factors in X, Y, Z directions respectively.-->
+							<scale_factors>1 1 1</scale_factors>
+							<!--Default appearance attributes for this Geometry-->
+							<Appearance>
+								<!--The opacity used to display the geometry between 0:transparent, 1:opaque.-->
+								<opacity>1</opacity>
+								<!--The color, (red, green, blue), [0, 1], used to display the geometry. -->
+								<color>1 1 1</color>
+							</Appearance>
+							<!--Name of geometry file.-->
+							<mesh_file>arm_r_thumbprox.vtp</mesh_file>
+						</Mesh>
+						<Mesh name="r_ulna_radius_hand_geom_17">
+							<!--Path to a Component that satisfies the Socket 'frame' of type Frame.-->
+							<socket_frame>..</socket_frame>
+							<!--Scale factors in X, Y, Z directions respectively.-->
+							<scale_factors>1 1 1</scale_factors>
+							<!--Default appearance attributes for this Geometry-->
+							<Appearance>
+								<!--The opacity used to display the geometry between 0:transparent, 1:opaque.-->
+								<opacity>1</opacity>
+								<!--The color, (red, green, blue), [0, 1], used to display the geometry. -->
+								<color>1 1 1</color>
+							</Appearance>
+							<!--Name of geometry file.-->
+							<mesh_file>arm_r_thumbdist.vtp</mesh_file>
+						</Mesh>
+						<Mesh name="r_ulna_radius_hand_geom_18">
+							<!--Path to a Component that satisfies the Socket 'frame' of type Frame.-->
+							<socket_frame>..</socket_frame>
+							<!--Scale factors in X, Y, Z directions respectively.-->
+							<scale_factors>1 1 1</scale_factors>
+							<!--Default appearance attributes for this Geometry-->
+							<Appearance>
+								<!--The opacity used to display the geometry between 0:transparent, 1:opaque.-->
+								<opacity>1</opacity>
+								<!--The color, (red, green, blue), [0, 1], used to display the geometry. -->
+								<color>1 1 1</color>
+							</Appearance>
+							<!--Name of geometry file.-->
+							<mesh_file>arm_r_2proxph.vtp</mesh_file>
+						</Mesh>
+						<Mesh name="r_ulna_radius_hand_geom_19">
+							<!--Path to a Component that satisfies the Socket 'frame' of type Frame.-->
+							<socket_frame>..</socket_frame>
+							<!--Scale factors in X, Y, Z directions respectively.-->
+							<scale_factors>1 1 1</scale_factors>
+							<!--Default appearance attributes for this Geometry-->
+							<Appearance>
+								<!--The opacity used to display the geometry between 0:transparent, 1:opaque.-->
+								<opacity>1</opacity>
+								<!--The color, (red, green, blue), [0, 1], used to display the geometry. -->
+								<color>1 1 1</color>
+							</Appearance>
+							<!--Name of geometry file.-->
+							<mesh_file>arm_r_2midph.vtp</mesh_file>
+						</Mesh>
+						<Mesh name="r_ulna_radius_hand_geom_20">
+							<!--Path to a Component that satisfies the Socket 'frame' of type Frame.-->
+							<socket_frame>..</socket_frame>
+							<!--Scale factors in X, Y, Z directions respectively.-->
+							<scale_factors>1 1 1</scale_factors>
+							<!--Default appearance attributes for this Geometry-->
+							<Appearance>
+								<!--The opacity used to display the geometry between 0:transparent, 1:opaque.-->
+								<opacity>1</opacity>
+								<!--The color, (red, green, blue), [0, 1], used to display the geometry. -->
+								<color>1 1 1</color>
+							</Appearance>
+							<!--Name of geometry file.-->
+							<mesh_file>arm_r_2distph.vtp</mesh_file>
+						</Mesh>
+						<Mesh name="r_ulna_radius_hand_geom_21">
+							<!--Path to a Component that satisfies the Socket 'frame' of type Frame.-->
+							<socket_frame>..</socket_frame>
+							<!--Scale factors in X, Y, Z directions respectively.-->
+							<scale_factors>1 1 1</scale_factors>
+							<!--Default appearance attributes for this Geometry-->
+							<Appearance>
+								<!--The opacity used to display the geometry between 0:transparent, 1:opaque.-->
+								<opacity>1</opacity>
+								<!--The color, (red, green, blue), [0, 1], used to display the geometry. -->
+								<color>1 1 1</color>
+							</Appearance>
+							<!--Name of geometry file.-->
+							<mesh_file>arm_r_3proxph.vtp</mesh_file>
+						</Mesh>
+						<Mesh name="r_ulna_radius_hand_geom_22">
+							<!--Path to a Component that satisfies the Socket 'frame' of type Frame.-->
+							<socket_frame>..</socket_frame>
+							<!--Scale factors in X, Y, Z directions respectively.-->
+							<scale_factors>1 1 1</scale_factors>
+							<!--Default appearance attributes for this Geometry-->
+							<Appearance>
+								<!--The opacity used to display the geometry between 0:transparent, 1:opaque.-->
+								<opacity>1</opacity>
+								<!--The color, (red, green, blue), [0, 1], used to display the geometry. -->
+								<color>1 1 1</color>
+							</Appearance>
+							<!--Name of geometry file.-->
+							<mesh_file>arm_r_3midph.vtp</mesh_file>
+						</Mesh>
+						<Mesh name="r_ulna_radius_hand_geom_23">
+							<!--Path to a Component that satisfies the Socket 'frame' of type Frame.-->
+							<socket_frame>..</socket_frame>
+							<!--Scale factors in X, Y, Z directions respectively.-->
+							<scale_factors>1 1 1</scale_factors>
+							<!--Default appearance attributes for this Geometry-->
+							<Appearance>
+								<!--The opacity used to display the geometry between 0:transparent, 1:opaque.-->
+								<opacity>1</opacity>
+								<!--The color, (red, green, blue), [0, 1], used to display the geometry. -->
+								<color>1 1 1</color>
+							</Appearance>
+							<!--Name of geometry file.-->
+							<mesh_file>arm_r_3distph.vtp</mesh_file>
+						</Mesh>
+						<Mesh name="r_ulna_radius_hand_geom_24">
+							<!--Path to a Component that satisfies the Socket 'frame' of type Frame.-->
+							<socket_frame>..</socket_frame>
+							<!--Scale factors in X, Y, Z directions respectively.-->
+							<scale_factors>1 1 1</scale_factors>
+							<!--Default appearance attributes for this Geometry-->
+							<Appearance>
+								<!--The opacity used to display the geometry between 0:transparent, 1:opaque.-->
+								<opacity>1</opacity>
+								<!--The color, (red, green, blue), [0, 1], used to display the geometry. -->
+								<color>1 1 1</color>
+							</Appearance>
+							<!--Name of geometry file.-->
+							<mesh_file>arm_r_4proxph.vtp</mesh_file>
+						</Mesh>
+						<Mesh name="r_ulna_radius_hand_geom_25">
+							<!--Path to a Component that satisfies the Socket 'frame' of type Frame.-->
+							<socket_frame>..</socket_frame>
+							<!--Scale factors in X, Y, Z directions respectively.-->
+							<scale_factors>1 1 1</scale_factors>
+							<!--Default appearance attributes for this Geometry-->
+							<Appearance>
+								<!--The opacity used to display the geometry between 0:transparent, 1:opaque.-->
+								<opacity>1</opacity>
+								<!--The color, (red, green, blue), [0, 1], used to display the geometry. -->
+								<color>1 1 1</color>
+							</Appearance>
+							<!--Name of geometry file.-->
+							<mesh_file>arm_r_4midph.vtp</mesh_file>
+						</Mesh>
+						<Mesh name="r_ulna_radius_hand_geom_26">
+							<!--Path to a Component that satisfies the Socket 'frame' of type Frame.-->
+							<socket_frame>..</socket_frame>
+							<!--Scale factors in X, Y, Z directions respectively.-->
+							<scale_factors>1 1 1</scale_factors>
+							<!--Default appearance attributes for this Geometry-->
+							<Appearance>
+								<!--The opacity used to display the geometry between 0:transparent, 1:opaque.-->
+								<opacity>1</opacity>
+								<!--The color, (red, green, blue), [0, 1], used to display the geometry. -->
+								<color>1 1 1</color>
+							</Appearance>
+							<!--Name of geometry file.-->
+							<mesh_file>arm_r_4distph.vtp</mesh_file>
+						</Mesh>
+						<Mesh name="r_ulna_radius_hand_geom_27">
+							<!--Path to a Component that satisfies the Socket 'frame' of type Frame.-->
+							<socket_frame>..</socket_frame>
+							<!--Scale factors in X, Y, Z directions respectively.-->
+							<scale_factors>1 1 1</scale_factors>
+							<!--Default appearance attributes for this Geometry-->
+							<Appearance>
+								<!--The opacity used to display the geometry between 0:transparent, 1:opaque.-->
+								<opacity>1</opacity>
+								<!--The color, (red, green, blue), [0, 1], used to display the geometry. -->
+								<color>1 1 1</color>
+							</Appearance>
+							<!--Name of geometry file.-->
+							<mesh_file>arm_r_5proxph.vtp</mesh_file>
+						</Mesh>
+						<Mesh name="r_ulna_radius_hand_geom_28">
+							<!--Path to a Component that satisfies the Socket 'frame' of type Frame.-->
+							<socket_frame>..</socket_frame>
+							<!--Scale factors in X, Y, Z directions respectively.-->
+							<scale_factors>1 1 1</scale_factors>
+							<!--Default appearance attributes for this Geometry-->
+							<Appearance>
+								<!--The opacity used to display the geometry between 0:transparent, 1:opaque.-->
+								<opacity>1</opacity>
+								<!--The color, (red, green, blue), [0, 1], used to display the geometry. -->
+								<color>1 1 1</color>
+							</Appearance>
+							<!--Name of geometry file.-->
+							<mesh_file>arm_r_5midph.vtp</mesh_file>
+						</Mesh>
+						<Mesh name="r_ulna_radius_hand_geom_29">
+							<!--Path to a Component that satisfies the Socket 'frame' of type Frame.-->
+							<socket_frame>..</socket_frame>
+							<!--Scale factors in X, Y, Z directions respectively.-->
+							<scale_factors>1 1 1</scale_factors>
+							<!--Default appearance attributes for this Geometry-->
+							<Appearance>
+								<!--The opacity used to display the geometry between 0:transparent, 1:opaque.-->
+								<opacity>1</opacity>
+								<!--The color, (red, green, blue), [0, 1], used to display the geometry. -->
+								<color>1 1 1</color>
+							</Appearance>
+							<!--Name of geometry file.-->
+							<mesh_file>arm_r_5distph.vtp</mesh_file>
+						</Mesh>
+					</attached_geometry>
+					<!--Set of wrap objects fixed to this body that GeometryPaths can wrap over.This property used to be a member of Body but was moved up with the introduction of Frames.-->
+					<WrapObjectSet name="wrapobjectset">
+						<objects />
+						<groups />
+					</WrapObjectSet>
+					<!--The mass of the body (kg)-->
+					<mass>1.5343150000000001</mass>
+					<!--The location (Vec3) of the mass center in the body frame.-->
+					<mass_center>0 -0.181479 0</mass_center>
+					<!--The elements of the inertia tensor (Vec6) as [Ixx Iyy Izz Ixy Ixz Iyz] measured about the mass_center and not the body origin.-->
+					<inertia>0.019281 0.0015709999999999999 0.020062 0 0 0</inertia>
+				</Body>
+				<Body name="yaw_carrier">
+					<!--The geometry used to display the axes of this Frame.-->
+					<FrameGeometry name="frame_geometry">
+						<!--Path to a Component that satisfies the Socket 'frame' of type Frame.-->
+						<socket_frame>..</socket_frame>
+						<!--Scale factors in X, Y, Z directions respectively.-->
+						<scale_factors>0.20000000000000001 0.20000000000000001 0.20000000000000001</scale_factors>
+					</FrameGeometry>
+					<!--The mass of the body (kg)-->
+					<mass>0.001</mass>
+					<!--The location (Vec3) of the mass center in the body frame.-->
+					<mass_center>0 0 0</mass_center>
+					<!--The elements of the inertia tensor (Vec6) as [Ixx Iyy Izz Ixy Ixz Iyz] measured about the mass_center and not the body origin.-->
+					<inertia>1.0000000000000001e-05 1.0000000000000001e-05 1.0000000000000001e-05 0 0 0</inertia>
+				</Body>
+				<Body name="hand_dumbbell">
+					<!--List of components that this component owns and serializes.-->
+					<components>
+						<PhysicalOffsetFrame name="handle">
+							<!--The geometry used to display the axes of this Frame.-->
+							<FrameGeometry name="frame_geometry">
+								<!--Path to a Component that satisfies the Socket 'frame' of type Frame.-->
+								<socket_frame>..</socket_frame>
+								<!--Scale factors in X, Y, Z directions respectively.-->
+								<scale_factors>0.20000000000000001 0.20000000000000001 0.20000000000000001</scale_factors>
+							</FrameGeometry>
+							<!--List of geometry attached to this Frame. Note, the geometry are treated as fixed to the frame and they share the transform of the frame when visualized-->
+							<attached_geometry>
+								<Cylinder name="handle_geom_1">
+									<!--Path to a Component that satisfies the Socket 'frame' of type Frame.-->
+									<socket_frame>..</socket_frame>
+									<!--Default appearance attributes for this Geometry-->
+									<Appearance>
+										<!--The color, (red, green, blue), [0, 1], used to display the geometry. -->
+										<color>0.65000000000000002 0.67000000000000004 0.69999999999999996</color>
+									</Appearance>
+									<!--Radius of cylinder.-->
+									<radius>0.012</radius>
+									<!--Half-Height of cylinder.-->
+									<half_height>0.077499999999999999</half_height>
+								</Cylinder>
+							</attached_geometry>
+							<!--Path to a Component that satisfies the Socket 'parent' of type C (description: The parent frame to this frame.).-->
+							<socket_parent>..</socket_parent>
+							<!--Translational offset (in meters) of this frame's origin from the parent frame's origin, expressed in the parent frame.-->
+							<translation>0 0 0</translation>
+							<!--Orientation offset (in radians) of this frame in its parent frame, expressed as a frame-fixed x-y-z rotation sequence.-->
+							<orientation>1.5707963267948966 0 0</orientation>
+						</PhysicalOffsetFrame>
+						<PhysicalOffsetFrame name="plate_left">
+							<!--The geometry used to display the axes of this Frame.-->
+							<FrameGeometry name="frame_geometry">
+								<!--Path to a Component that satisfies the Socket 'frame' of type Frame.-->
+								<socket_frame>..</socket_frame>
+								<!--Scale factors in X, Y, Z directions respectively.-->
+								<scale_factors>0.20000000000000001 0.20000000000000001 0.20000000000000001</scale_factors>
+							</FrameGeometry>
+							<!--List of geometry attached to this Frame. Note, the geometry are treated as fixed to the frame and they share the transform of the frame when visualized-->
+							<attached_geometry>
+								<Cylinder name="plate_left_geom_1">
+									<!--Path to a Component that satisfies the Socket 'frame' of type Frame.-->
+									<socket_frame>..</socket_frame>
+									<!--Default appearance attributes for this Geometry-->
+									<Appearance>
+										<!--The color, (red, green, blue), [0, 1], used to display the geometry. -->
+										<color>0.12 0.13 0.16</color>
+									</Appearance>
+									<!--Radius of cylinder.-->
+									<radius>0.050000000000000003</radius>
+									<!--Half-Height of cylinder.-->
+									<half_height>0.012500000000000001</half_height>
+								</Cylinder>
+							</attached_geometry>
+							<!--Path to a Component that satisfies the Socket 'parent' of type C (description: The parent frame to this frame.).-->
+							<socket_parent>..</socket_parent>
+							<!--Translational offset (in meters) of this frame's origin from the parent frame's origin, expressed in the parent frame.-->
+							<translation>0 0 -0.089999999999999997</translation>
+							<!--Orientation offset (in radians) of this frame in its parent frame, expressed as a frame-fixed x-y-z rotation sequence.-->
+							<orientation>1.5707963267948966 0 0</orientation>
+						</PhysicalOffsetFrame>
+						<PhysicalOffsetFrame name="plate_right">
+							<!--The geometry used to display the axes of this Frame.-->
+							<FrameGeometry name="frame_geometry">
+								<!--Path to a Component that satisfies the Socket 'frame' of type Frame.-->
+								<socket_frame>..</socket_frame>
+								<!--Scale factors in X, Y, Z directions respectively.-->
+								<scale_factors>0.20000000000000001 0.20000000000000001 0.20000000000000001</scale_factors>
+							</FrameGeometry>
+							<!--List of geometry attached to this Frame. Note, the geometry are treated as fixed to the frame and they share the transform of the frame when visualized-->
+							<attached_geometry>
+								<Cylinder name="plate_right_geom_1">
+									<!--Path to a Component that satisfies the Socket 'frame' of type Frame.-->
+									<socket_frame>..</socket_frame>
+									<!--Default appearance attributes for this Geometry-->
+									<Appearance>
+										<!--The color, (red, green, blue), [0, 1], used to display the geometry. -->
+										<color>0.12 0.13 0.16</color>
+									</Appearance>
+									<!--Radius of cylinder.-->
+									<radius>0.050000000000000003</radius>
+									<!--Half-Height of cylinder.-->
+									<half_height>0.012500000000000001</half_height>
+								</Cylinder>
+							</attached_geometry>
+							<!--Path to a Component that satisfies the Socket 'parent' of type C (description: The parent frame to this frame.).-->
+							<socket_parent>..</socket_parent>
+							<!--Translational offset (in meters) of this frame's origin from the parent frame's origin, expressed in the parent frame.-->
+							<translation>0 0 0.089999999999999997</translation>
+							<!--Orientation offset (in radians) of this frame in its parent frame, expressed as a frame-fixed x-y-z rotation sequence.-->
+							<orientation>1.5707963267948966 0 0</orientation>
+						</PhysicalOffsetFrame>
+					</components>
+					<!--The geometry used to display the axes of this Frame.-->
+					<FrameGeometry name="frame_geometry">
+						<!--Path to a Component that satisfies the Socket 'frame' of type Frame.-->
+						<socket_frame>..</socket_frame>
+						<!--Scale factors in X, Y, Z directions respectively.-->
+						<scale_factors>0.20000000000000001 0.20000000000000001 0.20000000000000001</scale_factors>
+					</FrameGeometry>
+					<!--The mass of the body (kg)-->
+					<mass>5</mass>
+					<!--The location (Vec3) of the mass center in the body frame.-->
+					<mass_center>0 0 0</mass_center>
+					<!--The elements of the inertia tensor (Vec6) as [Ixx Iyy Izz Ixy Ixz Iyz] measured about the mass_center and not the body origin.-->
+					<inertia>0.040515916666666665 0.040515916666666665 0.0056610000000000011 0 0 0</inertia>
+				</Body>
+			</objects>
+			<groups />
+		</BodySet>
+		<!--List of joints that connect the bodies.-->
+		<JointSet name="jointset">
+			<objects>
+				<CustomJoint name="prescribed_yaw_carrier">
+					<!--Path to a Component that satisfies the Socket 'parent_frame' of type PhysicalFrame (description: The parent frame for the joint.).-->
+					<socket_parent_frame>ground_yaw_offset</socket_parent_frame>
+					<!--Path to a Component that satisfies the Socket 'child_frame' of type PhysicalFrame (description: The child frame for the joint.).-->
+					<socket_child_frame>yaw_carrier_offset</socket_child_frame>
+					<!--List containing the generalized coordinates (q's) that parameterize this joint.-->
+					<coordinates>
+						<Coordinate name="r_shoulder_yaw">
+							<!--The value of this coordinate before any value has been set. Rotational coordinate value is in radians and Translational in meters.-->
+							<default_value>-0.26179938779914941</default_value>
+							<!--The speed value of this coordinate before any value has been set. Rotational coordinate value is in rad/s and Translational in m/s.-->
+							<default_speed_value>0</default_speed_value>
+							<!--The minimum and maximum values that the coordinate can range between. Rotational coordinate range in radians and Translational in meters.-->
+							<range>-1.3999999999999999 1.3999999999999999</range>
+							<!--Flag indicating whether or not the values of the coordinates should be limited to the range, above.-->
+							<clamped>false</clamped>
+							<!--Flag indicating whether or not the values of the coordinates should be constrained to the current (e.g. default) value, above.-->
+							<locked>true</locked>
+							<!--If specified, the coordinate can be prescribed by a function of time. It can be any OpenSim Function with valid second order derivatives.-->
+							<prescribed_function />
+							<!--Flag indicating whether or not the values of the coordinates should be prescribed according to the function above. It is ignored if the no prescribed function is specified.-->
+							<prescribed>false</prescribed>
+						</Coordinate>
+					</coordinates>
+					<!--Physical offset frames owned by the Joint that are typically used to satisfy the owning Joint's parent and child frame connections (sockets). PhysicalOffsetFrames are often used to describe the fixed transformation from a Body's origin to another location of interest on the Body (e.g., the joint center). When the joint is deleted, so are the PhysicalOffsetFrame components in this list.-->
+					<frames>
+						<PhysicalOffsetFrame name="ground_yaw_offset">
+							<!--The geometry used to display the axes of this Frame.-->
+							<FrameGeometry name="frame_geometry">
+								<!--Path to a Component that satisfies the Socket 'frame' of type Frame.-->
+								<socket_frame>..</socket_frame>
+								<!--Scale factors in X, Y, Z directions respectively.-->
+								<scale_factors>0.20000000000000001 0.20000000000000001 0.20000000000000001</scale_factors>
+							</FrameGeometry>
+							<!--Path to a Component that satisfies the Socket 'parent' of type C (description: The parent frame to this frame.).-->
+							<socket_parent>/ground</socket_parent>
+							<!--Translational offset (in meters) of this frame's origin from the parent frame's origin, expressed in the parent frame.-->
+							<translation>-0.017545000000000002 -0.0070000000000000001 0.17000000000000001</translation>
+							<!--Orientation offset (in radians) of this frame in its parent frame, expressed as a frame-fixed x-y-z rotation sequence.-->
+							<orientation>0 0 0</orientation>
+						</PhysicalOffsetFrame>
+						<PhysicalOffsetFrame name="yaw_carrier_offset">
+							<!--The geometry used to display the axes of this Frame.-->
+							<FrameGeometry name="frame_geometry">
+								<!--Path to a Component that satisfies the Socket 'frame' of type Frame.-->
+								<socket_frame>..</socket_frame>
+								<!--Scale factors in X, Y, Z directions respectively.-->
+								<scale_factors>0.20000000000000001 0.20000000000000001 0.20000000000000001</scale_factors>
+							</FrameGeometry>
+							<!--Path to a Component that satisfies the Socket 'parent' of type C (description: The parent frame to this frame.).-->
+							<socket_parent>/bodyset/yaw_carrier</socket_parent>
+							<!--Translational offset (in meters) of this frame's origin from the parent frame's origin, expressed in the parent frame.-->
+							<translation>0 0 0</translation>
+							<!--Orientation offset (in radians) of this frame in its parent frame, expressed as a frame-fixed x-y-z rotation sequence.-->
+							<orientation>0 0 0</orientation>
+						</PhysicalOffsetFrame>
+					</frames>
+					<!--The spatial transform defining how the child body moves with respectto the parent as a function of the generalized coordinates.-->
+					<SpatialTransform>
+						<!--The first TransformAxis defining a rotation about an axis with to a set of generalized coordinates.-->
+						<TransformAxis name="rotation1">
+							<!--The names of the generalized coordinates that serve as the independent variables of the transform function.-->
+							<coordinates>r_shoulder_yaw</coordinates>
+							<!--The rotation or translation axis for the transform. Default: (1,0,0).-->
+							<axis>0 1 0</axis>
+							<!--The transform function with respect to the generalized coordinates used to represent the amount of displacement about or along the TransformAxis. Default: Constant(0).-->
+							<LinearFunction name="function">
+								<coefficients> 1 0</coefficients>
+							</LinearFunction>
+						</TransformAxis>
+						<!--The second TransformAxis defining a rotation about an axis with to a set of generalized coordinates.-->
+						<TransformAxis name="rotation2">
+							<!--The names of the generalized coordinates that serve as the independent variables of the transform function.-->
+							<coordinates></coordinates>
+							<!--The rotation or translation axis for the transform. Default: (1,0,0).-->
+							<axis>0 0 1</axis>
+							<!--The transform function with respect to the generalized coordinates used to represent the amount of displacement about or along the TransformAxis. Default: Constant(0).-->
+							<Constant name="function">
+								<value>0</value>
+							</Constant>
+						</TransformAxis>
+						<!--The third TransformAxis defining a rotation about an axis with to a set of generalized coordinates.-->
+						<TransformAxis name="rotation3">
+							<!--The names of the generalized coordinates that serve as the independent variables of the transform function.-->
+							<coordinates></coordinates>
+							<!--The rotation or translation axis for the transform. Default: (1,0,0).-->
+							<axis>1 0 0</axis>
+							<!--The transform function with respect to the generalized coordinates used to represent the amount of displacement about or along the TransformAxis. Default: Constant(0).-->
+							<Constant name="function">
+								<value>0</value>
+							</Constant>
+						</TransformAxis>
+						<!--The first TransformAxis defining a translation along an axis with to a set of generalized coordinates.-->
+						<TransformAxis name="translation1">
+							<!--The names of the generalized coordinates that serve as the independent variables of the transform function.-->
+							<coordinates></coordinates>
+							<!--The rotation or translation axis for the transform. Default: (1,0,0).-->
+							<axis>1 0 0</axis>
+							<!--The transform function with respect to the generalized coordinates used to represent the amount of displacement about or along the TransformAxis. Default: Constant(0).-->
+							<Constant name="function">
+								<value>0</value>
+							</Constant>
+						</TransformAxis>
+						<!--The second TransformAxis defining a translation along an axis with to a set of generalized coordinates.-->
+						<TransformAxis name="translation2">
+							<!--The names of the generalized coordinates that serve as the independent variables of the transform function.-->
+							<coordinates></coordinates>
+							<!--The rotation or translation axis for the transform. Default: (1,0,0).-->
+							<axis>0 1 0</axis>
+							<!--The transform function with respect to the generalized coordinates used to represent the amount of displacement about or along the TransformAxis. Default: Constant(0).-->
+							<Constant name="function">
+								<value>0</value>
+							</Constant>
+						</TransformAxis>
+						<!--The third TransformAxis defining a translation along an axis with to a set of generalized coordinates.-->
+						<TransformAxis name="translation3">
+							<!--The names of the generalized coordinates that serve as the independent variables of the transform function.-->
+							<coordinates></coordinates>
+							<!--The rotation or translation axis for the transform. Default: (1,0,0).-->
+							<axis>0 0 1</axis>
+							<!--The transform function with respect to the generalized coordinates used to represent the amount of displacement about or along the TransformAxis. Default: Constant(0).-->
+							<Constant name="function">
+								<value>0</value>
+							</Constant>
+						</TransformAxis>
+					</SpatialTransform>
+				</CustomJoint>
+				<CustomJoint name="r_shoulder">
+					<!--Path to a Component that satisfies the Socket 'parent_frame' of type PhysicalFrame (description: The parent frame for the joint.).-->
+					<socket_parent_frame>ground_offset</socket_parent_frame>
+					<!--Path to a Component that satisfies the Socket 'child_frame' of type PhysicalFrame (description: The child frame for the joint.).-->
+					<socket_child_frame>r_humerus_offset</socket_child_frame>
+					<!--List containing the generalized coordinates (q's) that parameterize this joint.-->
+					<coordinates>
+						<Coordinate name="r_shoulder_elev">
+							<!--The value of this coordinate before any value has been set. Rotational coordinate value is in radians and Translational in meters.-->
+							<default_value>-0.087266462599716474</default_value>
+							<!--The speed value of this coordinate before any value has been set. Rotational coordinate value is in rad/s and Translational in m/s.-->
+							<default_speed_value>0</default_speed_value>
+							<!--The minimum and maximum values that the coordinate can range between. Rotational coordinate range in radians and Translational in meters.-->
+							<range>-1.5707963300000001 3.1415926500000002</range>
+							<!--Flag indicating whether or not the values of the coordinates should be limited to the range, above.-->
+							<clamped>false</clamped>
+							<!--Flag indicating whether or not the values of the coordinates should be constrained to the current (e.g. default) value, above.-->
+							<locked>true</locked>
+							<!--If specified, the coordinate can be prescribed by a function of time. It can be any OpenSim Function with valid second order derivatives.-->
+							<prescribed_function />
+							<!--Flag indicating whether or not the values of the coordinates should be prescribed according to the function above. It is ignored if the no prescribed function is specified.-->
+							<prescribed>false</prescribed>
+						</Coordinate>
+					</coordinates>
+					<!--Physical offset frames owned by the Joint that are typically used to satisfy the owning Joint's parent and child frame connections (sockets). PhysicalOffsetFrames are often used to describe the fixed transformation from a Body's origin to another location of interest on the Body (e.g., the joint center). When the joint is deleted, so are the PhysicalOffsetFrame components in this list.-->
+					<frames>
+						<PhysicalOffsetFrame name="ground_offset">
+							<!--The geometry used to display the axes of this Frame.-->
+							<FrameGeometry name="frame_geometry">
+								<!--Path to a Component that satisfies the Socket 'frame' of type Frame.-->
+								<socket_frame>..</socket_frame>
+								<!--Scale factors in X, Y, Z directions respectively.-->
+								<scale_factors>0.20000000000000001 0.20000000000000001 0.20000000000000001</scale_factors>
+							</FrameGeometry>
+							<!--Path to a Component that satisfies the Socket 'parent' of type C (description: The parent frame to this frame.).-->
+							<socket_parent>/bodyset/yaw_carrier</socket_parent>
+							<!--Translational offset (in meters) of this frame's origin from the parent frame's origin, expressed in the parent frame.-->
+							<translation>0 0 0</translation>
+							<!--Orientation offset (in radians) of this frame in its parent frame, expressed as a frame-fixed x-y-z rotation sequence.-->
+							<orientation>0 0 0</orientation>
+						</PhysicalOffsetFrame>
+						<PhysicalOffsetFrame name="r_humerus_offset">
+							<!--The geometry used to display the axes of this Frame.-->
+							<FrameGeometry name="frame_geometry">
+								<!--Path to a Component that satisfies the Socket 'frame' of type Frame.-->
+								<socket_frame>..</socket_frame>
+								<!--Scale factors in X, Y, Z directions respectively.-->
+								<scale_factors>0.20000000000000001 0.20000000000000001 0.20000000000000001</scale_factors>
+							</FrameGeometry>
+							<!--Path to a Component that satisfies the Socket 'parent' of type C (description: The parent frame to this frame.).-->
+							<socket_parent>/bodyset/r_humerus</socket_parent>
+							<!--Translational offset (in meters) of this frame's origin from the parent frame's origin, expressed in the parent frame.-->
+							<translation>0 0 0</translation>
+							<!--Orientation offset (in radians) of this frame in its parent frame, expressed as a frame-fixed x-y-z rotation sequence.-->
+							<orientation>0 0 0</orientation>
+						</PhysicalOffsetFrame>
+					</frames>
+					<!--The spatial transform defining how the child body moves with respectto the parent as a function of the generalized coordinates.-->
+					<SpatialTransform>
+						<!--The first TransformAxis defining a rotation about an axis with to a set of generalized coordinates.-->
+						<TransformAxis name="rotation1">
+							<!--The names of the generalized coordinates that serve as the independent variables of the transform function.-->
+							<coordinates>r_shoulder_elev</coordinates>
+							<!--The rotation or translation axis for the transform. Default: (1,0,0).-->
+							<axis>-0.058898020000000002 0.0023 0.99826135999999999</axis>
+							<!--The transform function with respect to the generalized coordinates used to represent the amount of displacement about or along the TransformAxis. Default: Constant(0).-->
+							<LinearFunction name="function">
+								<coefficients> 1 0</coefficients>
+							</LinearFunction>
+						</TransformAxis>
+						<!--The second TransformAxis defining a rotation about an axis with to a set of generalized coordinates.-->
+						<TransformAxis name="rotation2">
+							<!--The names of the generalized coordinates that serve as the independent variables of the transform function.-->
+							<coordinates></coordinates>
+							<!--The rotation or translation axis for the transform. Default: (1,0,0).-->
+							<axis>0 1 0</axis>
+							<!--The transform function with respect to the generalized coordinates used to represent the amount of displacement about or along the TransformAxis. Default: Constant(0).-->
+							<Constant name="function">
+								<value>0</value>
+							</Constant>
+						</TransformAxis>
+						<!--The third TransformAxis defining a rotation about an axis with to a set of generalized coordinates.-->
+						<TransformAxis name="rotation3">
+							<!--The names of the generalized coordinates that serve as the independent variables of the transform function.-->
+							<coordinates></coordinates>
+							<!--The rotation or translation axis for the transform. Default: (1,0,0).-->
+							<axis>0.99826135999999999 -0 0.058898020000000002</axis>
+							<!--The transform function with respect to the generalized coordinates used to represent the amount of displacement about or along the TransformAxis. Default: Constant(0).-->
+							<Constant name="function">
+								<value>0</value>
+							</Constant>
+						</TransformAxis>
+						<!--The first TransformAxis defining a translation along an axis with to a set of generalized coordinates.-->
+						<TransformAxis name="translation1">
+							<!--The names of the generalized coordinates that serve as the independent variables of the transform function.-->
+							<coordinates></coordinates>
+							<!--The rotation or translation axis for the transform. Default: (1,0,0).-->
+							<axis>1 0 0</axis>
+							<!--The transform function with respect to the generalized coordinates used to represent the amount of displacement about or along the TransformAxis. Default: Constant(0).-->
+							<Constant name="function">
+								<value>0</value>
+							</Constant>
+						</TransformAxis>
+						<!--The second TransformAxis defining a translation along an axis with to a set of generalized coordinates.-->
+						<TransformAxis name="translation2">
+							<!--The names of the generalized coordinates that serve as the independent variables of the transform function.-->
+							<coordinates></coordinates>
+							<!--The rotation or translation axis for the transform. Default: (1,0,0).-->
+							<axis>0 1 0</axis>
+							<!--The transform function with respect to the generalized coordinates used to represent the amount of displacement about or along the TransformAxis. Default: Constant(0).-->
+							<Constant name="function">
+								<value>0</value>
+							</Constant>
+						</TransformAxis>
+						<!--The third TransformAxis defining a translation along an axis with to a set of generalized coordinates.-->
+						<TransformAxis name="translation3">
+							<!--The names of the generalized coordinates that serve as the independent variables of the transform function.-->
+							<coordinates></coordinates>
+							<!--The rotation or translation axis for the transform. Default: (1,0,0).-->
+							<axis>0 0 1</axis>
+							<!--The transform function with respect to the generalized coordinates used to represent the amount of displacement about or along the TransformAxis. Default: Constant(0).-->
+							<Constant name="function">
+								<value>0</value>
+							</Constant>
+						</TransformAxis>
+					</SpatialTransform>
+				</CustomJoint>
+				<CustomJoint name="r_elbow">
+					<!--Path to a Component that satisfies the Socket 'parent_frame' of type PhysicalFrame (description: The parent frame for the joint.).-->
+					<socket_parent_frame>r_humerus_offset</socket_parent_frame>
+					<!--Path to a Component that satisfies the Socket 'child_frame' of type PhysicalFrame (description: The child frame for the joint.).-->
+					<socket_child_frame>r_ulna_radius_hand_offset</socket_child_frame>
+					<!--List containing the generalized coordinates (q's) that parameterize this joint.-->
+					<coordinates>
+						<Coordinate name="r_elbow_flex">
+							<!--The value of this coordinate before any value has been set. Rotational coordinate value is in radians and Translational in meters.-->
+							<default_value>1.0471975511965976</default_value>
+							<!--The speed value of this coordinate before any value has been set. Rotational coordinate value is in rad/s and Translational in m/s.-->
+							<default_speed_value>0</default_speed_value>
+							<!--The minimum and maximum values that the coordinate can range between. Rotational coordinate range in radians and Translational in meters.-->
+							<range>0 2.2689280300000001</range>
+							<!--Flag indicating whether or not the values of the coordinates should be limited to the range, above.-->
+							<clamped>false</clamped>
+							<!--Flag indicating whether or not the values of the coordinates should be constrained to the current (e.g. default) value, above.-->
+							<locked>false</locked>
+							<!--If specified, the coordinate can be prescribed by a function of time. It can be any OpenSim Function with valid second order derivatives.-->
+							<prescribed_function />
+						</Coordinate>
+					</coordinates>
+					<!--Physical offset frames owned by the Joint that are typically used to satisfy the owning Joint's parent and child frame connections (sockets). PhysicalOffsetFrames are often used to describe the fixed transformation from a Body's origin to another location of interest on the Body (e.g., the joint center). When the joint is deleted, so are the PhysicalOffsetFrame components in this list.-->
+					<frames>
+						<PhysicalOffsetFrame name="r_humerus_offset">
+							<!--The geometry used to display the axes of this Frame.-->
+							<FrameGeometry name="frame_geometry">
+								<!--Path to a Component that satisfies the Socket 'frame' of type Frame.-->
+								<socket_frame>..</socket_frame>
+								<!--Scale factors in X, Y, Z directions respectively.-->
+								<scale_factors>0.20000000000000001 0.20000000000000001 0.20000000000000001</scale_factors>
+							</FrameGeometry>
+							<!--Path to a Component that satisfies the Socket 'parent' of type C (description: The parent frame to this frame.).-->
+							<socket_parent>/bodyset/r_humerus</socket_parent>
+							<!--Translational offset (in meters) of this frame's origin from the parent frame's origin, expressed in the parent frame.-->
+							<translation>0.0061000000000000004 -0.29039999999999999 -0.0123</translation>
+							<!--Orientation offset (in radians) of this frame in its parent frame, expressed as a frame-fixed x-y-z rotation sequence.-->
+							<orientation>0 0 0</orientation>
+						</PhysicalOffsetFrame>
+						<PhysicalOffsetFrame name="r_ulna_radius_hand_offset">
+							<!--The geometry used to display the axes of this Frame.-->
+							<FrameGeometry name="frame_geometry">
+								<!--Path to a Component that satisfies the Socket 'frame' of type Frame.-->
+								<socket_frame>..</socket_frame>
+								<!--Scale factors in X, Y, Z directions respectively.-->
+								<scale_factors>0.20000000000000001 0.20000000000000001 0.20000000000000001</scale_factors>
+							</FrameGeometry>
+							<!--Path to a Component that satisfies the Socket 'parent' of type C (description: The parent frame to this frame.).-->
+							<socket_parent>/bodyset/r_ulna_radius_hand</socket_parent>
+							<!--Translational offset (in meters) of this frame's origin from the parent frame's origin, expressed in the parent frame.-->
+							<translation>0 0 0</translation>
+							<!--Orientation offset (in radians) of this frame in its parent frame, expressed as a frame-fixed x-y-z rotation sequence.-->
+							<orientation>0 0 0</orientation>
+						</PhysicalOffsetFrame>
+					</frames>
+					<!--The spatial transform defining how the child body moves with respectto the parent as a function of the generalized coordinates.-->
+					<SpatialTransform>
+						<!--The first TransformAxis defining a rotation about an axis with to a set of generalized coordinates.-->
+						<TransformAxis name="rotation1">
+							<!--The names of the generalized coordinates that serve as the independent variables of the transform function.-->
+							<coordinates>r_elbow_flex</coordinates>
+							<!--The rotation or translation axis for the transform. Default: (1,0,0).-->
+							<axis>0.049400010000000001 0.036600010000000002 0.99810825000000003</axis>
+							<!--The transform function with respect to the generalized coordinates used to represent the amount of displacement about or along the TransformAxis. Default: Constant(0).-->
+							<LinearFunction name="function">
+								<coefficients> 1 0</coefficients>
+							</LinearFunction>
+						</TransformAxis>
+						<!--The second TransformAxis defining a rotation about an axis with to a set of generalized coordinates.-->
+						<TransformAxis name="rotation2">
+							<!--The names of the generalized coordinates that serve as the independent variables of the transform function.-->
+							<coordinates></coordinates>
+							<!--The rotation or translation axis for the transform. Default: (1,0,0).-->
+							<axis>0 1 0</axis>
+							<!--The transform function with respect to the generalized coordinates used to represent the amount of displacement about or along the TransformAxis. Default: Constant(0).-->
+							<Constant name="function">
+								<value>0</value>
+							</Constant>
+						</TransformAxis>
+						<!--The third TransformAxis defining a rotation about an axis with to a set of generalized coordinates.-->
+						<TransformAxis name="rotation3">
+							<!--The names of the generalized coordinates that serve as the independent variables of the transform function.-->
+							<coordinates></coordinates>
+							<!--The rotation or translation axis for the transform. Default: (1,0,0).-->
+							<axis>0.99810825000000003 0 -0.049400010000000001</axis>
+							<!--The transform function with respect to the generalized coordinates used to represent the amount of displacement about or along the TransformAxis. Default: Constant(0).-->
+							<Constant name="function">
+								<value>0</value>
+							</Constant>
+						</TransformAxis>
+						<!--The first TransformAxis defining a translation along an axis with to a set of generalized coordinates.-->
+						<TransformAxis name="translation1">
+							<!--The names of the generalized coordinates that serve as the independent variables of the transform function.-->
+							<coordinates></coordinates>
+							<!--The rotation or translation axis for the transform. Default: (1,0,0).-->
+							<axis>1 0 0</axis>
+							<!--The transform function with respect to the generalized coordinates used to represent the amount of displacement about or along the TransformAxis. Default: Constant(0).-->
+							<Constant name="function">
+								<value>0</value>
+							</Constant>
+						</TransformAxis>
+						<!--The second TransformAxis defining a translation along an axis with to a set of generalized coordinates.-->
+						<TransformAxis name="translation2">
+							<!--The names of the generalized coordinates that serve as the independent variables of the transform function.-->
+							<coordinates></coordinates>
+							<!--The rotation or translation axis for the transform. Default: (1,0,0).-->
+							<axis>0 1 0</axis>
+							<!--The transform function with respect to the generalized coordinates used to represent the amount of displacement about or along the TransformAxis. Default: Constant(0).-->
+							<Constant name="function">
+								<value>0</value>
+							</Constant>
+						</TransformAxis>
+						<!--The third TransformAxis defining a translation along an axis with to a set of generalized coordinates.-->
+						<TransformAxis name="translation3">
+							<!--The names of the generalized coordinates that serve as the independent variables of the transform function.-->
+							<coordinates></coordinates>
+							<!--The rotation or translation axis for the transform. Default: (1,0,0).-->
+							<axis>0 0 1</axis>
+							<!--The transform function with respect to the generalized coordinates used to represent the amount of displacement about or along the TransformAxis. Default: Constant(0).-->
+							<Constant name="function">
+								<value>0</value>
+							</Constant>
+						</TransformAxis>
+					</SpatialTransform>
+				</CustomJoint>
+				<WeldJoint name="dumbbell_grip">
+					<!--Path to a Component that satisfies the Socket 'parent_frame' of type PhysicalFrame (description: The parent frame for the joint.).-->
+					<socket_parent_frame>r_ulna_radius_hand_offset</socket_parent_frame>
+					<!--Path to a Component that satisfies the Socket 'child_frame' of type PhysicalFrame (description: The child frame for the joint.).-->
+					<socket_child_frame>hand_dumbbell_offset</socket_child_frame>
+					<!--Physical offset frames owned by the Joint that are typically used to satisfy the owning Joint's parent and child frame connections (sockets). PhysicalOffsetFrames are often used to describe the fixed transformation from a Body's origin to another location of interest on the Body (e.g., the joint center). When the joint is deleted, so are the PhysicalOffsetFrame components in this list.-->
+					<frames>
+						<PhysicalOffsetFrame name="r_ulna_radius_hand_offset">
+							<!--The geometry used to display the axes of this Frame.-->
+							<FrameGeometry name="frame_geometry">
+								<!--Path to a Component that satisfies the Socket 'frame' of type Frame.-->
+								<socket_frame>..</socket_frame>
+								<!--Scale factors in X, Y, Z directions respectively.-->
+								<scale_factors>0.20000000000000001 0.20000000000000001 0.20000000000000001</scale_factors>
+							</FrameGeometry>
+							<!--Path to a Component that satisfies the Socket 'parent' of type C (description: The parent frame to this frame.).-->
+							<socket_parent>/bodyset/r_ulna_radius_hand</socket_parent>
+							<!--Translational offset (in meters) of this frame's origin from the parent frame's origin, expressed in the parent frame.-->
+							<translation>0 -0.33000000000000002 0.074999999999999997</translation>
+							<!--Orientation offset (in radians) of this frame in its parent frame, expressed as a frame-fixed x-y-z rotation sequence.-->
+							<orientation>0 0 0</orientation>
+						</PhysicalOffsetFrame>
+						<PhysicalOffsetFrame name="hand_dumbbell_offset">
+							<!--The geometry used to display the axes of this Frame.-->
+							<FrameGeometry name="frame_geometry">
+								<!--Path to a Component that satisfies the Socket 'frame' of type Frame.-->
+								<socket_frame>..</socket_frame>
+								<!--Scale factors in X, Y, Z directions respectively.-->
+								<scale_factors>0.20000000000000001 0.20000000000000001 0.20000000000000001</scale_factors>
+							</FrameGeometry>
+							<!--Path to a Component that satisfies the Socket 'parent' of type C (description: The parent frame to this frame.).-->
+							<socket_parent>/bodyset/hand_dumbbell</socket_parent>
+							<!--Translational offset (in meters) of this frame's origin from the parent frame's origin, expressed in the parent frame.-->
+							<translation>0 0 0</translation>
+							<!--Orientation offset (in radians) of this frame in its parent frame, expressed as a frame-fixed x-y-z rotation sequence.-->
+							<orientation>0 0 0</orientation>
+						</PhysicalOffsetFrame>
+					</frames>
+				</WeldJoint>
+			</objects>
+		</JointSet>
+		<!--Controllers that provide the control inputs for Actuators.-->
+		<ControllerSet name="controllerset">
+			<objects>
+				<PrescribedController name="fixed_human_muscle_excitation">
+					<!--Paths to Components that satisfies the list Socket 'actuators' of type Actuator (description: The list of Actuators that this controller will control.).To specify multiple paths, put spaces between them.-->
+					<socket_actuators>/forceset/TRIlong /forceset/TRIlat /forceset/TRImed /forceset/BIClong /forceset/BICshort /forceset/BRA</socket_actuators>
+					<!--Functions (one per control) describing the controls for actuators specified for this controller. The control function set must match the number and order of connected actuators.-->
+					<FunctionSet name="ControlFunctions">
+						<objects>
+							<Constant>
+								<value>0.10000000000000001</value>
+							</Constant>
+							<Constant>
+								<value>0.10000000000000001</value>
+							</Constant>
+							<Constant>
+								<value>0.10000000000000001</value>
+							</Constant>
+							<Constant>
+								<value>0.10000000000000001</value>
+							</Constant>
+							<Constant>
+								<value>0.10000000000000001</value>
+							</Constant>
+							<Constant>
+								<value>0.10000000000000001</value>
+							</Constant>
+						</objects>
+						<groups />
+					</FunctionSet>
+				</PrescribedController>
+			</objects>
+			<groups />
+		</ControllerSet>
+		<!--Constraints in the model.-->
+		<ConstraintSet name="constraintset">
+			<objects />
+			<groups />
+		</ConstraintSet>
+		<!--Forces in the model (includes Actuators).-->
+		<ForceSet name="forceset">
+			<objects>
+				<Thelen2003Muscle name="TRIlong">
+					<!--Flag indicating whether the force is applied or not. If true the forceis applied to the MultibodySystem otherwise the force is not applied.NOTE: Prior to OpenSim 4.0, this behavior was controlled by the 'isDisabled' property, where 'true' meant that force was not being applied. Thus, if 'isDisabled' is true, then 'appliesForce` is false.-->
+					<appliesForce>true</appliesForce>
+					<!--The path of the actuator which defines length and lengthening speed.-->
+					<GeometryPath name="path">
+						<!--Default appearance attributes for this AbstractGeometryPath.-->
+						<Appearance>
+							<!--The color, (red, green, blue), [0, 1], used to display the geometry. -->
+							<color>0.80000000000000004 0.10000000000000001 0.10000000000000001</color>
+						</Appearance>
+						<!--The set of points defining the path-->
+						<PathPointSet>
+							<objects>
+								<PathPoint name="TRIlong-P1">
+									<!--Path to a Component that satisfies the Socket 'parent_frame' of type PhysicalFrame (description: The frame in which this path point is defined.).-->
+									<socket_parent_frame>/bodyset/yaw_carrier</socket_parent_frame>
+									<!--The fixed location of the path point expressed in its parent frame.-->
+									<location>-0.036104999999999998 -0.006729999999999999 -0.022770000000000012</location>
+								</PathPoint>
+								<PathPoint name="TRIlong-P2">
+									<!--Path to a Component that satisfies the Socket 'parent_frame' of type PhysicalFrame (description: The frame in which this path point is defined.).-->
+									<socket_parent_frame>/bodyset/r_humerus</socket_parent_frame>
+									<!--The fixed location of the path point expressed in its parent frame.-->
+									<location>-0.027140000000000001 -0.11441 -0.0066400000000000001</location>
+								</PathPoint>
+								<PathPoint name="TRIlong-P3">
+									<!--Path to a Component that satisfies the Socket 'parent_frame' of type PhysicalFrame (description: The frame in which this path point is defined.).-->
+									<socket_parent_frame>/bodyset/r_humerus</socket_parent_frame>
+									<!--The fixed location of the path point expressed in its parent frame.-->
+									<location>-0.03184 -0.22636999999999999 -0.01217</location>
+								</PathPoint>
+								<PathPoint name="TRIlong-P4">
+									<!--Path to a Component that satisfies the Socket 'parent_frame' of type PhysicalFrame (description: The frame in which this path point is defined.).-->
+									<socket_parent_frame>/bodyset/r_humerus</socket_parent_frame>
+									<!--The fixed location of the path point expressed in its parent frame.-->
+									<location>-0.017430000000000001 -0.26756999999999997 -0.01208</location>
+								</PathPoint>
+								<PathPoint name="TRIlong-P5">
+									<!--Path to a Component that satisfies the Socket 'parent_frame' of type PhysicalFrame (description: The frame in which this path point is defined.).-->
+									<socket_parent_frame>/bodyset/r_ulna_radius_hand</socket_parent_frame>
+									<!--The fixed location of the path point expressed in its parent frame.-->
+									<location>-0.021899999999999999 0.010460000000000001 -0.00077999999999999999</location>
+								</PathPoint>
+							</objects>
+							<groups />
+						</PathPointSet>
+						<!--The wrap objects that are associated with this path-->
+						<PathWrapSet>
+							<objects>
+								<PathWrap name="pathwrap">
+									<!--A WrapObject that this PathWrap interacts with.-->
+									<wrap_object>TRI</wrap_object>
+									<!--The wrapping method used to solve the path around the wrap object.-->
+									<method>hybrid</method>
+									<!--The range of indices to use to compute the path over the wrap object.-->
+									<range>-1 -1</range>
+								</PathWrap>
+								<PathWrap name="pathwrap_0">
+									<!--A WrapObject that this PathWrap interacts with.-->
+									<wrap_object>TRIlonghh</wrap_object>
+									<!--The wrapping method used to solve the path around the wrap object.-->
+									<method>hybrid</method>
+									<!--The range of indices to use to compute the path over the wrap object.-->
+									<range>-1 -1</range>
+								</PathWrap>
+								<PathWrap name="pathwrap_1">
+									<!--A WrapObject that this PathWrap interacts with.-->
+									<wrap_object>TRIlongglen</wrap_object>
+									<!--The wrapping method used to solve the path around the wrap object.-->
+									<method>hybrid</method>
+									<!--The range of indices to use to compute the path over the wrap object.-->
+									<range>-1 -1</range>
+								</PathWrap>
+							</objects>
+							<groups />
+						</PathWrapSet>
+					</GeometryPath>
+					<!--The maximum force this actuator can produce.-->
+					<optimal_force>1</optimal_force>
+					<!--Maximum isometric force that the fibers can generate-->
+					<max_isometric_force>359.334</max_isometric_force>
+					<!--Optimal length of the muscle fibers-->
+					<optimal_fiber_length>0.13400000000000001</optimal_fiber_length>
+					<!--Resting length of the tendon-->
+					<tendon_slack_length>0.14299999999999999</tendon_slack_length>
+					<!--Angle between tendon and fibers at optimal fiber length expressed in radians-->
+					<pennation_angle_at_optimal>0.20943951</pennation_angle_at_optimal>
+					<!--Maximum contraction velocity of the fibers, in optimal fiberlengths/second-->
+					<max_contraction_velocity>10</max_contraction_velocity>
+					<!--Assumed activation level if none is assigned.-->
+					<default_activation>0.10000000000000001</default_activation>
+					<!--tendon strain at maximum isometric muscle force-->
+					<FmaxTendonStrain>0.033000000000000002</FmaxTendonStrain>
+					<!--passive muscle strain at maximum isometric muscle force-->
+					<FmaxMuscleStrain>0.59999999999999998</FmaxMuscleStrain>
+					<!--shape factor for Gaussian active muscle force-length relationship-->
+					<KshapeActive>0.5</KshapeActive>
+					<!--exponential shape factor for passive force-length relationship-->
+					<KshapePassive>4</KshapePassive>
+					<!--force-velocity shape factor-->
+					<Af>0.29999999999999999</Af>
+					<!--maximum normalized lengthening force-->
+					<Flen>1.8</Flen>
+					<!--Activation time constant, in seconds-->
+					<activation_time_constant>0.01</activation_time_constant>
+					<!--Deactivation time constant, in seconds-->
+					<deactivation_time_constant>0.040000000000000001</deactivation_time_constant>
+				</Thelen2003Muscle>
+				<Thelen2003Muscle name="TRIlat">
+					<!--Flag indicating whether the force is applied or not. If true the forceis applied to the MultibodySystem otherwise the force is not applied.NOTE: Prior to OpenSim 4.0, this behavior was controlled by the 'isDisabled' property, where 'true' meant that force was not being applied. Thus, if 'isDisabled' is true, then 'appliesForce` is false.-->
+					<appliesForce>true</appliesForce>
+					<!--The path of the actuator which defines length and lengthening speed.-->
+					<GeometryPath name="path">
+						<!--Default appearance attributes for this AbstractGeometryPath.-->
+						<Appearance>
+							<!--The color, (red, green, blue), [0, 1], used to display the geometry. -->
+							<color>0.80000000000000004 0.10000000000000001 0.10000000000000001</color>
+						</Appearance>
+						<!--The set of points defining the path-->
+						<PathPointSet>
+							<objects>
+								<PathPoint name="TRIlat-P1">
+									<!--Path to a Component that satisfies the Socket 'parent_frame' of type PhysicalFrame (description: The frame in which this path point is defined.).-->
+									<socket_parent_frame>/bodyset/r_humerus</socket_parent_frame>
+									<!--The fixed location of the path point expressed in its parent frame.-->
+									<location>-0.0059899999999999997 -0.12645999999999999 0.00428</location>
+								</PathPoint>
+								<PathPoint name="TRIlat-P2">
+									<!--Path to a Component that satisfies the Socket 'parent_frame' of type PhysicalFrame (description: The frame in which this path point is defined.).-->
+									<socket_parent_frame>/bodyset/r_humerus</socket_parent_frame>
+									<!--The fixed location of the path point expressed in its parent frame.-->
+									<location>-0.023439999999999999 -0.14527999999999999 0.0092800000000000001</location>
+								</PathPoint>
+								<PathPoint name="TRIlat-P3">
+									<!--Path to a Component that satisfies the Socket 'parent_frame' of type PhysicalFrame (description: The frame in which this path point is defined.).-->
+									<socket_parent_frame>/bodyset/r_humerus</socket_parent_frame>
+									<!--The fixed location of the path point expressed in its parent frame.-->
+									<location>-0.03184 -0.22636999999999999 -0.01217</location>
+								</PathPoint>
+								<PathPoint name="TRIlat-P4">
+									<!--Path to a Component that satisfies the Socket 'parent_frame' of type PhysicalFrame (description: The frame in which this path point is defined.).-->
+									<socket_parent_frame>/bodyset/r_humerus</socket_parent_frame>
+									<!--The fixed location of the path point expressed in its parent frame.-->
+									<location>-0.017430000000000001 -0.26756999999999997 -0.01208</location>
+								</PathPoint>
+								<PathPoint name="TRIlat-P5">
+									<!--Path to a Component that satisfies the Socket 'parent_frame' of type PhysicalFrame (description: The frame in which this path point is defined.).-->
+									<socket_parent_frame>/bodyset/r_ulna_radius_hand</socket_parent_frame>
+									<!--The fixed location of the path point expressed in its parent frame.-->
+									<location>-0.021899999999999999 0.010460000000000001 -0.00077999999999999999</location>
+								</PathPoint>
+							</objects>
+							<groups />
+						</PathPointSet>
+						<!--The wrap objects that are associated with this path-->
+						<PathWrapSet>
+							<objects>
+								<PathWrap name="pathwrap">
+									<!--A WrapObject that this PathWrap interacts with.-->
+									<wrap_object>TRI</wrap_object>
+									<!--The wrapping method used to solve the path around the wrap object.-->
+									<method>hybrid</method>
+									<!--The range of indices to use to compute the path over the wrap object.-->
+									<range>-1 -1</range>
+								</PathWrap>
+							</objects>
+							<groups />
+						</PathWrapSet>
+					</GeometryPath>
+					<!--The maximum force this actuator can produce.-->
+					<optimal_force>1</optimal_force>
+					<!--Maximum isometric force that the fibers can generate-->
+					<max_isometric_force>280.935</max_isometric_force>
+					<!--Optimal length of the muscle fibers-->
+					<optimal_fiber_length>0.1138</optimal_fiber_length>
+					<!--Resting length of the tendon-->
+					<tendon_slack_length>0.098000000000000004</tendon_slack_length>
+					<!--Angle between tendon and fibers at optimal fiber length expressed in radians-->
+					<pennation_angle_at_optimal>0.15707963</pennation_angle_at_optimal>
+					<!--Maximum contraction velocity of the fibers, in optimal fiberlengths/second-->
+					<max_contraction_velocity>10</max_contraction_velocity>
+					<!--Assumed activation level if none is assigned.-->
+					<default_activation>0.10000000000000001</default_activation>
+					<!--tendon strain at maximum isometric muscle force-->
+					<FmaxTendonStrain>0.033000000000000002</FmaxTendonStrain>
+					<!--passive muscle strain at maximum isometric muscle force-->
+					<FmaxMuscleStrain>0.59999999999999998</FmaxMuscleStrain>
+					<!--shape factor for Gaussian active muscle force-length relationship-->
+					<KshapeActive>0.5</KshapeActive>
+					<!--exponential shape factor for passive force-length relationship-->
+					<KshapePassive>4</KshapePassive>
+					<!--force-velocity shape factor-->
+					<Af>0.29999999999999999</Af>
+					<!--maximum normalized lengthening force-->
+					<Flen>1.8</Flen>
+					<!--Activation time constant, in seconds-->
+					<activation_time_constant>0.01</activation_time_constant>
+					<!--Deactivation time constant, in seconds-->
+					<deactivation_time_constant>0.040000000000000001</deactivation_time_constant>
+				</Thelen2003Muscle>
+				<Thelen2003Muscle name="TRImed">
+					<!--Flag indicating whether the force is applied or not. If true the forceis applied to the MultibodySystem otherwise the force is not applied.NOTE: Prior to OpenSim 4.0, this behavior was controlled by the 'isDisabled' property, where 'true' meant that force was not being applied. Thus, if 'isDisabled' is true, then 'appliesForce` is false.-->
+					<appliesForce>true</appliesForce>
+					<!--The path of the actuator which defines length and lengthening speed.-->
+					<GeometryPath name="path">
+						<!--Default appearance attributes for this AbstractGeometryPath.-->
+						<Appearance>
+							<!--The color, (red, green, blue), [0, 1], used to display the geometry. -->
+							<color>0.80000000000000004 0.10000000000000001 0.10000000000000001</color>
+						</Appearance>
+						<!--The set of points defining the path-->
+						<PathPointSet>
+							<objects>
+								<PathPoint name="TRImed-P1">
+									<!--Path to a Component that satisfies the Socket 'parent_frame' of type PhysicalFrame (description: The frame in which this path point is defined.).-->
+									<socket_parent_frame>/bodyset/r_humerus</socket_parent_frame>
+									<!--The fixed location of the path point expressed in its parent frame.-->
+									<location>-0.0083800000000000003 -0.13694999999999999 -0.0090600000000000003</location>
+								</PathPoint>
+								<PathPoint name="TRImed-P2">
+									<!--Path to a Component that satisfies the Socket 'parent_frame' of type PhysicalFrame (description: The frame in which this path point is defined.).-->
+									<socket_parent_frame>/bodyset/r_humerus</socket_parent_frame>
+									<!--The fixed location of the path point expressed in its parent frame.-->
+									<location>-0.026009999999999998 -0.15139 -0.010800000000000001</location>
+								</PathPoint>
+								<PathPoint name="TRImed-P3">
+									<!--Path to a Component that satisfies the Socket 'parent_frame' of type PhysicalFrame (description: The frame in which this path point is defined.).-->
+									<socket_parent_frame>/bodyset/r_humerus</socket_parent_frame>
+									<!--The fixed location of the path point expressed in its parent frame.-->
+									<location>-0.03184 -0.22636999999999999 -0.01217</location>
+								</PathPoint>
+								<PathPoint name="TRImed-P4">
+									<!--Path to a Component that satisfies the Socket 'parent_frame' of type PhysicalFrame (description: The frame in which this path point is defined.).-->
+									<socket_parent_frame>/bodyset/r_humerus</socket_parent_frame>
+									<!--The fixed location of the path point expressed in its parent frame.-->
+									<location>-0.017430000000000001 -0.26756999999999997 -0.01208</location>
+								</PathPoint>
+								<PathPoint name="TRImed-P5">
+									<!--Path to a Component that satisfies the Socket 'parent_frame' of type PhysicalFrame (description: The frame in which this path point is defined.).-->
+									<socket_parent_frame>/bodyset/r_ulna_radius_hand</socket_parent_frame>
+									<!--The fixed location of the path point expressed in its parent frame.-->
+									<location>-0.021899999999999999 0.010460000000000001 -0.00077999999999999999</location>
+								</PathPoint>
+							</objects>
+							<groups />
+						</PathPointSet>
+						<!--The wrap objects that are associated with this path-->
+						<PathWrapSet>
+							<objects>
+								<PathWrap name="pathwrap">
+									<!--A WrapObject that this PathWrap interacts with.-->
+									<wrap_object>TRI</wrap_object>
+									<!--The wrapping method used to solve the path around the wrap object.-->
+									<method>hybrid</method>
+									<!--The range of indices to use to compute the path over the wrap object.-->
+									<range>-1 -1</range>
+								</PathWrap>
+							</objects>
+							<groups />
+						</PathWrapSet>
+					</GeometryPath>
+					<!--The maximum force this actuator can produce.-->
+					<optimal_force>1</optimal_force>
+					<!--Maximum isometric force that the fibers can generate-->
+					<max_isometric_force>280.935</max_isometric_force>
+					<!--Optimal length of the muscle fibers-->
+					<optimal_fiber_length>0.1138</optimal_fiber_length>
+					<!--Resting length of the tendon-->
+					<tendon_slack_length>0.090800000000000006</tendon_slack_length>
+					<!--Angle between tendon and fibers at optimal fiber length expressed in radians-->
+					<pennation_angle_at_optimal>0.15707963</pennation_angle_at_optimal>
+					<!--Maximum contraction velocity of the fibers, in optimal fiberlengths/second-->
+					<max_contraction_velocity>10</max_contraction_velocity>
+					<!--Assumed activation level if none is assigned.-->
+					<default_activation>0.10000000000000001</default_activation>
+					<!--tendon strain at maximum isometric muscle force-->
+					<FmaxTendonStrain>0.033000000000000002</FmaxTendonStrain>
+					<!--passive muscle strain at maximum isometric muscle force-->
+					<FmaxMuscleStrain>0.59999999999999998</FmaxMuscleStrain>
+					<!--shape factor for Gaussian active muscle force-length relationship-->
+					<KshapeActive>0.5</KshapeActive>
+					<!--exponential shape factor for passive force-length relationship-->
+					<KshapePassive>4</KshapePassive>
+					<!--force-velocity shape factor-->
+					<Af>0.29999999999999999</Af>
+					<!--maximum normalized lengthening force-->
+					<Flen>1.8</Flen>
+					<!--Activation time constant, in seconds-->
+					<activation_time_constant>0.01</activation_time_constant>
+					<!--Deactivation time constant, in seconds-->
+					<deactivation_time_constant>0.040000000000000001</deactivation_time_constant>
+				</Thelen2003Muscle>
+				<Thelen2003Muscle name="BIClong">
+					<!--Flag indicating whether the force is applied or not. If true the forceis applied to the MultibodySystem otherwise the force is not applied.NOTE: Prior to OpenSim 4.0, this behavior was controlled by the 'isDisabled' property, where 'true' meant that force was not being applied. Thus, if 'isDisabled' is true, then 'appliesForce` is false.-->
+					<appliesForce>true</appliesForce>
+					<!--The path of the actuator which defines length and lengthening speed.-->
+					<GeometryPath name="path">
+						<!--Default appearance attributes for this AbstractGeometryPath.-->
+						<Appearance>
+							<!--The color, (red, green, blue), [0, 1], used to display the geometry. -->
+							<color>0.80000000000000004 0.10000000000000001 0.10000000000000001</color>
+						</Appearance>
+						<!--The set of points defining the path-->
+						<PathPointSet>
+							<objects>
+								<PathPoint name="BIClong-P1">
+									<!--Path to a Component that satisfies the Socket 'parent_frame' of type PhysicalFrame (description: The frame in which this path point is defined.).-->
+									<socket_parent_frame>/bodyset/yaw_carrier</socket_parent_frame>
+									<!--The fixed location of the path point expressed in its parent frame.-->
+									<location>-0.021689999999999997 0.01047 -0.022050000000000014</location>
+								</PathPoint>
+								<PathPoint name="BIClong-P2">
+									<!--Path to a Component that satisfies the Socket 'parent_frame' of type PhysicalFrame (description: The frame in which this path point is defined.).-->
+									<socket_parent_frame>/bodyset/yaw_carrier</socket_parent_frame>
+									<!--The fixed location of the path point expressed in its parent frame.-->
+									<location>-0.011399999999999997 0.020910000000000002 -0.013610000000000011</location>
+								</PathPoint>
+								<PathPoint name="BIClong-P3">
+									<!--Path to a Component that satisfies the Socket 'parent_frame' of type PhysicalFrame (description: The frame in which this path point is defined.).-->
+									<socket_parent_frame>/bodyset/r_humerus</socket_parent_frame>
+									<!--The fixed location of the path point expressed in its parent frame.-->
+									<location>0.021309999999999999 0.017930000000000001 0.010279999999999999</location>
+								</PathPoint>
+								<PathPoint name="BIClong-P4">
+									<!--Path to a Component that satisfies the Socket 'parent_frame' of type PhysicalFrame (description: The frame in which this path point is defined.).-->
+									<socket_parent_frame>/bodyset/r_humerus</socket_parent_frame>
+									<!--The fixed location of the path point expressed in its parent frame.-->
+									<location>0.023779999999999999 -0.00511 0.01201</location>
+								</PathPoint>
+								<PathPoint name="BIClong-P5">
+									<!--Path to a Component that satisfies the Socket 'parent_frame' of type PhysicalFrame (description: The frame in which this path point is defined.).-->
+									<socket_parent_frame>/bodyset/r_humerus</socket_parent_frame>
+									<!--The fixed location of the path point expressed in its parent frame.-->
+									<location>0.01345 -0.02827 0.0013600000000000001</location>
+								</PathPoint>
+								<PathPoint name="BIClong-P6">
+									<!--Path to a Component that satisfies the Socket 'parent_frame' of type PhysicalFrame (description: The frame in which this path point is defined.).-->
+									<socket_parent_frame>/bodyset/r_humerus</socket_parent_frame>
+									<!--The fixed location of the path point expressed in its parent frame.-->
+									<location>0.01068 -0.077359999999999998 -0.00165</location>
+								</PathPoint>
+								<PathPoint name="BIClong-P7">
+									<!--Path to a Component that satisfies the Socket 'parent_frame' of type PhysicalFrame (description: The frame in which this path point is defined.).-->
+									<socket_parent_frame>/bodyset/r_humerus</socket_parent_frame>
+									<!--The fixed location of the path point expressed in its parent frame.-->
+									<location>0.01703 -0.12125 0.00024000000000000001</location>
+								</PathPoint>
+								<PathPoint name="BIClong-P8">
+									<!--Path to a Component that satisfies the Socket 'parent_frame' of type PhysicalFrame (description: The frame in which this path point is defined.).-->
+									<socket_parent_frame>/bodyset/r_humerus</socket_parent_frame>
+									<!--The fixed location of the path point expressed in its parent frame.-->
+									<location>0.022800000000000001 -0.1754 -0.0063</location>
+								</PathPoint>
+								<PathPoint name="BIClong-P9">
+									<!--Path to a Component that satisfies the Socket 'parent_frame' of type PhysicalFrame (description: The frame in which this path point is defined.).-->
+									<socket_parent_frame>/bodyset/r_ulna_radius_hand</socket_parent_frame>
+									<!--The fixed location of the path point expressed in its parent frame.-->
+									<location>0.0075100000000000002 -0.048390000000000002 0.02179</location>
+								</PathPoint>
+							</objects>
+							<groups />
+						</PathPointSet>
+						<!--The wrap objects that are associated with this path-->
+						<PathWrapSet>
+							<objects>
+								<PathWrap name="pathwrap">
+									<!--A WrapObject that this PathWrap interacts with.-->
+									<wrap_object>BIClonghh</wrap_object>
+									<!--The wrapping method used to solve the path around the wrap object.-->
+									<method>hybrid</method>
+									<!--The range of indices to use to compute the path over the wrap object.-->
+									<range>2 3</range>
+								</PathWrap>
+							</objects>
+							<groups />
+						</PathWrapSet>
+					</GeometryPath>
+					<!--The maximum force this actuator can produce.-->
+					<optimal_force>1</optimal_force>
+					<!--Maximum isometric force that the fibers can generate-->
+					<max_isometric_force>280.935</max_isometric_force>
+					<!--Optimal length of the muscle fibers-->
+					<optimal_fiber_length>0.1157</optimal_fiber_length>
+					<!--Resting length of the tendon-->
+					<tendon_slack_length>0.27229999999999999</tendon_slack_length>
+					<!--Angle between tendon and fibers at optimal fiber length expressed in radians-->
+					<pennation_angle_at_optimal>0</pennation_angle_at_optimal>
+					<!--Maximum contraction velocity of the fibers, in optimal fiberlengths/second-->
+					<max_contraction_velocity>10</max_contraction_velocity>
+					<!--Assumed activation level if none is assigned.-->
+					<default_activation>0.10000000000000001</default_activation>
+					<!--tendon strain at maximum isometric muscle force-->
+					<FmaxTendonStrain>0.033000000000000002</FmaxTendonStrain>
+					<!--passive muscle strain at maximum isometric muscle force-->
+					<FmaxMuscleStrain>0.59999999999999998</FmaxMuscleStrain>
+					<!--shape factor for Gaussian active muscle force-length relationship-->
+					<KshapeActive>0.5</KshapeActive>
+					<!--exponential shape factor for passive force-length relationship-->
+					<KshapePassive>4</KshapePassive>
+					<!--force-velocity shape factor-->
+					<Af>0.29999999999999999</Af>
+					<!--maximum normalized lengthening force-->
+					<Flen>1.8</Flen>
+					<!--Activation time constant, in seconds-->
+					<activation_time_constant>0.01</activation_time_constant>
+					<!--Deactivation time constant, in seconds-->
+					<deactivation_time_constant>0.040000000000000001</deactivation_time_constant>
+				</Thelen2003Muscle>
+				<Thelen2003Muscle name="BICshort">
+					<!--Flag indicating whether the force is applied or not. If true the forceis applied to the MultibodySystem otherwise the force is not applied.NOTE: Prior to OpenSim 4.0, this behavior was controlled by the 'isDisabled' property, where 'true' meant that force was not being applied. Thus, if 'isDisabled' is true, then 'appliesForce` is false.-->
+					<appliesForce>true</appliesForce>
+					<!--The path of the actuator which defines length and lengthening speed.-->
+					<GeometryPath name="path">
+						<!--Default appearance attributes for this AbstractGeometryPath.-->
+						<Appearance>
+							<!--The color, (red, green, blue), [0, 1], used to display the geometry. -->
+							<color>0.80000000000000004 0.10000000000000001 0.10000000000000001</color>
+						</Appearance>
+						<!--The set of points defining the path-->
+						<PathPointSet>
+							<objects>
+								<PathPoint name="BICshort-P1">
+									<!--Path to a Component that satisfies the Socket 'parent_frame' of type PhysicalFrame (description: The frame in which this path point is defined.).-->
+									<socket_parent_frame>/bodyset/yaw_carrier</socket_parent_frame>
+									<!--The fixed location of the path point expressed in its parent frame.-->
+									<location>0.022220000000000004 -0.0053099999999999996 -0.035250000000000004</location>
+								</PathPoint>
+								<PathPoint name="BICshort-P2">
+									<!--Path to a Component that satisfies the Socket 'parent_frame' of type PhysicalFrame (description: The frame in which this path point is defined.).-->
+									<socket_parent_frame>/bodyset/yaw_carrier</socket_parent_frame>
+									<!--The fixed location of the path point expressed in its parent frame.-->
+									<location>0.010470000000000002 -0.03304 -0.024930000000000008</location>
+								</PathPoint>
+								<PathPoint name="BICshort-P3">
+									<!--Path to a Component that satisfies the Socket 'parent_frame' of type PhysicalFrame (description: The frame in which this path point is defined.).-->
+									<socket_parent_frame>/bodyset/r_humerus</socket_parent_frame>
+									<!--The fixed location of the path point expressed in its parent frame.-->
+									<location>0.011169999999999999 -0.075759999999999994 -0.011010000000000001</location>
+								</PathPoint>
+								<PathPoint name="BICshort-P4">
+									<!--Path to a Component that satisfies the Socket 'parent_frame' of type PhysicalFrame (description: The frame in which this path point is defined.).-->
+									<socket_parent_frame>/bodyset/r_humerus</socket_parent_frame>
+									<!--The fixed location of the path point expressed in its parent frame.-->
+									<location>0.01703 -0.12125 -0.010789999999999999</location>
+								</PathPoint>
+								<PathPoint name="BICshort-P5">
+									<!--Path to a Component that satisfies the Socket 'parent_frame' of type PhysicalFrame (description: The frame in which this path point is defined.).-->
+									<socket_parent_frame>/bodyset/r_humerus</socket_parent_frame>
+									<!--The fixed location of the path point expressed in its parent frame.-->
+									<location>0.022800000000000001 -0.1754 -0.0063</location>
+								</PathPoint>
+								<PathPoint name="BICshort-P6">
+									<!--Path to a Component that satisfies the Socket 'parent_frame' of type PhysicalFrame (description: The frame in which this path point is defined.).-->
+									<socket_parent_frame>/bodyset/r_ulna_radius_hand</socket_parent_frame>
+									<!--The fixed location of the path point expressed in its parent frame.-->
+									<location>0.0075100000000000002 -0.048390000000000002 0.02179</location>
+								</PathPoint>
+							</objects>
+							<groups />
+						</PathPointSet>
+						<!--The wrap objects that are associated with this path-->
+						<PathWrapSet>
+							<objects />
+							<groups />
+						</PathWrapSet>
+					</GeometryPath>
+					<!--The maximum force this actuator can produce.-->
+					<optimal_force>1</optimal_force>
+					<!--Maximum isometric force that the fibers can generate-->
+					<max_isometric_force>196.00200000000001</max_isometric_force>
+					<!--Optimal length of the muscle fibers-->
+					<optimal_fiber_length>0.1321</optimal_fiber_length>
+					<!--Resting length of the tendon-->
+					<tendon_slack_length>0.1923</tendon_slack_length>
+					<!--Angle between tendon and fibers at optimal fiber length expressed in radians-->
+					<pennation_angle_at_optimal>0</pennation_angle_at_optimal>
+					<!--Maximum contraction velocity of the fibers, in optimal fiberlengths/second-->
+					<max_contraction_velocity>10</max_contraction_velocity>
+					<!--Assumed activation level if none is assigned.-->
+					<default_activation>0.10000000000000001</default_activation>
+					<!--tendon strain at maximum isometric muscle force-->
+					<FmaxTendonStrain>0.033000000000000002</FmaxTendonStrain>
+					<!--passive muscle strain at maximum isometric muscle force-->
+					<FmaxMuscleStrain>0.59999999999999998</FmaxMuscleStrain>
+					<!--shape factor for Gaussian active muscle force-length relationship-->
+					<KshapeActive>0.5</KshapeActive>
+					<!--exponential shape factor for passive force-length relationship-->
+					<KshapePassive>4</KshapePassive>
+					<!--force-velocity shape factor-->
+					<Af>0.29999999999999999</Af>
+					<!--maximum normalized lengthening force-->
+					<Flen>1.8</Flen>
+					<!--Activation time constant, in seconds-->
+					<activation_time_constant>0.01</activation_time_constant>
+					<!--Deactivation time constant, in seconds-->
+					<deactivation_time_constant>0.040000000000000001</deactivation_time_constant>
+				</Thelen2003Muscle>
+				<Thelen2003Muscle name="BRA">
+					<!--Flag indicating whether the force is applied or not. If true the forceis applied to the MultibodySystem otherwise the force is not applied.NOTE: Prior to OpenSim 4.0, this behavior was controlled by the 'isDisabled' property, where 'true' meant that force was not being applied. Thus, if 'isDisabled' is true, then 'appliesForce` is false.-->
+					<appliesForce>true</appliesForce>
+					<!--The path of the actuator which defines length and lengthening speed.-->
+					<GeometryPath name="path">
+						<!--Default appearance attributes for this AbstractGeometryPath.-->
+						<Appearance>
+							<!--The color, (red, green, blue), [0, 1], used to display the geometry. -->
+							<color>0.80000000000000004 0.10000000000000001 0.10000000000000001</color>
+						</Appearance>
+						<!--The set of points defining the path-->
+						<PathPointSet>
+							<objects>
+								<PathPoint name="BRA-P1">
+									<!--Path to a Component that satisfies the Socket 'parent_frame' of type PhysicalFrame (description: The frame in which this path point is defined.).-->
+									<socket_parent_frame>/bodyset/r_humerus</socket_parent_frame>
+									<!--The fixed location of the path point expressed in its parent frame.-->
+									<location>0.0067999999999999996 -0.1739 -0.0035999999999999999</location>
+								</PathPoint>
+								<PathPoint name="BRA-P2">
+									<!--Path to a Component that satisfies the Socket 'parent_frame' of type PhysicalFrame (description: The frame in which this path point is defined.).-->
+									<socket_parent_frame>/bodyset/r_ulna_radius_hand</socket_parent_frame>
+									<!--The fixed location of the path point expressed in its parent frame.-->
+									<location>-0.0032000000000000002 -0.023900000000000001 0.00089999999999999998</location>
+								</PathPoint>
+							</objects>
+							<groups />
+						</PathPointSet>
+						<!--The wrap objects that are associated with this path-->
+						<PathWrapSet>
+							<objects>
+								<PathWrap name="pathwrap">
+									<!--A WrapObject that this PathWrap interacts with.-->
+									<wrap_object>TRI</wrap_object>
+									<!--The wrapping method used to solve the path around the wrap object.-->
+									<method>hybrid</method>
+									<!--The range of indices to use to compute the path over the wrap object.-->
+									<range>-1 -1</range>
+								</PathWrap>
+							</objects>
+							<groups />
+						</PathWrapSet>
+					</GeometryPath>
+					<!--The maximum force this actuator can produce.-->
+					<optimal_force>1</optimal_force>
+					<!--Maximum isometric force that the fibers can generate-->
+					<max_isometric_force>444.267</max_isometric_force>
+					<!--Optimal length of the muscle fibers-->
+					<optimal_fiber_length>0.085800000000000001</optimal_fiber_length>
+					<!--Resting length of the tendon-->
+					<tendon_slack_length>0.053499999999999999</tendon_slack_length>
+					<!--Angle between tendon and fibers at optimal fiber length expressed in radians-->
+					<pennation_angle_at_optimal>0</pennation_angle_at_optimal>
+					<!--Maximum contraction velocity of the fibers, in optimal fiberlengths/second-->
+					<max_contraction_velocity>10</max_contraction_velocity>
+					<!--Assumed activation level if none is assigned.-->
+					<default_activation>0.10000000000000001</default_activation>
+					<!--tendon strain at maximum isometric muscle force-->
+					<FmaxTendonStrain>0.033000000000000002</FmaxTendonStrain>
+					<!--passive muscle strain at maximum isometric muscle force-->
+					<FmaxMuscleStrain>0.59999999999999998</FmaxMuscleStrain>
+					<!--shape factor for Gaussian active muscle force-length relationship-->
+					<KshapeActive>0.5</KshapeActive>
+					<!--exponential shape factor for passive force-length relationship-->
+					<KshapePassive>4</KshapePassive>
+					<!--force-velocity shape factor-->
+					<Af>0.29999999999999999</Af>
+					<!--maximum normalized lengthening force-->
+					<Flen>1.8</Flen>
+					<!--Activation time constant, in seconds-->
+					<activation_time_constant>0.01</activation_time_constant>
+					<!--Deactivation time constant, in seconds-->
+					<deactivation_time_constant>0.040000000000000001</deactivation_time_constant>
+				</Thelen2003Muscle>
+				<PathActuator name="exo_flexor">
+					<!--Minimum allowed value for control signal. Used primarily when solving for control values.-->
+					<min_control>0</min_control>
+					<!--The path of the actuator which defines length and lengthening speed.-->
+					<GeometryPath name="path">
+						<!--Default appearance attributes for this AbstractGeometryPath.-->
+						<Appearance>
+							<!--The color, (red, green, blue), [0, 1], used to display the geometry. -->
+							<color>0 0.84999999999999998 0.14999999999999999</color>
+						</Appearance>
+						<!--The set of points defining the path-->
+						<PathPointSet>
+							<objects>
+								<PathPoint name="upper_arm_anchor">
+									<!--Path to a Component that satisfies the Socket 'parent_frame' of type PhysicalFrame (description: The frame in which this path point is defined.).-->
+									<socket_parent_frame>/bodyset/r_humerus</socket_parent_frame>
+									<!--The fixed location of the path point expressed in its parent frame.-->
+									<location>0.046100000000000002 -0.15039999999999998 -0.0123</location>
+								</PathPoint>
+								<PathPoint name="forearm_anchor">
+									<!--Path to a Component that satisfies the Socket 'parent_frame' of type PhysicalFrame (description: The frame in which this path point is defined.).-->
+									<socket_parent_frame>/bodyset/r_ulna_radius_hand</socket_parent_frame>
+									<!--The fixed location of the path point expressed in its parent frame.-->
+									<location>0.02 -0.14999999999999999 0</location>
+								</PathPoint>
+							</objects>
+							<groups />
+						</PathPointSet>
+					</GeometryPath>
+					<!--The maximum force this actuator can produce.-->
+					<optimal_force>1</optimal_force>
+				</PathActuator>
+				<PrescribedForce name="known_external_load">
+					<!--Path to a Component that satisfies the Socket 'frame' of type PhysicalFrame (description: The frame onto which this force is applied.).-->
+					<socket_frame>/bodyset/r_ulna_radius_hand</socket_frame>
+					<!--Flag indicating whether the point (specified in pointFunctions) is in global frame.-->
+					<pointIsGlobal>false</pointIsGlobal>
+					<!--Flag indicating whether the quantities (specified in force/torqueFunctions) is in global frame.-->
+					<forceIsGlobal>true</forceIsGlobal>
+					<!--Three functions describing the force to be applied.-->
+					<FunctionSet name="forceFunctions">
+						<objects>
+							<Constant>
+								<value>0</value>
+							</Constant>
+							<SimmSpline>
+								<x> 0 0.00999634 0.0199927 0.029989 0.0399854 0.0499817 0.059978 0.0699744 0.0799707 0.089967 0.0999634 0.10996 0.119956 0.129952 0.139949 0.149945 0.159941 0.169938 0.179934 0.18993 0.199927 0.209923 0.219919 0.229916 0.239912 0.249908 0.259905 0.269901 0.279897 0.289894 0.29989 0.309886 0.319883 0.329879 0.339875 0.349872 0.359868 0.369865 0.379861 0.389857 0.399854 0.40985 0.419846 0.429843 0.439839 0.449835 0.459832 0.469828 0.479824 0.489821 0.499817 0.509813 0.51981 0.529806 0.539802 0.549799 0.559795 0.569791 0.579788 0.589784 0.59978 0.609777 0.619773 0.629769 0.639766 0.649762 0.659758 0.669755 0.679751 0.689747 0.699744 0.70974 0.719736 0.729733 0.739729 0.749725 0.759722 0.769718 0.779714 0.789711 0.799707 0.809703 0.8197 0.829696 0.839692 0.849689 0.859685 0.869681 0.879678 0.889674 0.89967 0.909667 0.919663 0.929659 0.939656 0.949652 0.959648 0.969645 0.979641 0.989637 0.999634 1.00963 1.01963 1.02962 1.03962 1.04962 1.05961 1.06961 1.0796 1.0896 1.0996 1.10959 1.11959 1.12959 1.13958 1.14958 1.15958 1.16957 1.17957 1.18956 1.19956 1.20956 1.21955 1.22955 1.23955 1.24954 1.25954 1.26953 1.27953 1.28953 1.29952 1.30952 1.31952 1.32951 1.33951 1.34951 1.3595 1.3695 1.37949 1.38949 1.39949 1.40948 1.41948 1.42948 1.43947 1.44947 1.45947 1.46946 1.47946 1.48945 1.49945 1.50945 1.51944 1.52944 1.53944 1.54943 1.55943 1.56943 1.57942 1.58942 1.59941 1.60941 1.61941 1.6294 1.6394 1.6494 1.65939 1.66939 1.67938 1.68938 1.69938 1.70937 1.71937 1.72937 1.73936 1.74936 1.75936 1.76935 1.77935 1.78934 1.79934 1.80934 1.81933 1.82933 1.83933 1.84932 1.85932 1.86932 1.87931 1.88931 1.8993 1.9093 1.9193 1.92929 1.93929 1.94929 1.95928 1.96928 1.97927 1.98927 1.99927 2.00926 2.01926 2.02926 2.03925 2.04925 2.05925 2.06924 2.07924 2.08923 2.09923 2.10923 2.11922 2.12922 2.13922 2.14921 2.15921 2.16921 2.1792 2.1892 2.19919 2.20919 2.21919 2.22918 2.23918 2.24918 2.25917 2.26917 2.27917 2.28916 2.29916 2.30915 2.31915 2.32915 2.33914 2.34914 2.35914 2.36913 2.37913 2.38912 2.39912 2.40912 2.41911 2.42911 2.43911 2.4491 2.4591 2.4691 2.47909 2.48909 2.49908 2.50908 2.51908 2.52907 2.53907 2.54907 2.55906 2.56906 2.57906 2.58905 2.59905 2.60904 2.61904 2.62904 2.63903 2.64903 2.65903 2.66902 2.67902 2.68901 2.69901 2.70901 2.719 2.729 2.739 2.74899 2.75899 2.76899 2.77898 2.78898 2.79897 2.80897 2.81897 2.82896 2.83896 2.84896 2.85895 2.86895 2.87895 2.88894 2.89894 2.90893 2.91893 2.92893 2.93892 2.94892 2.95892 2.96891 2.97891 2.98891 2.9989 3.0089 3.01889 3.02889 3.03889 3.04888 3.05888 3.06888 3.07887 3.08887 3.09886 3.10886 3.11886 3.12885 3.13885 3.14885 3.15884 3.16884 3.17884 3.18883 3.19883 3.20882 3.21882 3.22882 3.23881 3.24881 3.25881 3.2688 3.2788 3.2888 3.29879 3.30879 3.31878 3.32878 3.33878 3.34877 3.35877 3.36877 3.37876 3.38876 3.39875 3.40875 3.41875 3.42874 3.43874 3.44874 3.45873 3.46873 3.47873 3.48872 3.49872 3.50871 3.51871 3.52871 3.5387 3.5487 3.5587 3.56869 3.57869 3.58869 3.59868 3.60868 3.61867 3.62867 3.63867 3.64866 3.65866 3.66866 3.67865 3.68865 3.69865 3.70864 3.71864 3.72863 3.73863 3.74863 3.75862 3.76862 3.77862 3.78861 3.79861 3.8086 3.8186 3.8286 3.83859 3.84859 3.85859 3.86858 3.87858 3.88858 3.89857 3.90857 3.91856 3.92856 3.93856 3.94855 3.95855 3.96855 3.97854 3.98854 3.99854 4.00853 4.01853 4.02852 4.03852 4.04852 4.05851 4.06851 4.07851 4.0885 4.0985 4.10849 4.11849 4.12849 4.13848 4.14848 4.15848 4.16847 4.17847 4.18847 4.19846 4.20846 4.21845 4.22845 4.23845 4.24844 4.25844 4.26844 4.27843 4.28843 4.29843 4.30842 4.31842 4.32841 4.33841 4.34841 4.3584 4.3684 4.3784 4.38839 4.39839 4.40839 4.41838 4.42838 4.43837 4.44837 4.45837 4.46836 4.47836 4.48836 4.49835 4.50835 4.51834 4.52834 4.53834 4.54833 4.55833 4.56833 4.57832 4.58832 4.59832 4.60831 4.61831 4.6283 4.6383 4.6483 4.65829 4.66829 4.67829 4.68828 4.69828 4.70828 4.71827 4.72827 4.73826 4.74826 4.75826 4.76825 4.77825 4.78825 4.79824 4.80824 4.81823 4.82823 4.83823 4.84822 4.85822 4.86822 4.87821 4.88821 4.89821 4.9082 4.9182 4.92819 4.93819 4.94819 4.95818 4.96818 4.97818 4.98817 4.99817 5.00817 5.01816 5.02816 5.03815 5.04815 5.05815 5.06814 5.07814 5.08814 5.09813 5.10813 5.11813 5.12812 5.13812 5.14811 5.15811 5.16811 5.1781 5.1881 5.1981 5.20809 5.21809 5.22808 5.23808 5.24808 5.25807 5.26807 5.27807 5.28806 5.29806 5.30806 5.31805 5.32805 5.33804 5.34804 5.35804 5.36803 5.37803 5.38803 5.39802 5.40802 5.41802 5.42801 5.43801 5.448 5.458 5.468 5.47799 5.48799 5.49799 5.50798 5.51798 5.52797 5.53797 5.54797 5.55796 5.56796 5.57796 5.58795 5.59795 5.60795 5.61794 5.62794 5.63793 5.64793 5.65793 5.66792 5.67792 5.68792 5.69791 5.70791 5.71791 5.7279 5.7379 5.74789 5.75789 5.76789 5.77788 5.78788 5.79788 5.80787 5.81787 5.82787 5.83786 5.84786 5.85785 5.86785 5.87785 5.88784 5.89784 5.90784 5.91783 5.92783 5.93782 5.94782 5.95782 5.96781 5.97781 5.98781 5.9978 6.0078 6.0178 6.02779 6.03779 6.04778 6.05778 6.06778 6.07777 6.08777 6.09777 6.10776 6.11776 6.12776 6.13775 6.14775 6.15774 6.16774 6.17774 6.18773 6.19773 6.20773 6.21772 6.22772 6.23771 6.24771 6.25771 6.2677 6.2777 6.2877 6.29769 6.30769 6.31769 6.32768 6.33768 6.34767 6.35767 6.36767 6.37766 6.38766 6.39766 6.40765 6.41765 6.42765 6.43764 6.44764 6.45763 6.46763 6.47763 6.48762 6.49762 6.50762 6.51761 6.52761 6.53761 6.5476 6.5576 6.56759 6.57759 6.58759 6.59758 6.60758 6.61758 6.62757 6.63757 6.64756 6.65756 6.66756 6.67755 6.68755 6.69755 6.70754 6.71754 6.72754 6.73753 6.74753 6.75752 6.76752 6.77752 6.78751 6.79751 6.80751 6.8175 6.8275 6.8375 6.84749 6.85749 6.86748 6.87748 6.88748 6.89747 6.90747 6.91747 6.92746 6.93746 6.94745 6.95745 6.96745 6.97744 6.98744 6.99744 7.00743 7.01743 7.02743 7.03742 7.04742 7.05741 7.06741 7.07741 7.0874 7.0974 7.1074 7.11739 7.12739 7.13739 7.14738 7.15738 7.16737 7.17737 7.18737 7.19736 7.20736 7.21736 7.22735 7.23735 7.24735 7.25734 7.26734 7.27733 7.28733 7.29733 7.30732 7.31732 7.32732 7.33731 7.34731 7.3573 7.3673 7.3773 7.38729 7.39729 7.40729 7.41728 7.42728 7.43728 7.44727 7.45727 7.46726 7.47726 7.48726 7.49725 7.50725 7.51725 7.52724 7.53724 7.54724 7.55723 7.56723 7.57722 7.58722 7.59722 7.60721 7.61721 7.62721 7.6372 7.6472 7.65719 7.66719 7.67719 7.68718 7.69718 7.70718 7.71717 7.72717 7.73717 7.74716 7.75716 7.76715 7.77715 7.78715 7.79714 7.80714 7.81714 7.82713 7.83713 7.84713 7.85712 7.86712 7.87711 7.88711 7.89711 7.9071 7.9171 7.9271 7.93709 7.94709 7.95709 7.96708 7.97708 7.98707 7.99707 8.00707 8.01706 8.02706 8.03706 8.04705 8.05705 8.06704 8.07704 8.08704 8.09703 8.10703 8.11703 8.12702 8.13702 8.14702 8.15701 8.16701 8.177 8.187 8.197 8.20699 8.21699 8.22699 8.23698 8.24698 8.25698 8.26697 8.27697 8.28696 8.29696 8.30696 8.31695 8.32695 8.33695 8.34694 8.35694 8.36693 8.37693 8.38693 8.39692 8.40692 8.41692 8.42691 8.43691 8.44691 8.4569 8.4669 8.47689 8.48689 8.49689 8.50688 8.51688 8.52688 8.53687 8.54687 8.55687 8.56686 8.57686 8.58685 8.59685 8.60685 8.61684 8.62684 8.63684 8.64683 8.65683 8.66683 8.67682 8.68682 8.69681 8.70681 8.71681 8.7268 8.7368 8.7468 8.75679 8.76679 8.77678 8.78678 8.79678 8.80677 8.81677 8.82677 8.83676 8.84676 8.85676 8.86675 8.87675 8.88674 8.89674 8.90674 8.91673 8.92673 8.93673 8.94672 8.95672 8.96672 8.97671 8.98671 8.9967 9.0067 9.0167 9.02669 9.03669 9.04669 9.05668 9.06668 9.07667 9.08667 9.09667 9.10666 9.11666 9.12666 9.13665 9.14665 9.15665 9.16664 9.17664 9.18663 9.19663 9.20663 9.21662 9.22662 9.23662 9.24661 9.25661 9.26661 9.2766 9.2866 9.29659 9.30659 9.31659 9.32658 9.33658 9.34658 9.35657 9.36657 9.37657 9.38656 9.39656 9.40655 9.41655 9.42655 9.43654 9.44654 9.45654 9.46653 9.47653 9.48652 9.49652 9.50652 9.51651 9.52651 9.53651 9.5465 9.5565 9.5665 9.57649 9.58649 9.59648 9.60648 9.61648 9.62647 9.63647 9.64647 9.65646 9.66646 9.67646 9.68645 9.69645 9.70644 9.71644 9.72644 9.73643 9.74643 9.75643 9.76642 9.77642 9.78641 9.79641 9.80641 9.8164 9.8264 9.8364 9.84639 9.85639 9.86639 9.87638 9.88638 9.89637 9.90637 9.91637 9.92636 9.93636 9.94636 9.95635 9.96635 9.97635 9.98634 9.99634 10.0063 10.0163 10.0263 10.0363 10.0463 10.0563 10.0663 10.0763 10.0863 10.0963 10.1063 10.1163 10.1263 10.1363 10.1463 10.1563 10.1663 10.1763 10.1863 10.1963 10.2063 10.2163 10.2263 10.2363 10.2462 10.2562 10.2662 10.2762 10.2862 10.2962 10.3062 10.3162 10.3262 10.3362 10.3462 10.3562 10.3662 10.3762 10.3862 10.3962 10.4062 10.4162 10.4262 10.4362 10.4462 10.4562 10.4662 10.4762 10.4862 10.4962 10.5062 10.5161 10.5261 10.5361 10.5461 10.5561 10.5661 10.5761 10.5861 10.5961 10.6061 10.6161 10.6261 10.6361 10.6461 10.6561 10.6661 10.6761 10.6861 10.6961 10.7061 10.7161 10.7261 10.7361 10.7461 10.7561 10.7661 10.7761 10.786 10.796 10.806 10.816 10.826 10.836 10.846 10.856 10.866 10.876 10.886 10.896 10.906 10.916 10.926 10.936 10.946 10.956 10.966 10.976 10.986 10.996 11.006 11.016 11.026 11.036 11.046 11.0559 11.0659 11.0759 11.0859 11.0959 11.1059 11.1159 11.1259 11.1359 11.1459 11.1559 11.1659 11.1759 11.1859 11.1959 11.2059 11.2159 11.2259 11.2359 11.2459 11.2559 11.2659 11.2759 11.2859 11.2959 11.3059 11.3159 11.3259 11.3358 11.3458 11.3558 11.3658 11.3758 11.3858 11.3958 11.4058 11.4158 11.4258 11.4358 11.4458 11.4558 11.4658 11.4758 11.4858 11.4958 11.5058 11.5158 11.5258 11.5358 11.5458 11.5558 11.5658 11.5758 11.5858 11.5958 11.6057 11.6157 11.6257 11.6357 11.6457 11.6557 11.6657 11.6757 11.6857 11.6957 11.7057 11.7157 11.7257 11.7357 11.7457 11.7557 11.7657 11.7757 11.7857 11.7957 11.8057 11.8157 11.8257 11.8357 11.8457 11.8557 11.8657 11.8756 11.8856 11.8956 11.9056 11.9156 11.9256 11.9356 11.9456 11.9556 11.9656 11.9756 11.9856 11.9956 12.0056 12.0156 12.0256 12.0356 12.0456 12.0556 12.0656 12.0756 12.0856 12.0956 12.1056 12.1156 12.1256 12.1356 12.1456 12.1555 12.1655 12.1755 12.1855 12.1955 12.2055 12.2155 12.2255 12.2355 12.2455 12.2555 12.2655 12.2755 12.2855 12.2955 12.3055 12.3155 12.3255 12.3355 12.3455 12.3555 12.3655 12.3755 12.3855 12.3955 12.4055 12.4155 12.4254 12.4354 12.4454 12.4554 12.4654 12.4754 12.4854 12.4954 12.5054 12.5154 12.5254 12.5354 12.5454 12.5554 12.5654 12.5754 12.5854 12.5954 12.6054 12.6154 12.6254 12.6354 12.6454 12.6554 12.6654 12.6754 12.6854 12.6953 12.7053 12.7153 12.7253 12.7353 12.7453 12.7553 12.7653 12.7753 12.7853 12.7953 12.8053 12.8153 12.8253 12.8353 12.8453 12.8553 12.8653 12.8753 12.8853 12.8953 12.9053 12.9153 12.9253 12.9353 12.9453 12.9553 12.9653 12.9752 12.9852 12.9952 13.0052 13.0152 13.0252 13.0352 13.0452 13.0552 13.0652 13.0752 13.0852 13.0952 13.1052 13.1152 13.1252 13.1352 13.1452 13.1552 13.1652 13.1752 13.1852 13.1952 13.2052 13.2152 13.2252 13.2352 13.2451 13.2551 13.2651 13.2751 13.2851 13.2951 13.3051 13.3151 13.3251 13.3351 13.3451 13.3551 13.3651 13.3751 13.3851 13.3951 13.4051 13.4151 13.4251 13.4351 13.4451 13.4551 13.4651 13.4751 13.4851 13.4951 13.5051 13.515 13.525 13.535 13.545 13.555 13.565 13.575 13.585 13.595 13.605 13.615 13.625 13.635 13.645 13.655 13.665 13.675 13.685 13.695 13.705 13.715 13.725 13.735 13.745 13.755 13.765 13.775 13.785 13.7949 13.8049 13.8149 13.8249 13.8349 13.8449 13.8549 13.8649 13.8749 13.8849 13.8949 13.9049 13.9149 13.9249 13.9349 13.9449 13.9549 13.9649 13.9749 13.9849 13.9949 14.0049 14.0149 14.0249 14.0349 14.0449 14.0549 14.0648 14.0748 14.0848 14.0948 14.1048 14.1148 14.1248 14.1348 14.1448 14.1548 14.1648 14.1748 14.1848 14.1948 14.2048 14.2148 14.2248 14.2348 14.2448 14.2548 14.2648 14.2748 14.2848 14.2948 14.3048 14.3148 14.3248 14.3347 14.3447 14.3547 14.3647 14.3747 14.3847 14.3947 14.4047 14.4147 14.4247 14.4347 14.4447 14.4547 14.4647 14.4747 14.4847 14.4947 14.5047 14.5147 14.5247 14.5347 14.5447 14.5547 14.5647 14.5747 14.5847 14.5947 14.6046 14.6146 14.6246 14.6346 14.6446 14.6546 14.6646 14.6746 14.6846 14.6946 14.7046 14.7146 14.7246 14.7346 14.7446 14.7546 14.7646 14.7746 14.7846 14.7946 14.8046 14.8146 14.8246 14.8346 14.8446 14.8546 14.8646 14.8746 14.8845 14.8945 14.9045 14.9145 14.9245 14.9345 14.9445 14.9545 14.9645 14.9745 14.9845 14.9945 15.0045 15.0145 15.0245 15.0345 15.0445 15.0545 15.0645 15.0745 15.0845 15.0945 15.1045 15.1145 15.1245 15.1345 15.1445 15.1544 15.1644 15.1744 15.1844 15.1944 15.2044 15.2144 15.2244 15.2344 15.2444 15.2544 15.2644 15.2744 15.2844 15.2944 15.3044 15.3144 15.3244 15.3344 15.3444 15.3544 15.3644 15.3744 15.3844 15.3944 15.4044 15.4144 15.4243 15.4343 15.4443 15.4543 15.4643 15.4743 15.4843 15.4943 15.5043 15.5143 15.5243 15.5343 15.5443 15.5543 15.5643 15.5743 15.5843 15.5943 15.6043 15.6143 15.6243 15.6343 15.6443 15.6543 15.6643 15.6743 15.6843 15.6943 15.7042 15.7142 15.7242 15.7342 15.7442 15.7542 15.7642 15.7742 15.7842 15.7942 15.8042 15.8142 15.8242 15.8342 15.8442 15.8542 15.8642 15.8742 15.8842 15.8942 15.9042 15.9142 15.9242 15.9342 15.9442 15.9542 15.9642 15.9741 15.9841 15.9941 16.0041 16.0141 16.0241 16.0341 16.0441 16.0541 16.0641 16.0741 16.0841 16.0941 16.1041 16.1141 16.1241 16.1341 16.1441 16.1541 16.1641 16.1741 16.1841 16.1941 16.2041 16.2141 16.2241 16.2341 16.244 16.254 16.264 16.274 16.284 16.294 16.304 16.314 16.324 16.334 16.344 16.354 16.364 16.374 16.384 16.394 16.404 16.414 16.424 16.434 16.444 16.454 16.464 16.474 16.484 16.494 16.504 16.514 16.5239 16.5339 16.5439 16.5539 16.5639 16.5739 16.5839 16.5939 16.6039 16.6139 16.6239 16.6339 16.6439 16.6539 16.6639 16.6739 16.6839 16.6939 16.7039 16.7139 16.7239 16.7339 16.7439 16.7539 16.7639 16.7739 16.7839 16.7938 16.8038 16.8138 16.8238 16.8338 16.8438 16.8538 16.8638 16.8738 16.8838 16.8938 16.9038 16.9138 16.9238 16.9338 16.9438 16.9538 16.9638 16.9738 16.9838 16.9938 17.0038 17.0138 17.0238 17.0338 17.0438 17.0538 17.0637 17.0737 17.0837 17.0937 17.1037 17.1137 17.1237 17.1337 17.1437 17.1537 17.1637 17.1737 17.1837 17.1937 17.2037 17.2137 17.2237 17.2337 17.2437 17.2537 17.2637 17.2737 17.2837 17.2937 17.3037 17.3137 17.3237 17.3337 17.3436 17.3536 17.3636 17.3736 17.3836 17.3936 17.4036 17.4136 17.4236 17.4336 17.4436 17.4536 17.4636 17.4736 17.4836 17.4936 17.5036 17.5136 17.5236 17.5336 17.5436 17.5536 17.5636 17.5736 17.5836 17.5936 17.6036 17.6135 17.6235 17.6335 17.6435 17.6535 17.6635 17.6735 17.6835 17.6935 17.7035 17.7135 17.7235 17.7335 17.7435 17.7535 17.7635 17.7735 17.7835 17.7935 17.8035 17.8135 17.8235 17.8335 17.8435 17.8535 17.8635 17.8735 17.8834 17.8934 17.9034 17.9134 17.9234 17.9334 17.9434 17.9534 17.9634 17.9734 17.9834 17.9934 18.0034 18.0134 18.0234 18.0334 18.0434 18.0534 18.0634 18.0734 18.0834 18.0934 18.1034 18.1134 18.1234 18.1334 18.1434 18.1533 18.1633 18.1733 18.1833 18.1933 18.2033 18.2133 18.2233 18.2333 18.2433 18.2533 18.2633 18.2733 18.2833 18.2933 18.3033 18.3133 18.3233 18.3333 18.3433 18.3533 18.3633 18.3733 18.3833 18.3933 18.4033 18.4133 18.4233 18.4332 18.4432 18.4532 18.4632 18.4732 18.4832 18.4932 18.5032 18.5132 18.5232 18.5332 18.5432 18.5532 18.5632 18.5732 18.5832 18.5932 18.6032 18.6132 18.6232 18.6332 18.6432 18.6532 18.6632 18.6732 18.6832 18.6932 18.7031 18.7131 18.7231 18.7331 18.7431 18.7531 18.7631 18.7731 18.7831 18.7931 18.8031 18.8131 18.8231 18.8331 18.8431 18.8531 18.8631 18.8731 18.8831 18.8931 18.9031 18.9131 18.9231 18.9331 18.9431 18.9531 18.9631 18.973 18.983 18.993 19.003 19.013 19.023 19.033 19.043 19.053 19.063 19.073 19.083 19.093 19.103 19.113 19.123 19.133 19.143 19.153 19.163 19.173 19.183 19.193 19.203 19.213 19.223 19.233 19.243 19.2529 19.2629 19.2729 19.2829 19.2929 19.3029 19.3129 19.3229 19.3329 19.3429 19.3529 19.3629 19.3729 19.3829 19.3929 19.4029 19.4129 19.4229 19.4329 19.4429 19.4529 19.4629 19.4729 19.4829 19.4929 19.5029 19.5129 19.5228 19.5328 19.5428 19.5528 19.5628 19.5728 19.5828 19.5928 19.6028 19.6128 19.6228 19.6328 19.6428 19.6528 19.6628 19.6728 19.6828 19.6928 19.7028 19.7128 19.7228 19.7328 19.7428 19.7528 19.7628 19.7728 19.7828 19.7927 19.8027 19.8127 19.8227 19.8327 19.8427 19.8527 19.8627 19.8727 19.8827 19.8927 19.9027 19.9127 19.9227 19.9327 19.9427 19.9527 19.9627 19.9727 19.9827 19.9927 20.0027 20.0127 20.0227 20.0327 20.0427 20.0527 20.0627 20.0726 20.0826 20.0926 20.1026 20.1126 20.1226 20.1326 20.1426 20.1526 20.1626 20.1726 20.1826 20.1926 20.2026 20.2126 20.2226 20.2326 20.2426 20.2526 20.2626 20.2726 20.2826 20.2926 20.3026 20.3126 20.3226 20.3326 20.3425 20.3525 20.3625 20.3725 20.3825 20.3925 20.4025 20.4125 20.4225 20.4325 20.4425 20.4525 20.4625 20.4725 20.4825 20.4925 20.5025 20.5125 20.5225 20.5325 20.5425 20.5525 20.5625 20.5725 20.5825 20.5925 20.6025 20.6124 20.6224 20.6324 20.6424 20.6524 20.6624 20.6724 20.6824 20.6924 20.7024 20.7124 20.7224 20.7324 20.7424 20.7524 20.7624 20.7724 20.7824 20.7924 20.8024 20.8124 20.8224 20.8324 20.8424 20.8524 20.8624 20.8724 20.8824 20.8923 20.9023 20.9123 20.9223 20.9323 20.9423 20.9523 20.9623 20.9723 20.9823 20.9923 21.0023 21.0123 21.0223 21.0323 21.0423 21.0523 21.0623 21.0723 21.0823 21.0923 21.1023 21.1123 21.1223 21.1323 21.1423 21.1523 21.1622 21.1722 21.1822 21.1922 21.2022 21.2122 21.2222 21.2322 21.2422 21.2522 21.2622 21.2722 21.2822 21.2922 21.3022 21.3122 21.3222 21.3322 21.3422 21.3522 21.3622 21.3722 21.3822 21.3922 21.4022 21.4122 21.4222 21.4321 21.4421 21.4521 21.4621 21.4721 21.4821 21.4921 21.5021 21.5121 21.5221 21.5321 21.5421 21.5521 21.5621 21.5721 21.5821 21.5921 21.6021 21.6121 21.6221 21.6321 21.6421 21.6521 21.6621 21.6721 21.6821 21.6921 21.702 21.712 21.722 21.732 21.742 21.752 21.762 21.772 21.782 21.792 21.802 21.812 21.822 21.832 21.842 21.852 21.862 21.872 21.882 21.892 21.902 21.912 21.922 21.932 21.942 21.952 21.962 21.972 21.9819 21.9919 22.0019 22.0119 22.0219 22.0319 22.0419 22.0519 22.0619 22.0719 22.0819 22.0919 22.1019 22.1119 22.1219 22.1319 22.1419 22.1519 22.1619 22.1719 22.1819 22.1919 22.2019 22.2119 22.2219 22.2319 22.2419 22.2518 22.2618 22.2718 22.2818 22.2918 22.3018 22.3118 22.3218 22.3318 22.3418 22.3518 22.3618 22.3718 22.3818 22.3918 22.4018 22.4118 22.4218 22.4318 22.4418 22.4518 22.4618 22.4718 22.4818 22.4918 22.5018 22.5118 22.5217 22.5317 22.5417 22.5517 22.5617 22.5717 22.5817 22.5917 22.6017 22.6117 22.6217 22.6317 22.6417 22.6517 22.6617 22.6717 22.6817 22.6917 22.7017 22.7117 22.7217 22.7317 22.7417 22.7517 22.7617 22.7717 22.7817 22.7917 22.8016 22.8116 22.8216 22.8316 22.8416 22.8516 22.8616 22.8716 22.8816 22.8916 22.9016 22.9116 22.9216 22.9316 22.9416 22.9516 22.9616 22.9716 22.9816 22.9916 23.0016 23.0116 23.0216 23.0316 23.0416 23.0516 23.0616 23.0715 23.0815 23.0915 23.1015 23.1115 23.1215 23.1315 23.1415 23.1515 23.1615 23.1715 23.1815 23.1915 23.2015 23.2115 23.2215 23.2315 23.2415 23.2515 23.2615 23.2715 23.2815 23.2915 23.3015 23.3115 23.3215 23.3315 23.3414 23.3514 23.3614 23.3714 23.3814 23.3914 23.4014 23.4114 23.4214 23.4314 23.4414 23.4514 23.4614 23.4714 23.4814 23.4914 23.5014 23.5114 23.5214 23.5314 23.5414 23.5514 23.5614 23.5714 23.5814 23.5914 23.6014 23.6114 23.6213 23.6313 23.6413 23.6513 23.6613 23.6713 23.6813 23.6913 23.7013 23.7113 23.7213 23.7313 23.7413 23.7513 23.7613 23.7713 23.7813 23.7913 23.8013 23.8113 23.8213 23.8313 23.8413 23.8513 23.8613 23.8713 23.8813 23.8912 23.9012 23.9112 23.9212 23.9312 23.9412 23.9512 23.9612 23.9712 23.9812 23.9912 24.0012 24.0112 24.0212 24.0312 24.0412 24.0512 24.0612 24.0712 24.0812 24.0912 24.1012 24.1112 24.1212 24.1312 24.1412 24.1512 24.1611 24.1711 24.1811 24.1911 24.2011 24.2111 24.2211 24.2311 24.2411 24.2511 24.2611 24.2711 24.2811 24.2911 24.3011 24.3111 24.3211 24.3311 24.3411 24.3511 24.3611 24.3711 24.3811 24.3911 24.4011 24.4111 24.4211 24.4311 24.441 24.451 24.461 24.471 24.481 24.491 24.501 24.511 24.521 24.531 24.541 24.551 24.561 24.571 24.581 24.591 24.601 24.611 24.621 24.631 24.641 24.651 24.661 24.671 24.681 24.691 24.701 24.7109 24.7209 24.7309 24.7409 24.7509 24.7609 24.7709 24.7809 24.7909 24.8009 24.8109 24.8209 24.8309 24.8409 24.8509 24.8609 24.8709 24.8809 24.8909 24.9009 24.9109 24.9209 24.9309 24.9409 24.9509 24.9609 24.9709 24.9808 24.9908 25.0008 25.0108 25.0208 25.0308 25.0408 25.0508 25.0608 25.0708 25.0808 25.0908 25.1008 25.1108 25.1208 25.1308 25.1408 25.1508 25.1608 25.1708 25.1808 25.1908 25.2008 25.2108 25.2208 25.2308 25.2408 25.2507 25.2607 25.2707 25.2807 25.2907 25.3007 25.3107 25.3207 25.3307 25.3407 25.3507 25.3607 25.3707 25.3807 25.3907 25.4007 25.4107 25.4207 25.4307 25.4407 25.4507 25.4607 25.4707 25.4807 25.4907 25.5007 25.5107 25.5207 25.5306 25.5406 25.5506 25.5606 25.5706 25.5806 25.5906 25.6006 25.6106 25.6206 25.6306 25.6406 25.6506 25.6606 25.6706 25.6806 25.6906 25.7006 25.7106 25.7206 25.7306 25.7406 25.7506 25.7606 25.7706 25.7806 25.7906 25.8005 25.8105 25.8205 25.8305 25.8405 25.8505 25.8605 25.8705</x>
+								<y> 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -2.49549e-08 -5.4012e-07 -3.00889e-06 -9.96518e-06 -2.50102e-05 -5.28076e-05 -9.90775e-05 -0.000170589 -0.000275152 -0.000421605 -0.000619806 -0.000880617 -0.00121589 -0.00163847 -0.00216212 -0.00280159 -0.00357252 -0.00449148 -0.00557587 -0.006844 -0.00831499 -0.0100088 -0.011946 -0.0141482 -0.0166375 -0.0194368 -0.0225697 -0.0260602 -0.0299333 -0.0342142 -0.0389288 -0.0441034 -0.049765 -0.0559408 -0.0626583 -0.0699457 -0.0778312 -0.0863434 -0.0955111 -0.105363 -0.115929 -0.127238 -0.13932 -0.152203 -0.165917 -0.180492 -0.195956 -0.212339 -0.229669 -0.247976 -0.267288 -0.287633 -0.309038 -0.331531 -0.35514 -0.379889 -0.405807 -0.432917 -0.461244 -0.490814 -0.521649 -0.553772 -0.587205 -0.62197 -0.658087 -0.695575 -0.734453 -0.77474 -0.816451 -0.859602 -0.904209 -0.950285 -0.997843 -1.04689 -1.09745 -1.14951 -1.2031 -1.25822 -1.31486 -1.37305 -1.43277 -1.49404 -1.55685 -1.6212 -1.68709 -1.75451 -1.82346 -1.89394 -1.96593 -2.03942 -2.11441 -2.19089 -2.26883 -2.34822 -2.42906 -2.51131 -2.59496 -2.67999 -2.76638 -2.8541 -2.94313 -3.03344 -3.125 -3.21778 -3.31176 -3.4069 -3.50317 -3.60053 -3.69894 -3.79837 -3.89879 -4.00014 -4.1024 -4.20551 -4.30944 -4.41413 -4.51955 -4.62564 -4.73237 -4.83967 -4.9475 -5.05582 -5.16456 -5.27368 -5.38312 -5.49283 -5.60275 -5.71283 -5.82301 -5.93323 -6.04344 -6.15359 -6.2636 -6.37343 -6.48301 -6.59228 -6.70118 -6.80966 -6.91766 -7.0251 -7.13194 -7.23811 -7.34356 -7.44821 -7.55201 -7.65491 -7.75683 -7.85772 -7.95753 -8.05618 -8.15363 -8.24981 -8.34467 -8.43815 -8.5302 -8.62075 -8.70975 -8.79714 -8.88289 -8.96692 -9.04919 -9.12965 -9.20824 -9.28492 -9.35965 -9.43236 -9.50302 -9.57159 -9.63802 -9.70226 -9.76428 -9.82403 -9.88148 -9.9366 -9.98934 -10.0397 -10.0876 -10.133 -10.1759 -10.2163 -10.2542 -10.2894 -10.3221 -10.3521 -10.3795 -10.4043 -10.4263 -10.4457 -10.4624 -10.4763 -10.4876 -10.4961 -10.5019 -10.5049 -10.5052 -10.5027 -10.4975 -10.4896 -10.479 -10.4656 -10.4495 -10.4307 -10.4092 -10.385 -10.3582 -10.3287 -10.2966 -10.2619 -10.2246 -10.1847 -10.1423 -10.0974 -10.0501 -10.0003 -9.94802 -9.8934 -9.83644 -9.77718 -9.71564 -9.65186 -9.5859 -9.51778 -9.44756 -9.37528 -9.30098 -9.22471 -9.14652 -9.06645 -8.98456 -8.9009 -8.81552 -8.72847 -8.63981 -8.54958 -8.45785 -8.36467 -8.2701 -8.1742 -8.07701 -7.97861 -7.87904 -7.77838 -7.67667 -7.57397 -7.47036 -7.36588 -7.2606 -7.15458 -7.04788 -6.94056 -6.83268 -6.72429 -6.61547 -6.50627 -6.39675 -6.28698 -6.177 -6.06688 -5.95667 -5.84645 -5.73625 -5.62615 -5.51619 -5.40643 -5.29693 -5.18774 -5.07891 -4.9705 -4.86256 -4.75514 -4.64829 -4.54206 -4.43649 -4.33164 -4.22755 -4.12426 -4.02182 -3.92027 -3.81965 -3.72 -3.62137 -3.52378 -3.42728 -3.3319 -3.23767 -3.14463 -3.05281 -2.96223 -2.87293 -2.78493 -2.69825 -2.61293 -2.52899 -2.44643 -2.3653 -2.28559 -2.20734 -2.13055 -2.05525 -1.98143 -1.90912 -1.83832 -1.76905 -1.7013 -1.63508 -1.57041 -1.50727 -1.44567 -1.38562 -1.32711 -1.27014 -1.2147 -1.16078 -1.10839 -1.05752 -1.00815 -0.960275 -0.913885 -0.868967 -0.825507 -0.783491 -0.742903 -0.703726 -0.665944 -0.629537 -0.594487 -0.560772 -0.528372 -0.497265 -0.467428 -0.438839 -0.411472 -0.385303 -0.360307 -0.336458 -0.31373 -0.292096 -0.271528 -0.251999 -0.23348 -0.215944 -0.199362 -0.183705 -0.168944 -0.155049 -0.141992 -0.129742 -0.118271 -0.10755 -0.0975482 -0.0882373 -0.0795881 -0.0715717 -0.0641595 -0.0573231 -0.0510345 -0.0452659 -0.0399899 -0.0351797 -0.0308087 -0.0268511 -0.0232813 -0.0200744 -0.0172061 -0.0146528 -0.0123914 -0.0103997 -0.00865588 -0.00713921 -0.00582956 -0.00470765 -0.003755 -0.002954 -0.00228791 -0.00174089 -0.00129801 -0.00094527 -0.000669647 -0.000459073 -0.000302474 -0.000189777 -0.000111925 -6.08884e-05 -2.96768e-05 -1.23459e-05 -4.00688e-06 -8.32031e-07 -6.01611e-08 -1.5719e-12 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -7.39849e-12 -9.804e-08 -1.29587e-06 -6.14173e-06 -1.87699e-05 -4.48955e-05 -9.18068e-05 -0.000168356 -0.000284946 -0.000453522 -0.000687547 -0.00100199 -0.00141332 -0.00193944 -0.00259973 -0.00341495 -0.00440727 -0.00560022 -0.00701865 -0.0086887 -0.0106378 -0.0128945 -0.0154888 -0.0184514 -0.0218146 -0.0256115 -0.0298761 -0.0346437 -0.0399503 -0.0458328 -0.052329 -0.0594774 -0.0673172 -0.0758885 -0.0852318 -0.0953881 -0.106399 -0.118307 -0.131154 -0.144983 -0.159838 -0.17576 -0.192795 -0.210985 -0.230374 -0.251005 -0.272922 -0.296169 -0.320787 -0.346821 -0.374312 -0.403303 -0.433835 -0.465949 -0.499686 -0.535085 -0.572185 -0.611025 -0.651643 -0.694074 -0.738355 -0.784519 -0.832602 -0.882634 -0.934648 -0.988672 -1.04474 -1.10287 -1.16309 -1.22544 -1.28992 -1.35657 -1.4254 -1.49643 -1.56968 -1.64515 -1.72288 -1.80286 -1.88511 -1.96963 -2.05643 -2.14552 -2.23689 -2.33055 -2.42649 -2.52471 -2.62521 -2.72797 -2.83298 -2.94024 -3.04973 -3.16143 -3.27532 -3.39138 -3.5096 -3.62994 -3.75237 -3.87688 -4.00342 -4.13196 -4.26247 -4.39491 -4.52924 -4.66541 -4.80339 -4.94313 -5.08457 -5.22767 -5.37239 -5.51865 -5.66641 -5.81561 -5.96619 -6.11809 -6.27125 -6.4256 -6.58107 -6.73759 -6.89511 -7.05353 -7.2128 -7.37284 -7.53358 -7.69492 -7.85681 -8.01916 -8.18188 -8.3449 -8.50813 -8.6715 -8.83491 -8.99828 -9.16153 -9.32456 -9.4873 -9.64965 -9.81152 -9.97283 -10.1335 -10.2934 -10.4525 -10.6106 -10.7678 -10.9238 -11.0787 -11.2323 -11.3845 -11.5352 -11.6844 -11.832 -11.9778 -12.1218 -12.264 -12.4041 -12.5422 -12.6781 -12.8118 -12.9432 -13.0722 -13.1987 -13.3227 -13.444 -13.5626 -13.6785 -13.7915 -13.9015 -14.0086 -14.1126 -14.2135 -14.3112 -14.4057 -14.4969 -14.5846 -14.669 -14.7499 -14.8272 -14.901 -14.9711 -15.0376 -15.1003 -15.1593 -15.2145 -15.2658 -15.3133 -15.357 -15.3966 -15.4324 -15.4641 -15.4919 -15.5157 -15.5354 -15.5511 -15.5627 -15.5703 -15.5739 -15.5733 -15.5687 -15.5601 -15.5473 -15.5306 -15.5098 -15.485 -15.4561 -15.4233 -15.3865 -15.3458 -15.3012 -15.2526 -15.2003 -15.1441 -15.0841 -15.0204 -14.9529 -14.8818 -14.8071 -14.7288 -14.647 -14.5618 -14.4731 -14.3811 -14.2857 -14.1872 -14.0855 -13.9806 -13.8727 -13.7619 -13.6481 -13.5315 -13.4122 -13.2902 -13.1655 -13.0383 -12.9087 -12.7767 -12.6424 -12.5059 -12.3673 -12.2266 -12.084 -11.9394 -11.7931 -11.6451 -11.4955 -11.3444 -11.1918 -11.0379 -10.8827 -10.7264 -10.5689 -10.4105 -10.2512 -10.0911 -9.93027 -9.7688 -9.60679 -9.44433 -9.28151 -9.11841 -8.95512 -8.79173 -8.62832 -8.46498 -8.3018 -8.13885 -7.97622 -7.81398 -7.65223 -7.49104 -7.33048 -7.17064 -7.01158 -6.85339 -6.69613 -6.53988 -6.3847 -6.23066 -6.07783 -5.92627 -5.77605 -5.62722 -5.47985 -5.33399 -5.1897 -5.04703 -4.90603 -4.76676 -4.62925 -4.49356 -4.35972 -4.22779 -4.0978 -3.96978 -3.84378 -3.71982 -3.59793 -3.47815 -3.3605 -3.24501 -3.1317 -3.02058 -2.91168 -2.80501 -2.70059 -2.59843 -2.49854 -2.40092 -2.30558 -2.21252 -2.12176 -2.03327 -1.94708 -1.86315 -1.78151 -1.70212 -1.62499 -1.5501 -1.47744 -1.407 -1.33875 -1.27267 -1.20876 -1.14698 -1.08731 -1.02972 -0.974199 -0.920709 -0.869222 -0.819708 -0.772135 -0.726472 -0.682683 -0.640735 -0.60059 -0.562214 -0.525567 -0.490611 -0.457307 -0.425615 -0.395494 -0.366904 -0.339802 -0.314146 -0.289894 -0.267003 -0.24543 -0.225131 -0.206063 -0.188183 -0.171446 -0.15581 -0.141231 -0.127666 -0.115071 -0.103404 -0.092623 -0.0826855 -0.0735502 -0.0651761 -0.0575228 -0.0505506 -0.0442203 -0.0384936 -0.033333 -0.0287018 -0.0245641 -0.0208851 -0.017631 -0.0147687 -0.0122666 -0.010094 -0.00822141 -0.00662047 -0.00526411 -0.00412654 -0.00318324 -0.00241106 -0.00178819 -0.00129423 -0.000910185 -0.000618529 -0.000403192 -0.000249601 -0.000144689 -7.69198e-05 -3.62978e-05 -1.4383e-05 -4.30221e-06 -7.57339e-07 -3.27746e-08 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -1.90768e-09 -4.55205e-07 -4.22505e-06 -1.75178e-05 -4.98924e-05 -0.000114237 -0.00022674 -0.000406846 -0.000677216 -0.00106366 -0.0015951 -0.00230346 -0.00322364 -0.00439336 -0.00585316 -0.00764622 -0.00981828 -0.0124176 -0.0154946 -0.0191022 -0.0232951 -0.0281301 -0.0336659 -0.0399626 -0.0470821 -0.0550873 -0.0640427 -0.0740135 -0.0850659 -0.0972669 -0.110684 -0.125385 -0.141437 -0.158909 -0.177868 -0.198382 -0.220518 -0.244341 -0.269918 -0.297311 -0.326585 -0.3578 -0.391016 -0.426291 -0.463682 -0.503243 -0.545024 -0.589076 -0.635445 -0.684174 -0.735305 -0.788876 -0.844921 -0.903471 -0.964555 -1.0282 -1.09442 -1.16323 -1.23466 -1.3087 -1.38536 -1.46464 -1.54655 -1.63106 -1.71817 -1.80787 -1.90012 -1.99491 -2.09221 -2.19198 -2.29417 -2.39876 -2.50568 -2.61489 -2.72633 -2.83994 -2.95565 -3.07339 -3.19308 -3.31466 -3.43802 -3.5631 -3.68979 -3.818 -3.94763 -4.07859 -4.21076 -4.34403 -4.4783 -4.61345 -4.74935 -4.8859 -5.02296 -5.16041 -5.29812 -5.43596 -5.57379 -5.7115 -5.84893 -5.98595 -6.12243 -6.25822 -6.39319 -6.5272 -6.6601 -6.79176 -6.92204 -7.05079 -7.17788 -7.30318 -7.42653 -7.54781 -7.66688 -7.78362 -7.89788 -8.00954 -8.11848 -8.22456 -8.32768 -8.4277 -8.52452 -8.61802 -8.7081 -8.79464 -8.87755 -8.95674 -9.0321 -9.10354 -9.17099 -9.23437 -9.29359 -9.3486 -9.39931 -9.44567 -9.48763 -9.52514 -9.55815 -9.58662 -9.61051 -9.62981 -9.64447 -9.6545 -9.65987 -9.66058 -9.65662 -9.64801 -9.63475 -9.61686 -9.59436 -9.56728 -9.53565 -9.4995 -9.45889 -9.41386 -9.36446 -9.31075 -9.2528 -9.19068 -9.12446 -9.05422 -8.98004 -8.90201 -8.82022 -8.73476 -8.64575 -8.55328 -8.45746 -8.35839 -8.25621 -8.15101 -8.04293 -7.93208 -7.81859 -7.7026 -7.58422 -7.4636 -7.34086 -7.21614 -7.08958 -6.96132 -6.83149 -6.70024 -6.56769 -6.43401 -6.29932 -6.16376 -6.02747 -5.8906 -5.75328 -5.61564 -5.47783 -5.33998 -5.20222 -5.06467 -4.92748 -4.79077 -4.65466 -4.51927 -4.38472 -4.25113 -4.11861 -3.98728 -3.85723 -3.72858 -3.60142 -3.47584 -3.35195 -3.22982 -3.10954 -2.9912 -2.87487 -2.76062 -2.64851 -2.53862 -2.43099 -2.32569 -2.22277 -2.12226 -2.02421 -1.92865 -1.83562 -1.74515 -1.65725 -1.57194 -1.48925 -1.40916 -1.33171 -1.25687 -1.18465 -1.11505 -1.04804 -0.983616 -0.921757 -0.86244 -0.805637 -0.751319 -0.69945 -0.649996 -0.602914 -0.558164 -0.515698 -0.475468 -0.437423 -0.401511 -0.367675 -0.335859 -0.306002 -0.278044 -0.251922 -0.227573 -0.204932 -0.183932 -0.164508 -0.146591 -0.130115 -0.115011 -0.101211 -0.0886477 -0.0772534 -0.0669611 -0.0577042 -0.0494172 -0.0420354 -0.0354954 -0.0297349 -0.0246933 -0.0203114 -0.0165319 -0.0132994 -0.0105604 -0.00826377 -0.00636054 -0.0048042 -0.00355076 -0.00255891 -0.00179002 -0.00120836 -0.000781062 -0.000478306 -0.000273323 -0.000142489 -6.53776e-05 -2.48066e-05 -6.88181e-06 -1.02996e-06 -2.43501e-08 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0</y>
+							</SimmSpline>
+							<Constant>
+								<value>0</value>
+							</Constant>
+						</objects>
+						<groups />
+					</FunctionSet>
+					<!--Three functions describing the location at which the force is applied.-->
+					<FunctionSet name="pointFunctions">
+						<objects>
+							<Constant>
+								<value>0</value>
+							</Constant>
+							<Constant>
+								<value>-0.33000000000000002</value>
+							</Constant>
+							<Constant>
+								<value>0.074999999999999997</value>
+							</Constant>
+						</objects>
+						<groups />
+					</FunctionSet>
+				</PrescribedForce>
+			</objects>
+			<groups />
+		</ForceSet>
+		<!--Markers in the model.-->
+		<MarkerSet name="markerset">
+			<objects>
+				<Marker name="r_acromion">
+					<!--Path to a Component that satisfies the Socket 'parent_frame' of type PhysicalFrame (description: The frame to which this station is fixed.).-->
+					<socket_parent_frame>/bodyset/yaw_carrier</socket_parent_frame>
+					<!--The fixed location of the station expressed in its parent frame.-->
+					<location>0.0049850000000000016 0.047 0</location>
+					<!--Flag (true or false) specifying whether the marker is fixed in its parent frame during the marker placement step of scaling.  If false, the marker is free to move within its parent Frame to match its experimental counterpart.-->
+					<fixed>false</fixed>
+				</Marker>
+				<Marker name="r_humerus_epicondyle">
+					<!--Path to a Component that satisfies the Socket 'parent_frame' of type PhysicalFrame (description: The frame to which this station is fixed.).-->
+					<socket_parent_frame>/bodyset/r_humerus</socket_parent_frame>
+					<!--The fixed location of the station expressed in its parent frame.-->
+					<location>0.0050000000000000001 -0.29039999999999999 0.029999999999999999</location>
+					<!--Flag (true or false) specifying whether the marker is fixed in its parent frame during the marker placement step of scaling.  If false, the marker is free to move within its parent Frame to match its experimental counterpart.-->
+					<fixed>false</fixed>
+				</Marker>
+				<Marker name="r_radius_styloid">
+					<!--Path to a Component that satisfies the Socket 'parent_frame' of type PhysicalFrame (description: The frame to which this station is fixed.).-->
+					<socket_parent_frame>/bodyset/r_ulna_radius_hand</socket_parent_frame>
+					<!--The fixed location of the station expressed in its parent frame.-->
+					<location>-0.0011000000000000001 -0.23558999999999999 0.094299999999999995</location>
+					<!--Flag (true or false) specifying whether the marker is fixed in its parent frame during the marker placement step of scaling.  If false, the marker is free to move within its parent Frame to match its experimental counterpart.-->
+					<fixed>false</fixed>
+				</Marker>
+			</objects>
+			<groups />
+		</MarkerSet>
+		<!--Geometry to be used in contact forces.-->
+		<ContactGeometrySet name="contactgeometryset">
+			<objects />
+			<groups />
+		</ContactGeometrySet>
+		<!--Probes in the model.-->
+		<ProbeSet name="probeset">
+			<objects />
+			<groups />
+		</ProbeSet>
+		<!--Additional components in the model.-->
+		<ComponentSet name="componentset">
+			<objects />
+			<groups />
+		</ComponentSet>
+	</Model>
+</OpenSimDocument>
