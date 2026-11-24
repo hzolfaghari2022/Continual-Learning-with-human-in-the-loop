@@ -20,5 +20,6 @@ Every run below contains original named files in **files/**, source, models, rep
 - [smoke_20261123_123514_075998_a86a1e22dbca](smoke_20261123_123514_075998_a86a1e22dbca/files/) — [manifest](smoke_20261123_123514_075998_a86a1e22dbca/LATEST_MANIFEST.json)
 - [smoke_20261123_151031_828128_e834017da51a](smoke_20261123_151031_828128_e834017da51a/files/) — [manifest](smoke_20261123_151031_828128_e834017da51a/LATEST_MANIFEST.json)
 - [smoke_20261124_095857_361959_df12c288d435](smoke_20261124_095857_361959_df12c288d435/files/) — [manifest](smoke_20261124_095857_361959_df12c288d435/LATEST_MANIFEST.json)
+- [smoke_20261124_110919_388192_369df7593cdd](smoke_20261124_110919_388192_369df7593cdd/files/) — [manifest](smoke_20261124_110919_388192_369df7593cdd/LATEST_MANIFEST.json)
 
 Data and NN results have separate run folders. A successful model-result upload does not upload an external input dataset again. Legacy backups may need the newline-compatible restore/repair utility before deletion of local originals.
